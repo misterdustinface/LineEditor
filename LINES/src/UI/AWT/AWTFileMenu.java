@@ -21,7 +21,7 @@ public class AWTFileMenu extends Menu {
 	private JFileChooser 	exporter;
 	private JFileChooser 	loader;
 
-	public static String SAVE_STRING = "Export";
+	public static String SAVE_STRING = "Save";
 	public static String LOAD_STRING = "Load";
 	
 	public AWTFileMenu(LuaScriptFiler FILER, JPanel PANEL) {

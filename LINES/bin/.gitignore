@@ -1,0 +1,12 @@
+/UI/
+/data/
+/file/
+/generic/
+/input/
+/main/
+/rendering/
+/request/
+LINES/bin/*
+**.classpath
+**.project
+**.settings
