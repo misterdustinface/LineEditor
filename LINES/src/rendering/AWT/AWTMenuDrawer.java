@@ -1,13 +1,13 @@
 package rendering.AWT;
 
-import rendering.MenuDrawer;
+import UI.MenuButton;
 import UI.AWT.AWTBarSlider;
 import UI.AWT.AWTMenuButton;
 import UI.AWT.AWTRenderer;
 import data.graphics.AWTGraphicData;
 import data.shapes.Point;
 
-public class AWTMenuDrawer extends AWTRenderer implements MenuDrawer {
+public class AWTMenuDrawer extends AWTRenderer {
 
 	private AWTShapeDrawer shapeDrawer;
 	
@@ -35,7 +35,7 @@ public class AWTMenuDrawer extends AWTRenderer implements MenuDrawer {
 		}
 	}
 	
-	public void drawPlusOnButton( AWTMenuButton b ) {
+	public void drawPlusOnButton( MenuButton b ) {
 		
 		int centerX    = b.getCenterX();
 		int centerY    = b.getCenterY();

@@ -1,12 +1,12 @@
 package rendering;
 
+import UI.BarSlider;
+import UI.MenuButton;
 import data.shapes.Point;
-import UI.AWT.AWTBarSlider;
-import UI.AWT.AWTMenuButton;
 
 public interface MenuDrawer {
-	void drawButton       ( AWTMenuButton b );
-	void drawSlider       ( AWTBarSlider s );
-	void drawSelectorArrow( AWTMenuButton b, int x, int size );
+	void drawButton       ( MenuButton b );
+	void drawSlider       ( BarSlider s );
+	void drawSelectorArrow( MenuButton b, int x, int size );
 	void drawMenu         ( Point topLeft, int width, int height);
 }
