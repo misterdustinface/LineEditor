@@ -6,7 +6,7 @@ import rendering.AWT.AWTMenuDrawer;
 import UI.GridMenu;
 import data.shapes.Grid;
 
-public abstract class AWTGridMenu extends GridMenu {
+public abstract class AWTGridMenu extends GridMenu implements AWTUILayer {
 	
 	private AWTMenuDrawer menuDrawer;
 	

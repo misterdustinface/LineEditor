@@ -9,11 +9,10 @@ import java.util.ArrayList;
 
 import rendering.AWT.AWTMenuDrawer;
 import UI.MouseUserDevice;
-import UI.UILayer;
 import data.graphics.AWTGraphicData;
 import data.shapes.Rectangle;
 
-public class AWTColorChooserMenu extends DataModificationNotifier implements UILayer {
+public class AWTColorChooserMenu extends DataModificationNotifier implements AWTUILayer {
 	
 	private AWTMenuDrawer menuDrawer;
 	

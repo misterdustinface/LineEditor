@@ -5,12 +5,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-import data.shapes.Rectangle;
 import UI.MouseUserDevice;
-import UI.UILayer;
-import UI.AWT.Viewport;
+import UI.AWT.AWTUILayer;
+import UI.AWT.AWTViewport;
+import data.shapes.Rectangle;
 
-public class AWTGridDrawer implements UILayer {
+public class AWTGridDrawer implements AWTUILayer {
 	
 	public Color BACKGROUND_COLOR  	= new Color(250,250,250);
 	public Color MINOR_LINES_COLOR 	= new Color(225,225,225);
@@ -23,9 +23,9 @@ public class AWTGridDrawer implements UILayer {
 	private float 	zoom;
 	
 	private Rectangle drawingBounds;
-	private Viewport  viewport;
+	private AWTViewport  viewport;
 	
-	public AWTGridDrawer(Viewport VIEWPORT){
+	public AWTGridDrawer(AWTViewport VIEWPORT){
 		xPos = yPos = width = height = 0;
 		zoom = 1.0f;
 		drawingBounds = new Rectangle();

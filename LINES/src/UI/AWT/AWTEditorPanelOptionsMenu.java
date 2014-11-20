@@ -5,8 +5,6 @@ import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import UI.UILayer;
-
 public class AWTEditorPanelOptionsMenu extends Menu {
 
 	private static final long serialVersionUID = -3207544261732311004L;	
@@ -17,7 +15,7 @@ public class AWTEditorPanelOptionsMenu extends Menu {
 		editorPanel = EDITOR_PANEL;
 	}
 	
-	public void addMenuItemToggleUI(String title, final UILayer ui) {
+	public void addMenuItemToggleUI(String title, final AWTUILayer ui) {
 		MenuItem item = new MenuItem(title);
 		item.addActionListener(new ActionListener(){
 			@Override

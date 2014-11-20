@@ -4,14 +4,14 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 import UI.MouseUserDevice;
-import UI.UILayer;
 import UI.AWT.AWTLineEditorUserDevice;
+import UI.AWT.AWTUILayer;
 import data.graphics.AWTGraphicData;
 import data.shapes.Circle;
 import data.shapes.Pipe;
 import data.shapes.Shape;
 
-public class AWTWorldEditorUserDeviceRenderer implements UILayer {
+public class AWTWorldEditorUserDeviceRenderer implements AWTUILayer {
 
 	private AWTLineEditorUserDevice device;
 	private AWTShapeDrawer shapeDrawer;

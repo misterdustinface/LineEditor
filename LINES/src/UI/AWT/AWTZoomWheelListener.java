@@ -5,9 +5,9 @@ import java.awt.event.MouseWheelListener;
 
 public class AWTZoomWheelListener implements MouseWheelListener {
 	
-	private Viewport viewport;
+	private AWTViewport viewport;
 	
-	public AWTZoomWheelListener(Viewport VIEWPORT) {
+	public AWTZoomWheelListener(AWTViewport VIEWPORT) {
 		viewport = VIEWPORT;
 	}
 	

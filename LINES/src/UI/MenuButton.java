@@ -4,7 +4,7 @@ import data.shapes.Point;
 import data.shapes.Polygon;
 import data.shapes.Rectangle;
 
-public abstract class MenuButton extends UIElement {
+public abstract class MenuButton extends FunctionButton {
 	private int 	maxChars;
 	private boolean permaCenterText;
 	
@@ -88,4 +88,5 @@ public abstract class MenuButton extends UIElement {
 		
 		if( permaCenterText ) { alignText(); }
 	}
+	
 }

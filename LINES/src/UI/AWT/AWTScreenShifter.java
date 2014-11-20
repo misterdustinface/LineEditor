@@ -11,9 +11,9 @@ public class AWTScreenShifter implements MouseListener, MouseMotionListener {
 	private boolean shiftingScreen = false;
 	private Point 	lastOffset     = new Point(0,0);
 	
-	private Viewport viewport;
+	private AWTViewport viewport;
 	
-	public AWTScreenShifter(Viewport VIEWPORT) {
+	public AWTScreenShifter(AWTViewport VIEWPORT) {
 		viewport = VIEWPORT;
 	}
 	

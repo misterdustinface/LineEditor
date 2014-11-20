@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 
 import data.shapes.Point;
 
-public class Viewport extends JPanel {
+public class AWTViewport extends JPanel {
 	private static final long serialVersionUID = -3215062024839871611L;
 	protected Point position;
 	private float zoomAmount;
@@ -47,7 +47,7 @@ public class Viewport extends JPanel {
 		repaint();
 	}
 		
-	public Viewport() {
+	public AWTViewport() {
 		resetToDefaultZoom();
 		position = new Point(0, 0);
 		
