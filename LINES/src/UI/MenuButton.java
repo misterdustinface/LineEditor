@@ -2,39 +2,24 @@ package UI;
 
 import data.shapes.Point;
 import data.shapes.Polygon;
-import data.shapes.Rectangle;
 
-public abstract class MenuButton extends FunctionButton {
-	private int 	maxChars;
-	private boolean permaCenterText;
-	
-	public String 	text;
-	public Polygon  polygon;
-	public Point	textLocation;
+public class MenuButton extends FunctionButton {
+
+	public TextLabel textLabel;
+	public Polygon   polygon;
 	
 	public MenuButton() {
 		super();
-		text    	 = new String();
-		polygon 	 = new Polygon(4);
-		textLocation = new Point(0, 0);
-		maxChars     = 10;
-		permaCenterText  = false; 
-	}
-	
-	public boolean hasText() {
-		return text.length() > 0;
-	}
-	
-	public void setMaxTextWidth(int maxChars) {
-		this.maxChars = maxChars;
+		polygon   = new Polygon(4);
+		textLabel = new TextLabel();
 	}
 	
 	public void makeSuggestedBoxRelativeToPoint(Point position, int xOff, int yOff) {
-		makeBoxRelativeToPoint(position, xOff, yOff, suggestedWidth(), suggestedHeight());
+		makeBoxRelativeToPoint(position, xOff, yOff, textLabel.suggestedWidth(), textLabel.suggestedHeight());
 	}
 	
 	public void makeSuggestedBoxRelativeToPoint(int xPos, int yPos, int xOff, int yOff) {
-		makeBoxRelativeToPoint(xPos, yPos, xOff, yOff, suggestedWidth(), suggestedHeight());
+		makeBoxRelativeToPoint(xPos, yPos, xOff, yOff, textLabel.suggestedWidth(), textLabel.suggestedHeight());
 	}
 	
 	public void makeBoxRelativeToPoint(Point position, int xOff, int yOff, int width, int height) {
@@ -47,7 +32,7 @@ public abstract class MenuButton extends FunctionButton {
 		addPointRelativeToMenuPosition(xPos, yPos, xOff + width, yOff);
 		addPointRelativeToMenuPosition(xPos, yPos, xOff + width, yOff + height);
 		addPointRelativeToMenuPosition(xPos, yPos, xOff, yOff + height);
-		alignText();
+		textLabel.alignText(polygon);
 	}
 	
 	public void addPointRelativeToMenuPosition(Point position, int x, int y) {
@@ -57,18 +42,6 @@ public abstract class MenuButton extends FunctionButton {
 	public void addPointRelativeToMenuPosition(int menuPointX, int menuPointY, int x, int y) {
 		polygon.addPoint(menuPointX + x, menuPointY + y);
 	}
-	
-	public void center() { permaCenterText = true; }
-	
-	public void alignText() {
-		Rectangle bounding = polygon.getBounds();
-		int width  = permaCenterText ? text.length() : maxChars; 
-		float xoff = width * 3.75f;
-		textLocation.set((float)bounding.getCenterX() - xoff, (float)bounding.getCenterY() + 4);
-	}
-	
-	public int suggestedWidth()  { return maxChars * 10; }
-	public int suggestedHeight() { return 40;            }
 	
 	public int getWidth()   { return polygon.getBounds().width;  }
 	public int getHeight()  { return polygon.getBounds().height; }
@@ -86,7 +59,7 @@ public abstract class MenuButton extends FunctionButton {
 			if ( isPressed() && mouse.isDragged() ) { release(); }
 		}
 		
-		if( permaCenterText ) { alignText(); }
+		if(textLabel.isCentered()) { textLabel.alignText(polygon); }
 	}
 	
 }

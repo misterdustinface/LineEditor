@@ -1,6 +1,7 @@
 package rendering.AWT;
 
 import UI.MenuButton;
+import UI.TextLabel;
 import UI.AWT.AWTBarSlider;
 import UI.AWT.AWTMenuButton;
 import UI.AWT.AWTRenderer;
@@ -15,13 +16,17 @@ public class AWTMenuDrawer extends AWTRenderer {
 		shapeDrawer = new AWTShapeDrawer();
 	}
 	
+	public void drawTextLabel( TextLabel tl) {
+		if (tl.hasText()) {
+			graphics.drawString(tl.getText(), tl.getPosition().x, tl.getPosition().y);
+		}
+	}
+	
 	public void drawButton( AWTMenuButton b ) {
 		shapeDrawer.setGraphics(graphics);
 		shapeDrawer.setColor(b.getColor());
 		shapeDrawer.drawPolygonBorder(b.polygon);
-		if (b.hasText()) {
-			graphics.drawString(b.text, b.textLocation.x, b.textLocation.y);
-		}
+		drawTextLabel(b.textLabel);
 	}
 	
 	public void drawFilledButton( AWTMenuButton b ) {
@@ -30,9 +35,7 @@ public class AWTMenuDrawer extends AWTRenderer {
 		shapeDrawer.drawPolygon(b.polygon);
 		shapeDrawer.setColor(b.getColor());
 		shapeDrawer.drawPolygon(b.polygon);
-		if (b.hasText()) {
-			graphics.drawString(b.text, b.textLocation.x, b.textLocation.y);
-		}
+		drawTextLabel(b.textLabel);
 	}
 	
 	public void drawPlusOnButton( MenuButton b ) {

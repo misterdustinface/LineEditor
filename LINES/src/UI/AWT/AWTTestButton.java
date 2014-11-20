@@ -5,12 +5,12 @@ public class AWTTestButton extends AWTMenuButton {
 
 	@Override
 	protected void pressAction() {
-		text = "PRESSED";
+		textLabel.setText("PRESSED");
 	}
 
 	@Override
 	protected void releaseAction() {
-		text = "RELEASED";
+		textLabel.setText("RELEASED");
 	}
 
 }
