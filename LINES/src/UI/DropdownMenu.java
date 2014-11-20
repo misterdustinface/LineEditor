@@ -2,7 +2,7 @@ package UI;
 
 import generic.VoidFunctionPointer;
 
-public abstract class DropdownMenu extends UIElement {
+public class DropdownMenu implements UILayer {
 	protected MenuButton root;
 	protected ListMenu   menu;
 	private   boolean	 isListMenuOpen;
@@ -22,20 +22,14 @@ public abstract class DropdownMenu extends UIElement {
 		root = ROOT;
 		root.setButtonPressedFunction(TOGGLE_LIST_MENU);
 	}
+	public void setMenu(ListMenu MENU) { menu = MENU; }
 	
-	public void setMenu(ListMenu MENU)   { 
-		menu = MENU; 
+	protected void 	  toggleListMenu() { isListMenuOpen = !isListMenuOpen; }
+	protected boolean isListMenuOpen() { return isListMenuOpen; }
+
+	@Override
+	public void update(MouseUserDevice mouse) {
+		root.update(mouse);
+		if(isListMenuOpen) { menu.update(mouse); }
 	}
-	
-	protected void toggleListMenu() {
-		if(isListMenuOpen) {
-			closeListMenu();
-		} else {
-			openListMenu();
-		}
-		isListMenuOpen = !isListMenuOpen;
-	}
-	
-	protected abstract void openListMenu();
-	protected abstract void closeListMenu();
 }

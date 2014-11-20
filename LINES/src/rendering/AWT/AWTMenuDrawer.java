@@ -1,5 +1,8 @@
 package rendering.AWT;
 
+import UI.DropdownMenu;
+import UI.GridMenu;
+import UI.ListMenu;
 import UI.MenuButton;
 import UI.TextLabel;
 import UI.AWT.AWTBarSlider;
@@ -80,4 +83,20 @@ public class AWTMenuDrawer extends AWTRenderer {
 		graphics.drawRect(X, Y, width, height);
 	}
 	
+	public void drawListMenu(ListMenu menu) {
+		drawMenu(menu.getX(), menu.getY(), menu.getWidth(), menu.getHeight());
+		for(int i = 0; i < menu.numberOfButtons(); ++i) {
+			drawFilledButton((AWTMenuButton)menu.getButton(i));
+		}
+	}
+	
+	public void drawGridMenu(GridMenu menu) {
+		drawMenu(menu.getX(), menu.getY(), menu.getWidth(), menu.getHeight());
+		for(int i = 0; i < menu.numberOfButtons(); ++i) {
+			drawFilledButton((AWTMenuButton)menu.getButton(i));
+		}
+		if(menu.canFitNewEmptyEntry()) {
+			drawPlusOnButton(menu.getEmptyEntry());
+		}
+	}
 }

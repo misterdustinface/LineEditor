@@ -3,21 +3,21 @@ package UI.AWT;
 import java.awt.Graphics2D;
 
 import rendering.AWT.AWTMenuDrawer;
-import UI.GridMenu;
-import data.shapes.Grid;
+import UI.DropdownMenu;
 
-public abstract class AWTGridMenu extends GridMenu implements AWTUILayer {
-	
+public class AWTDropdownMenu extends DropdownMenu implements AWTUILayer {
+
 	private AWTMenuDrawer menuDrawer;
 	
-	public AWTGridMenu(Grid DISPLAYGRID) {
-		super(DISPLAYGRID);
+	public AWTDropdownMenu() {
 		menuDrawer = new AWTMenuDrawer();
 	}
 	
 	@Override
 	public void render(Graphics2D g) {
 		menuDrawer.setGraphics(g);
-		menuDrawer.drawGridMenu(this);
+		if(isListMenuOpen()) { menuDrawer.drawListMenu(menu); }
+		menuDrawer.drawButton((AWTMenuButton)root);
 	}
+
 }
