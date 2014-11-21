@@ -22,8 +22,8 @@ public abstract class UIElement {
 	final protected void highlight()       { isHighlighted = true;  }
 	final protected void removeHighlight() { isHighlighted = false; }
 	
-	public    abstract void update(MouseUserDevice mouse);
 	protected abstract void pressAction();
 	protected abstract void releaseAction();
 
+	public abstract void    update(MouseUserDevice mouse);
 }

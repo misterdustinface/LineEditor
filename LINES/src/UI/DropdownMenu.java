@@ -1,11 +1,12 @@
 package UI;
 
+import data.shapes.Point;
 import generic.VoidFunctionPointer;
 
 public class DropdownMenu implements UILayer {
-	protected MenuButton root;
-	protected ListMenu   menu;
-	private   boolean	 isListMenuOpen;
+	protected MenuButton 	 root;
+	protected StaticListMenu menu;
+	private   boolean isListMenuOpen;
 	
 	private final VoidFunctionPointer TOGGLE_LIST_MENU = new VoidFunctionPointer() {
 		@Override
@@ -22,7 +23,13 @@ public class DropdownMenu implements UILayer {
 		root = ROOT;
 		root.setButtonPressedFunction(TOGGLE_LIST_MENU);
 	}
-	public void setMenu(ListMenu MENU) { menu = MENU; }
+	public void setMenu(StaticListMenu MENU) { 
+		menu = MENU;
+	}
+	
+	public void setMenuPosition(Point POSITION) {
+		menu.setPostition(POSITION);
+	}
 	
 	protected void 	  toggleListMenu() { isListMenuOpen = !isListMenuOpen; }
 	protected boolean isListMenuOpen() { return isListMenuOpen; }

@@ -9,11 +9,11 @@ import java.util.ArrayList;
 import UI.MouseUserDevice;
 import data.shapes.Grid;
 
-public class AWTColorPaletteMenu extends AWTGridMenu {
+public class AWTColorPaletteMenu extends AWTDynamicGridMenu {
 
 	private ArrayList<ColorData> 	paletteColors;
 	private AWTColorChooserMenu 	colorChooser;
-	private ColorData 				toRemove;
+	private int toRemove;
 	
 	public AWTColorPaletteMenu(AWTColorChooserMenu COLOR_CHOOSER, Grid DISPLAYGRID) {
 		super(DISPLAYGRID);
@@ -26,8 +26,8 @@ public class AWTColorPaletteMenu extends AWTGridMenu {
 		remakeButtons();
 	}
 	
-	private void removeColor(ColorData COLOR_DATA) {
-		paletteColors.remove(COLOR_DATA);
+	private void removeColorAtIndex(int i) {
+		paletteColors.remove(i);
 		remakeButtons();
 	}
 	
@@ -62,14 +62,14 @@ public class AWTColorPaletteMenu extends AWTGridMenu {
 		setColorToRemove(COLOR_DATA);
 	}
 	
-	private boolean shouldRemoveColor() 			{ return toRemove != null; }
-	private void	setColorToRemove(ColorData cd) 	{ toRemove = cd; }
-	private void    removalComplete()   			{ toRemove = null; }
+	private boolean shouldRemoveColor() 			{ return toRemove != -1; }
+	private void	setColorToRemove(ColorData cd) 	{ toRemove = paletteColors.indexOf(cd); }
+	private void    removalComplete()   			{ toRemove = -1; }
 	
 	public void update(MouseUserDevice mouse) {
 		super.update(mouse);
 		if(shouldRemoveColor()) {
-			removeColor(toRemove);
+			removeColorAtIndex(toRemove);
 			removalComplete();
 		}
 		
@@ -87,7 +87,7 @@ public class AWTColorPaletteMenu extends AWTGridMenu {
 															highlightColor.getGreen(),
 															highlightColor.getBlue(),
 															64);
-		//private boolean isDeleteButtonPressed = false;
+//		private boolean isDeleteButtonPressed = false;
 		
 		public ColorPaletteButton(ColorData COLOR_DATA) {
 			colordata = COLOR_DATA;
@@ -111,20 +111,21 @@ public class AWTColorPaletteMenu extends AWTGridMenu {
 		
 		@Override
 		protected void pressAction() { 
-			colorChooser.setColorData(colordata); 
-		}
-		@Override
-		protected void releaseAction() {
 //			if(isDeleteButtonPressed) { 
 //				requestColorDeletion(colordata);
 //				isDeleteButtonPressed = false;
+//			} else {
+				colorChooser.setColorData(colordata); 
 //			}
 		}
 		
-//		public void update(MouseUserDevice mouse) {
+		@Override
+		protected void releaseAction() {}
+		
+		public void update(MouseUserDevice mouse) {
 //			isDeleteButtonPressed = mouse.isTerciaryButton() && mouse.isClicked();
-//			super.update(mouse);
-//		}
+			super.update(mouse);
+		}
 		
 	}
 

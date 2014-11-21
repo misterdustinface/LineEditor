@@ -42,7 +42,7 @@ public class AWTLineEditorProgram implements Program {
 		//worldEditorPanel.addUI(new AWTTestMenu(new Point(20,20), 172, 180)); // TESTING FEATURES
 		
 		MenuBar menuBar = new MenuBar();
-		menuBar.add(new AWTFileMenu(worldFiler, worldEditorPanel));
+		//menuBar.add(new AWTFileMenu(worldFiler, worldEditorPanel)); //TODO FIXME
 		
 		AWTEditorPanelOptionsMenu optionsMenu = new AWTEditorPanelOptionsMenu(worldEditorPanel);
 		MenuItem resetZoom  = new MenuItem("Reset Zoom");

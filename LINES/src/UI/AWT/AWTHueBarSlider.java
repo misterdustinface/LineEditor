@@ -1,5 +1,6 @@
 package UI.AWT;
 
+
 public class AWTHueBarSlider extends AWTBarSlider {
 
 	@Override

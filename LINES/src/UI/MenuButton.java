@@ -1,17 +1,24 @@
 package UI;
 
+import generic.DebounceTimer;
 import data.shapes.Point;
 import data.shapes.Polygon;
 
 public class MenuButton extends FunctionButton {
 
-	public TextLabel textLabel;
-	public Polygon   polygon;
+	public TextLabel 	 textLabel;
+	public Polygon   	 polygon;
+	public DebounceTimer debounceTimer;
 	
 	public MenuButton() {
 		super();
 		polygon   = new Polygon(4);
 		textLabel = new TextLabel();
+		debounceTimer = new DebounceTimer();
+	}
+	
+	public void makeSuggestedBoxRelativeToPoint(int xPos, int yPos) {
+		makeBoxRelativeToPoint(xPos, yPos, 0, 0, textLabel.suggestedWidth(), textLabel.suggestedHeight());
 	}
 	
 	public void makeSuggestedBoxRelativeToPoint(Point position, int xOff, int yOff) {
@@ -47,12 +54,17 @@ public class MenuButton extends FunctionButton {
 	public int getHeight()  { return polygon.getBounds().height; }
 	public int getCenterX() { return polygon.getBounds().getCenterX(); }
 	public int getCenterY() { return polygon.getBounds().getCenterY(); }
-
+	
 	@Override
 	public void update(MouseUserDevice mouse) {
 		if( polygon.contains(mouse.getCursorX(), mouse.getCursorY())) {
 			highlight();
-			if ( mouse.isPressed()  || mouse.isClicked() ) { press();   }
+			if ( mouse.isPressed()  || mouse.isClicked() ) { 
+				if(debounceTimer.isDebounceComplete()) {
+					press();
+					debounceTimer.reset();
+				}   
+			}
 			if ( mouse.isReleased() || mouse.isClicked() ) { release(); }
 		} else {
 			removeHighlight();
@@ -61,5 +73,5 @@ public class MenuButton extends FunctionButton {
 		
 		if(textLabel.isCentered()) { textLabel.alignText(polygon); }
 	}
-	
+
 }

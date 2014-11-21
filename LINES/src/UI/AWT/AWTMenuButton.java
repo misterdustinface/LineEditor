@@ -5,7 +5,7 @@ import java.awt.Color;
 import UI.MenuButton;
 import data.graphics.AWTGraphicData;
 
-public abstract class AWTMenuButton extends MenuButton {
+public class AWTMenuButton extends MenuButton {
 	
 	protected Color pressedColor;
 	protected Color releasedColor;

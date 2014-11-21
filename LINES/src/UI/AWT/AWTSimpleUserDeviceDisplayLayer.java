@@ -23,7 +23,5 @@ public class AWTSimpleUserDeviceDisplayLayer implements AWTUILayer {
 	}
 
 	@Override
-	public void update(MouseUserDevice mouse) {
-		
-	}
+	public void update(MouseUserDevice mouse) {}
 }

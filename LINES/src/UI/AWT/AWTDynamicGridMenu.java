@@ -3,14 +3,14 @@ package UI.AWT;
 import java.awt.Graphics2D;
 
 import rendering.AWT.AWTMenuDrawer;
-import UI.GridMenu;
+import UI.DynamicGridMenu;
 import data.shapes.Grid;
 
-public abstract class AWTGridMenu extends GridMenu implements AWTUILayer {
+public abstract class AWTDynamicGridMenu extends DynamicGridMenu implements AWTUILayer {
 	
 	private AWTMenuDrawer menuDrawer;
 	
-	public AWTGridMenu(Grid DISPLAYGRID) {
+	public AWTDynamicGridMenu(Grid DISPLAYGRID) {
 		super(DISPLAYGRID);
 		menuDrawer = new AWTMenuDrawer();
 	}
@@ -19,5 +19,8 @@ public abstract class AWTGridMenu extends GridMenu implements AWTUILayer {
 	public void render(Graphics2D g) {
 		menuDrawer.setGraphics(g);
 		menuDrawer.drawGridMenu(this);
+		if(canFitNewEmptyEntry()) {
+			menuDrawer.drawPlusOnButton(getEmptyEntry());
+		}
 	}
 }

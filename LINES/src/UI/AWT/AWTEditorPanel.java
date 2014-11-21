@@ -40,7 +40,7 @@ public class AWTEditorPanel extends AWTViewport{
 	public void removeLayer (AWTUILayer ui) { uis.remove(ui); shouldShow.put(ui, true); }
 	public void toggleLayer (AWTUILayer ui) { shouldShow.put(ui, ! shouldShow.get(ui)); }
 	
-	private boolean shouldShow(UILayer ui) { return shouldShow.get(ui); }
+	private boolean shouldShow(AWTUILayer ui) { return shouldShow.get(ui); }
 	
 	@Override
     protected void paintComponent(Graphics g){
