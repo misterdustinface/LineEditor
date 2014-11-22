@@ -1,0 +1,10 @@
+/build
+/bin
+**.classpath
+**.project
+**.settings
+*~
+**/.gradle/
+.gradle/1.4/taskArtifacts/**
+.gradle/1.11/taskArtifacts/*
+
