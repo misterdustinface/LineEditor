@@ -28,8 +28,7 @@ public class AWTFileMenu extends AWTDropdownMenu {
 			exporter.setApproveButtonText(SAVE_STRING);
 			exporter.setApproveButtonMnemonic(SAVE_STRING.charAt(0));
 			exporter.setFileHidingEnabled(true);
-			
-			System.out.println("CALLED");
+
 			if(exporter.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
 				try {
 					filer.save(new FileOutputStream(exporter.getSelectedFile()));
@@ -37,7 +36,6 @@ public class AWTFileMenu extends AWTDropdownMenu {
 					fnf.printStackTrace();
 				}
 			}
-			System.out.println("FINISHED");
 		}
 
 	};
@@ -88,7 +86,7 @@ public class AWTFileMenu extends AWTDropdownMenu {
 		openButton.debounceTimer.setDebounceTime_sec(1);
 		openButton.setButtonPressedFunction(LOAD);
 		
-		final MenuButton[] fileMenuOptions = new MenuButton[] { saveButton, openButton };
+		MenuButton[] fileMenuOptions = new MenuButton[] { saveButton, openButton };
 		StaticListMenu list = new StaticListMenu();
 		list.setButtons(fileMenuOptions);
 		list.setPostition(new Point(2,2 + fileButton.getHeight()));
