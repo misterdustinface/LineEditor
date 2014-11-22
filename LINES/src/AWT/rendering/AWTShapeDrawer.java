@@ -3,8 +3,8 @@ package AWT.rendering;
 //import uiTools.WorldEditorUITool;
 
 import AWT.UI.AWTRenderer;
+import AWT.graphicdata.AWTGraphicData;
 import rendering.ShapeDrawer;
-import data.graphics.AWTGraphicData;
 import data.shapes.Circle;
 import data.shapes.LineSegment;
 import data.shapes.Point;

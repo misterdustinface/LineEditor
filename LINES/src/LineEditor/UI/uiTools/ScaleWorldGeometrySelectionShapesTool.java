@@ -1,7 +1,7 @@
 package LineEditor.UI.uiTools;
 
+import LineEditor.data.WorldGeometryData;
 import UI.uiTools.accessories.ScaleController;
-import data.shapes.WorldGeometryData;
 
 public class ScaleWorldGeometrySelectionShapesTool extends WorldEditorTool{
 	

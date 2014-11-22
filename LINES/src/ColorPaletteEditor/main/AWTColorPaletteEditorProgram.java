@@ -1,6 +1,5 @@
-package main;
+package ColorPaletteEditor.main;
 
-import file.ColorPaletteFiler;
 import generic.ColorData;
 
 import java.util.ArrayList;
@@ -14,6 +13,7 @@ import AWT.UI.AWTMenuButton;
 import AWT.UI.AWTMouseUserDevice;
 import AWT.UI.AWTProgramWindow;
 import AWT.UI.AWTSimpleUserDeviceDisplayLayer;
+import ColorPaletteEditor.file.ColorPaletteFiler;
 import data.shapes.Grid;
 import data.shapes.Point;
 import data.shapes.Rectangle;

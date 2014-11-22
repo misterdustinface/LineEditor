@@ -1,6 +1,6 @@
 package data.shapes;
 
-import data.graphics.AWTGraphicData;
+import AWT.graphicdata.AWTGraphicData;
 
 public class Circle implements Shape{
 
@@ -25,7 +25,7 @@ public class Circle implements Shape{
 		this.center = other.center.copy();
 	}
 	
-	Circle(final Point center, final float r){
+	public Circle(final Point center, final float r){
 		instance = instanceCounter++;
 		id = "CIRCLE"+instance;
 		this.center = center.copy();
@@ -34,7 +34,7 @@ public class Circle implements Shape{
 	public void setPosition(float x, float y){center.x = x; center.y = y;}
 	void setRadius(float r){this.r = Math.abs(r);}
 	
-	Point center(){return center;}
+	public Point center(){return center;}
 	public Point centerCopy(){return center.copy();}
 	public float radius(){return r;}
 	public float diameter(){return r*2;}

@@ -2,8 +2,8 @@ package AWT.UI;
 
 import java.awt.Color;
 
+import AWT.graphicdata.AWTGraphicData;
 import UI.MenuButton;
-import data.graphics.AWTGraphicData;
 
 public class AWTMenuButton extends MenuButton {
 	

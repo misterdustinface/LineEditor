@@ -5,7 +5,7 @@ import generic.Pair;
 import java.awt.event.MouseEvent;
 
 import LineEditor.AWT.UI.uiTools.FunctionPointers.*;
-import data.shapes.WorldGeometryData;
+import LineEditor.data.WorldGeometryData;
 
 //TODO - use a SwingVMouseDriver instead of the WorldEditorMouseToolSetter
 final public class AWTWorldEditorMouseToolSetter {

@@ -1,10 +1,10 @@
 package LineEditor.UI.uiTools;
 
+import LineEditor.data.WorldGeometryData;
 import request.RequestibleAction;
 import data.shapes.Circle;
 import data.shapes.Pipe;
 import data.shapes.Shape;
-import data.shapes.WorldGeometryData;
 
 //public abstract class WorldEditorTool implements ToolAction{
 public abstract class WorldEditorTool extends RequestibleAction {

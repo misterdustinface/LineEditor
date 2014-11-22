@@ -3,9 +3,9 @@ package LineEditor.UI.uiTools;
 import java.util.HashSet;
 
 import LineEditor.AWT.UI.uiTools.SelectionBoxTool;
+import LineEditor.data.WorldGeometryData;
 import data.shapes.LineSegment;
 import data.shapes.Pipe;
-import data.shapes.WorldGeometryData;
 
 public class CopyTool extends SelectionBoxTool{
 

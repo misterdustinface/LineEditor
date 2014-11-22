@@ -13,8 +13,8 @@ import AWT.UI.AWTScreenShifter;
 import AWT.UI.AWTZoomWheelListener;
 import AWT.rendering.AWTGridDrawer;
 import LineEditor.AWT.rendering.AWTWorldEditorUserDeviceRenderer;
+import LineEditor.data.WorldGeometryData;
 import LineEditor.file.WorldGeometryFiler;
-import data.shapes.WorldGeometryData;
 
 public class AWTLineEditorProgram {
 	

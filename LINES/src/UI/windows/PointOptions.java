@@ -1,7 +1,7 @@
 package UI.windows;
 
+import LineEditor.data.WorldGeometryData;
 import data.shapes.Circle;
-import data.shapes.WorldGeometryData;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

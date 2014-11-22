@@ -5,9 +5,9 @@ import java.awt.RenderingHints;
 
 import AWT.UI.AWTLineEditorUserDevice;
 import AWT.UI.AWTUILayer;
+import AWT.graphicdata.AWTGraphicData;
 import AWT.rendering.AWTShapeDrawer;
 import UI.MouseUserDevice;
-import data.graphics.AWTGraphicData;
 import data.shapes.Circle;
 import data.shapes.Pipe;
 import data.shapes.Shape;

@@ -3,11 +3,11 @@ package AWT.rendering;
 import AWT.UI.AWTBarSlider;
 import AWT.UI.AWTMenuButton;
 import AWT.UI.AWTRenderer;
+import AWT.graphicdata.AWTGraphicData;
 import UI.DynamicGridMenu;
 import UI.StaticListMenu;
 import UI.MenuButton;
 import UI.TextLabel;
-import data.graphics.AWTGraphicData;
 import data.shapes.Point;
 
 public class AWTMenuDrawer extends AWTRenderer {

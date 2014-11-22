@@ -2,8 +2,8 @@ package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
+import LineEditor.data.WorldGeometryData;
 import data.shapes.Pipe;
-import data.shapes.WorldGeometryData;
 
 public class CircleCreatorTool extends AWTWorldEditorMouseTool{
 

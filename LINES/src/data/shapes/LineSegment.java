@@ -2,8 +2,8 @@ package data.shapes;
 
 public class LineSegment {
 
-	Point a;
-	Point b;
+	public Point a;
+	public Point b;
 	
 	public LineSegment(Point A, Point B){
 		a = A; b = B;
@@ -39,23 +39,23 @@ public class LineSegment {
 		return new Point(a.x + (float)(offset*java.lang.Math.cos(theta)), a.y + (float)(offset*java.lang.Math.sin(theta)));
 	}
 	
-	void shift(float x, float y){
+	public void shift(float x, float y){
 		a.x += x; b.x += x;
 		a.y += y; b.y += y;
 	}
 	
-	void scale(double percent){
+	public void scale(double percent){
 		double theta = Math.theta(a, b);
 		float halfLength = length()/2;
 		resize(	(float)(java.lang.Math.cos(theta) * halfLength * percent),
 				(float)(java.lang.Math.sin(theta) * halfLength * percent));
 	}
 	
-	void rotate(int degrees){
+	public void rotate(int degrees){
 		rotate(java.lang.Math.toRadians(degrees));
 	}
 	
-	void rotate(double theta){
+	public void rotate(double theta){
 		theta += Math.theta(a, b);
 		float halfLength = length()/2;
 		resize(	(float)(java.lang.Math.cos(theta) * halfLength),
@@ -66,7 +66,7 @@ public class LineSegment {
 	 * @param percent 0.0 - 1.0
 	 * @return Line
 	 */
-	LineSegment split(double percent){
+	public LineSegment split(double percent){
 		Point temp = b;
 		b = pointAt(percent);
 		return new LineSegment(b, temp);

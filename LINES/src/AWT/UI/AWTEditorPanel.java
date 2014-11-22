@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import data.graphics.AWTGraphicData;
+import AWT.graphicdata.AWTGraphicData;
 import UI.UILayer;
 
 public class AWTEditorPanel extends AWTViewport{

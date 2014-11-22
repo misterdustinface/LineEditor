@@ -2,11 +2,11 @@ package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
+import AWT.graphicdata.AWTGraphicData;
 import AWT.rendering.AWTShapeDrawer;
-import data.graphics.AWTGraphicData;
+import LineEditor.data.WorldGeometryData;
 import data.shapes.Circle;
 import data.shapes.Point;
-import data.shapes.WorldGeometryData;
 
 public class CircleMoverTool extends AWTWorldEditorMouseTool{
 

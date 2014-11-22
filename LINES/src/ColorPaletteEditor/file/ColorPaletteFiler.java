@@ -1,5 +1,6 @@
-package file;
+package ColorPaletteEditor.file;
 
+import file.LuaScriptFiler;
 import generic.ColorData;
 
 import java.util.ArrayList;

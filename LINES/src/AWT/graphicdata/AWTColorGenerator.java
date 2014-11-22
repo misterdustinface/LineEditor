@@ -1,4 +1,4 @@
-package data.graphics;
+package AWT.graphicdata;
 
 
 import java.awt.Color;

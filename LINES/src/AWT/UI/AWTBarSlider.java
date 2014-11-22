@@ -2,8 +2,8 @@ package AWT.UI;
 
 import java.awt.Color;
 
+import AWT.graphicdata.AWTGraphicData;
 import UI.BarSlider;
-import data.graphics.AWTGraphicData;
 
 public abstract class AWTBarSlider extends BarSlider {
 

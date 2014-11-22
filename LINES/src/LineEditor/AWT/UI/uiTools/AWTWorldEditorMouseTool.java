@@ -5,13 +5,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import AWT.graphicdata.AWTGraphicData;
 import AWT.rendering.AWTCursorDrawer;
 import LineEditor.UI.uiTools.WorldEditorTool;
+import LineEditor.data.WorldGeometryData;
 import rendering.Renderable;
-import data.graphics.AWTGraphicData;
 import data.shapes.Circle;
 import data.shapes.Point;
-import data.shapes.WorldGeometryData;
 
 
 public abstract class AWTWorldEditorMouseTool extends WorldEditorTool implements MouseListener, MouseMotionListener, Renderable{

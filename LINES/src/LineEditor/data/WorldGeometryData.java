@@ -1,8 +1,14 @@
-package data.shapes;
+package LineEditor.data;
 
 import java.util.ArrayList;
 
-import data.graphics.AWTGraphicData;
+import AWT.graphicdata.AWTGraphicData;
+import data.shapes.Circle;
+import data.shapes.CollisionBoundSelectorMap;
+import data.shapes.LineSegment;
+import data.shapes.Pipe;
+import data.shapes.Point;
+import data.shapes.Shape;
 
 public class WorldGeometryData{
 

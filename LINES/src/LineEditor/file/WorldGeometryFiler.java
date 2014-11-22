@@ -1,8 +1,8 @@
 package LineEditor.file;
 
+import LineEditor.data.WorldGeometryData;
 import data.shapes.Pipe;
 import data.shapes.Point;
-import data.shapes.WorldGeometryData;
 import file.LuaScriptFiler;
 
 public class WorldGeometryFiler extends LuaScriptFiler {

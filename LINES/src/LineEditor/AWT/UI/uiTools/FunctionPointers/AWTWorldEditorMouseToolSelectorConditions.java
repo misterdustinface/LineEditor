@@ -2,7 +2,7 @@ package LineEditor.AWT.UI.uiTools.FunctionPointers;
 
 import java.awt.event.MouseEvent;
 
-import data.shapes.WorldGeometryData;
+import LineEditor.data.WorldGeometryData;
 
 public abstract class AWTWorldEditorMouseToolSelectorConditions {
 	
