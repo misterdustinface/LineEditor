@@ -19,14 +19,18 @@ public abstract class MouseUserDevice {
 		return cursorPosition.y;
 	}
 	
-	private enum MOUSE_STATE{PRESSED, RELEASED, CLICKED, DRAGGED, MOVED};
-	private MOUSE_STATE state = MOUSE_STATE.MOVED;
+	private enum MOUSE_STATE{PRESSED, RELEASED, CLICKED, DRAGGED, MOVED, NONE};
+	private MOUSE_STATE state = MOUSE_STATE.NONE;
+	
+	final public boolean wasIntercepted() { return state == MOUSE_STATE.NONE; }
 	
 	final public boolean isClicked()  { return state == MOUSE_STATE.CLICKED;  }
 	final public boolean isPressed()  { return state == MOUSE_STATE.PRESSED;  }
 	final public boolean isReleased() { return state == MOUSE_STATE.RELEASED; }
 	final public boolean isDragged()  { return state == MOUSE_STATE.DRAGGED;  }
 	final public boolean isMoved()    { return state == MOUSE_STATE.MOVED;    }
+	
+	final public void intercept() { state = MOUSE_STATE.NONE; }
 	
 	final protected void click()   { state = MOUSE_STATE.CLICKED;  }
 	final protected void press()   { state = MOUSE_STATE.PRESSED;  }

@@ -19,7 +19,17 @@ public class TextLabel {
 		alignment    = ALIGNMENT.LEFT;
 	}
 	
-	public void 	setText(String TEXT)	{ text = TEXT; }
+	public void setText(String TEXT)	{ 
+		text = TEXT;
+		modifyText();
+	}
+	private void modifyText() {
+		if (text.length() > maxChars) {
+			text = text.substring(0, maxChars);
+			text += "...";
+		}
+	}
+	
 	public String 	getText() 				{ return text; }
 	public void 	setPosition(Point POS) 	{ textLocation = POS; }
 	public Point 	getPosition() 			{ return textLocation; }
@@ -29,7 +39,11 @@ public class TextLabel {
 	public boolean 	hasText() 	 			{ return text.length() > 0;}
 	public int 		suggestedWidth()  		{ return maxChars * 10; }
 	public int 		suggestedHeight() 		{ return 40;            }
-	public void 	setMaxTextWidth(int maxChars) { this.maxChars = maxChars; }
+	
+	public void 	setMaxTextWidth(int maxChars) { 
+		this.maxChars = maxChars; 
+		modifyText();
+	}
 
 	public boolean isCentered()       		{ return alignment == ALIGNMENT.CENTER; }
 	public boolean isRightJustified() 		{ return alignment == ALIGNMENT.RIGHT;  }
@@ -44,4 +58,5 @@ public class TextLabel {
 			textLocation.set((float)bounding.getCenterX() - xoff, (float)bounding.getCenterY() + 4);
 		}
 	}
+
 }

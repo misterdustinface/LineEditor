@@ -27,9 +27,11 @@ public class AWTFileMenu extends AWTDropdownMenu {
 		@Override
 		public void call() {
 			try {
+				System.out.println("CALLED");
 				if(exporter.showSaveDialog(new JPanel()) == JFileChooser.APPROVE_OPTION){
 					filer.save(new FileOutputStream(exporter.getSelectedFile()));
 				}
+				System.out.println("FINISHED");
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
 			}
@@ -78,13 +80,13 @@ public class AWTFileMenu extends AWTDropdownMenu {
 		AWTMenuButton saveButton = new AWTMenuButton();
 		saveButton.textLabel.setText(SAVE_STRING);
 		saveButton.textLabel.center();
-		saveButton.debounceTimer.setDebounceTime(1);
+		saveButton.debounceTimer.setDebounceTime_sec(1);
 		saveButton.setButtonPressedFunction(SAVE);
 		
 		AWTMenuButton openButton = new AWTMenuButton();
 		openButton.textLabel.setText(LOAD_STRING);
 		openButton.textLabel.center();
-		openButton.debounceTimer.setDebounceTime(1);
+		openButton.debounceTimer.setDebounceTime_sec(1);
 		openButton.setButtonPressedFunction(LOAD);
 		
 		final MenuButton[] fileMenuOptions = new MenuButton[] { saveButton, openButton };

@@ -7,11 +7,11 @@ public class DebounceTimer {
 	private double COUNTDOWN_SEC;
 	
 	public DebounceTimer() {
-		TIMER_LENGTH_SEC = 0.25;
-		COUNTDOWN_SEC    = 0;
+		setDebounceTime_sec(0.25);
+		reset();
 	}
 	
-	public void setDebounceTime(double seconds) { 
+	public void setDebounceTime_sec(double seconds) { 
 		TIMER_LENGTH_SEC = seconds;
 	}
 	
@@ -22,18 +22,19 @@ public class DebounceTimer {
 	
 	public boolean isDebounceComplete() {
 		updateCountdown();
-		return COUNTDOWN_SEC <= 0;
+		System.out.println(COUNTDOWN_SEC);
+		return COUNTDOWN_SEC >= TIMER_LENGTH_SEC;
 	}
 	
 	private void updateCountdown() {
-		COUNTDOWN_SEC = TIMER_LENGTH_SEC - passedTimeSinceReset();
+		COUNTDOWN_SEC = passedTimeSinceReset();
 	}
 	
 	private double passedTimeSinceReset() {
 		return currentTimeSeconds() - START_TIME_SEC;
 	}
 	
-	private double currentTimeSeconds() {
-		return System.currentTimeMillis() / 1000;
+	private static double currentTimeSeconds() {
+		return (System.currentTimeMillis() / 1000.0);
 	}
 }

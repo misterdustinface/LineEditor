@@ -57,21 +57,28 @@ public class MenuButton extends FunctionButton {
 	
 	@Override
 	public void update(MouseUserDevice mouse) {
-		if( polygon.contains(mouse.getCursorX(), mouse.getCursorY())) {
+		if( contains(mouse) ) {
 			highlight();
-			if ( mouse.isPressed()  || mouse.isClicked() ) { 
-				if(debounceTimer.isDebounceComplete()) {
-					press();
-					debounceTimer.reset();
-				}   
-			}
-			if ( mouse.isReleased() || mouse.isClicked() ) { release(); }
+			if ( mouse.isPressed()  || mouse.isClicked() ) { debouncedPress();  }
+			if ( mouse.isReleased() || mouse.isClicked() ) { release();         }
+			if ( mouse.isPressed()  || mouse.isClicked() ) { mouse.intercept(); }
 		} else {
 			removeHighlight();
-			if ( isPressed() && mouse.isDragged() ) { release(); }
+			if ( isPressed() ) { release(); }
 		}
 		
 		if(textLabel.isCentered()) { textLabel.alignText(polygon); }
+	}
+	
+	private boolean contains(MouseUserDevice mouse) {
+		return polygon.contains(mouse.getCursorX(), mouse.getCursorY());
+	}
+	
+	final public void debouncedPress() {
+		if(debounceTimer.isDebounceComplete()) {
+			debounceTimer.reset(); // TEMPORAL COUPLING. UPDATE CAN BE CALLED MULTIPLE TIMES AT ONCE IN DIFFERENT THREADS; THEREFORE, THIS FUNCTION CAN TOO.
+			press();
+		}   
 	}
 
 }
