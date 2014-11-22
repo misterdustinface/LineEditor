@@ -1,4 +1,4 @@
-package UI.uiTools;
+package LineEditor.UI.uiTools;
 
 import request.RequestibleAction;
 import data.shapes.Circle;

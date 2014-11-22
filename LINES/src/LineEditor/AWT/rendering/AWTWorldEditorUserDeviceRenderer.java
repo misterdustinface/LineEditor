@@ -1,10 +1,11 @@
-package AWT.rendering;
+package LineEditor.AWT.rendering;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
 import AWT.UI.AWTLineEditorUserDevice;
 import AWT.UI.AWTUILayer;
+import AWT.rendering.AWTShapeDrawer;
 import UI.MouseUserDevice;
 import data.graphics.AWTGraphicData;
 import data.shapes.Circle;

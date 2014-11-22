@@ -18,29 +18,28 @@ import data.shapes.Grid;
 import data.shapes.Point;
 import data.shapes.Rectangle;
 
-public class AWTColorPaletteEditorProgram implements Program {
+public class AWTColorPaletteEditorProgram {
 	
-	int X_OFFSET     = 16;
-	int MENU_WIDTH   = 180;
-	int Y_OFFSET     = 16;
-	int MENU_HEIGHT  = 100;
+	static int X_OFFSET     = 16;
+	static int MENU_WIDTH   = 180;
+	static int Y_OFFSET     = 16;
+	static int MENU_HEIGHT  = 100;
 	
-	int COLOR_CHOOSER_DISPLAYBOX_YOFFSET = Y_OFFSET + 100;
+	static int COLOR_CHOOSER_DISPLAYBOX_YOFFSET = Y_OFFSET + 100;
 	
-	Rectangle COLOR_CHOOSER_DISPLAYBOX = new Rectangle(new Point(X_OFFSET, COLOR_CHOOSER_DISPLAYBOX_YOFFSET), MENU_WIDTH, MENU_HEIGHT);
+	static Rectangle COLOR_CHOOSER_DISPLAYBOX = new Rectangle(new Point(X_OFFSET, COLOR_CHOOSER_DISPLAYBOX_YOFFSET), MENU_WIDTH, MENU_HEIGHT);
 	
-	int BUTTON_OFFSET = 16;
-	int BUTTON_SIZE   = 32;
-	int BUTTON_ROWS   = 4;
-	int BUTTON_COLS   = 3;
+	static int BUTTON_OFFSET = 16;
+	static int BUTTON_SIZE   = 32;
+	static int BUTTON_ROWS   = 4;
+	static int BUTTON_COLS   = 3;
 
-	Grid COLOR_PALETTE_DISPLAYGRID = new Grid(new Point(2*X_OFFSET + MENU_WIDTH, Y_OFFSET), BUTTON_ROWS, BUTTON_COLS);
+	static Grid COLOR_PALETTE_DISPLAYGRID = new Grid(new Point(2*X_OFFSET + MENU_WIDTH, Y_OFFSET), BUTTON_ROWS, BUTTON_COLS);
 	
-	int DELETE_BUTTON_X_POS = 107;
-	int DELETE_BUTTON_Y_POS = 80 - Y_OFFSET;
+	static int DELETE_BUTTON_X_POS = 107;
+	static int DELETE_BUTTON_Y_POS = 80 - Y_OFFSET;
 	
-	@Override
-	public void launch() {
+	public static void main(String[] args) {
 		AWTProgramWindow window = new AWTProgramWindow("Color Palette");
 		window.setSize(400, 300);
 		

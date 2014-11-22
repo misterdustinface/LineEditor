@@ -1,8 +1,8 @@
-package UI.uiTools;
+package LineEditor.UI.uiTools;
 
 import java.util.HashSet;
 
-import AWT.UI.uiTools.SelectionBoxTool;
+import LineEditor.AWT.UI.uiTools.SelectionBoxTool;
 import data.shapes.LineSegment;
 import data.shapes.Pipe;
 import data.shapes.WorldGeometryData;

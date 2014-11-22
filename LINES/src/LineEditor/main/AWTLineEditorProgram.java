@@ -1,4 +1,4 @@
-package main;
+package LineEditor.main;
 
 import java.awt.MenuBar;
 import java.awt.MenuItem;
@@ -7,20 +7,18 @@ import java.awt.event.ActionListener;
 
 import AWT.UI.AWTEditorPanel;
 import AWT.UI.AWTEditorPanelOptionsMenu;
-import AWT.UI.AWTFileMenu;
 import AWT.UI.AWTLineEditorUserDevice;
 import AWT.UI.AWTProgramWindow;
 import AWT.UI.AWTScreenShifter;
 import AWT.UI.AWTZoomWheelListener;
 import AWT.rendering.AWTGridDrawer;
-import AWT.rendering.AWTWorldEditorUserDeviceRenderer;
+import LineEditor.AWT.rendering.AWTWorldEditorUserDeviceRenderer;
+import LineEditor.file.WorldGeometryFiler;
 import data.shapes.WorldGeometryData;
-import file.WorldGeometryFiler;
 
-public class AWTLineEditorProgram implements Program {
-
-	@Override
-	public void launch() {
+public class AWTLineEditorProgram {
+	
+	public static void main(String[] args) {
 		AWTProgramWindow window = new AWTProgramWindow("Lines");
 		
 		WorldGeometryData 			worldData 				= new WorldGeometryData();

@@ -1,4 +1,4 @@
-package AWT.UI.uiTools;
+package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
@@ -6,11 +6,11 @@ import data.shapes.Point;
 import data.shapes.Shape;
 import data.shapes.WorldGeometryData;
 
-public class ShapeDeleteTool extends AWTWorldEditorMouseTool {
+public class SelectionPointTool extends AWTWorldEditorMouseTool{
 
 	private Point position;
 	
-	public ShapeDeleteTool(WorldGeometryData WORLD_DATA) {
+	public SelectionPointTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		position = new Point(0,0);
 	}
@@ -25,13 +25,10 @@ public class ShapeDeleteTool extends AWTWorldEditorMouseTool {
 		position.set(x, y);
 	}
 	
-	private void findAndRemoveFirstFoundWorldShapeAtPoint(Point pointToRemoveAt){
-		for(Shape s : collisionBounds()){
-			if(s.contains(pointToRemoveAt)){
-				worldData.remove(s);
-				//return;
-			}
-		}
+	private void selectWorldShapes(Point selectionPoint){
+		for(Shape s : collisionBounds())
+			if(s.contains(selectionPoint))
+				toggleSelected(s);
 	}
 
 	@Override
@@ -41,13 +38,14 @@ public class ShapeDeleteTool extends AWTWorldEditorMouseTool {
 
 	@Override
 	protected void performAction() {
-		findAndRemoveFirstFoundWorldShapeAtPoint(position);
+		selectWorldShapes(position);
 	}
 
 	@Override
 	public void render(Graphics2D g) {
 //		cursorDrawer.setGraphics(g);
-//		cursorDrawer.setColor(Color.RED);
-//		cursorDrawer.drawLargeXCursor((int)position.x, (int)position.y);
+//		cursorDrawer.setColor(AWTGraphicData.selectedPointCircleHighlight);
+//		cursorDrawer.drawTriangularCrosshairCursor((int)position.x, (int)position.y);
 	}
+
 }

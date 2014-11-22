@@ -1,4 +1,4 @@
-package UI.uiTools;
+package LineEditor.UI.uiTools;
 
 import UI.uiTools.accessories.ScaleController;
 import data.shapes.WorldGeometryData;

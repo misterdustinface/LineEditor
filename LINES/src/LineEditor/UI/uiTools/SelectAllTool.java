@@ -1,4 +1,4 @@
-package UI.uiTools;
+package LineEditor.UI.uiTools;
 
 import data.shapes.Circle;
 import data.shapes.Pipe;

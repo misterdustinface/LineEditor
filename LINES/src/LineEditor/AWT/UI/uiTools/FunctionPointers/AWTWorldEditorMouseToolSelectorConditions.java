@@ -1,4 +1,4 @@
-package AWT.UI.uiTools.FunctionPointers;
+package LineEditor.AWT.UI.uiTools.FunctionPointers;
 
 import java.awt.event.MouseEvent;
 

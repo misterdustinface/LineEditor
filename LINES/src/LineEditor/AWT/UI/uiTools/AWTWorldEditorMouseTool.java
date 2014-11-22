@@ -1,4 +1,4 @@
-package AWT.UI.uiTools;
+package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
@@ -6,7 +6,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import AWT.rendering.AWTCursorDrawer;
-import UI.uiTools.WorldEditorTool;
+import LineEditor.UI.uiTools.WorldEditorTool;
 import rendering.Renderable;
 import data.graphics.AWTGraphicData;
 import data.shapes.Circle;

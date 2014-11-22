@@ -1,4 +1,4 @@
-package AWT.UI.uiTools;
+package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
