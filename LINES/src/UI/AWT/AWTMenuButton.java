@@ -7,6 +7,8 @@ import data.graphics.AWTGraphicData;
 
 public class AWTMenuButton extends MenuButton {
 	
+	//SwingUtilities
+	
 	protected Color pressedColor;
 	protected Color releasedColor;
 	protected Color highlightColor;

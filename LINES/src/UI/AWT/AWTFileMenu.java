@@ -14,7 +14,7 @@ import generic.VoidFunctionPointer;
 
 public class AWTFileMenu extends AWTDropdownMenu {
 
-	private LuaScriptFiler 	filer;
+	private LuaScriptFiler filer;
 	
 	public static String SAVE_STRING = "SAVE";
 	public static String LOAD_STRING = "LOAD";
@@ -28,7 +28,8 @@ public class AWTFileMenu extends AWTDropdownMenu {
 			exporter.setApproveButtonText(SAVE_STRING);
 			exporter.setApproveButtonMnemonic(SAVE_STRING.charAt(0));
 			exporter.setFileHidingEnabled(true);
-
+			exporter.validate();
+			
 			if(exporter.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
 				try {
 					filer.save(new FileOutputStream(exporter.getSelectedFile()));
@@ -49,6 +50,7 @@ public class AWTFileMenu extends AWTDropdownMenu {
 			loader.setApproveButtonText(LOAD_STRING);
 			loader.setApproveButtonMnemonic(LOAD_STRING.charAt(0));
 			loader.setFileHidingEnabled(true);
+			loader.validate();
 			
 			if(loader.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
 				try {

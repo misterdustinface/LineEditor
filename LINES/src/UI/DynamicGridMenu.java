@@ -94,7 +94,7 @@ public abstract class DynamicGridMenu implements UIMenu {
 		return (((buttonIndex+1) * buttonOffset) + ((buttonIndex) * buttonSize));
 	}
 	private int getButtonRow(int buttonIndex) {
-		return (int)(getUnadjustedXOffset(buttonIndex) / (float)(width-buttonWidth));
+		return (int)(getUnadjustedXOffset(buttonIndex) / (float)(width-buttonOffset));
 	}
 	
 	public boolean canFitNewEmptyEntry() {
