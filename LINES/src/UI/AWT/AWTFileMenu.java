@@ -5,7 +5,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
 import javax.swing.JFileChooser;
-import javax.swing.JPanel;
 
 import UI.MenuButton;
 import UI.StaticListMenu;
@@ -16,39 +15,49 @@ import generic.VoidFunctionPointer;
 public class AWTFileMenu extends AWTDropdownMenu {
 
 	private LuaScriptFiler 	filer;
-	private JFileChooser 	exporter;
-	private JFileChooser 	loader;
-
+	
 	public static String SAVE_STRING = "SAVE";
 	public static String LOAD_STRING = "LOAD";
 	
-	public final VoidFunctionPointer SAVE = new VoidFunctionPointer(){
+	public final VoidFunctionPointer SAVE = new VoidFunctionPointer() {
 
 		@Override
 		public void call() {
-			try {
-				System.out.println("CALLED");
-				if(exporter.showSaveDialog(new JPanel()) == JFileChooser.APPROVE_OPTION){
+			
+			JFileChooser exporter = new JFileChooser();
+			exporter.setApproveButtonText(SAVE_STRING);
+			exporter.setApproveButtonMnemonic(SAVE_STRING.charAt(0));
+			exporter.setFileHidingEnabled(true);
+			
+			System.out.println("CALLED");
+			if(exporter.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
+				try {
 					filer.save(new FileOutputStream(exporter.getSelectedFile()));
+				} catch (FileNotFoundException fnf) {
+					fnf.printStackTrace();
 				}
-				System.out.println("FINISHED");
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
 			}
+			System.out.println("FINISHED");
 		}
-		
+
 	};
 	
-	public final VoidFunctionPointer LOAD = new VoidFunctionPointer(){
+	public final VoidFunctionPointer LOAD = new VoidFunctionPointer() {
 
 		@Override
 		public void call() {
-			try {
-				if(loader.showOpenDialog(new JPanel()) == JFileChooser.APPROVE_OPTION){
+			
+			JFileChooser loader = new JFileChooser();
+			loader.setApproveButtonText(LOAD_STRING);
+			loader.setApproveButtonMnemonic(LOAD_STRING.charAt(0));
+			loader.setFileHidingEnabled(true);
+			
+			if(loader.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
+				try {
 					filer.load(new FileInputStream(loader.getSelectedFile()));
+				} catch (FileNotFoundException fnf) {
+					fnf.printStackTrace();
 				}
-			} catch (FileNotFoundException e) {
-				e.printStackTrace();
 			}
 		}
 		
@@ -61,17 +70,7 @@ public class AWTFileMenu extends AWTDropdownMenu {
 	}
 	
 	private void setup() {
-		
-		exporter = new JFileChooser();
-		exporter.setApproveButtonText(SAVE_STRING);
-		exporter.setApproveButtonMnemonic(SAVE_STRING.charAt(0));
-		exporter.setFileHidingEnabled(true);
-		
-		loader = new JFileChooser();
-		loader.setApproveButtonText(LOAD_STRING);
-		loader.setApproveButtonMnemonic(LOAD_STRING.charAt(0));
-		loader.setFileHidingEnabled(true);
-		
+
 		AWTMenuButton fileButton = new AWTMenuButton();
 		fileButton.textLabel.setText("FILE");
 		fileButton.textLabel.center();
