@@ -22,7 +22,6 @@ public class DebounceTimer {
 	
 	public boolean isDebounceComplete() {
 		updateCountdown();
-		System.out.println(COUNTDOWN_SEC);
 		return COUNTDOWN_SEC >= TIMER_LENGTH_SEC;
 	}
 	
