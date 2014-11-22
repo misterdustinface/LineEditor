@@ -75,6 +75,12 @@ public class AWTColorPaletteMenu extends AWTDynamicGridMenu {
 		
 	}
 	
+	@Override
+	public void refreshButton(int index) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 	class ColorPaletteButton extends AWTMenuButton {
 
 		private ColorData colordata;
