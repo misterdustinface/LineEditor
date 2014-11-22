@@ -1,9 +1,9 @@
-package UI.AWT;
+package UI;
 
 import data.shapes.Point;
 import data.shapes.Polygon;
 
-final public class AWTArrowButton extends AWTMenuButton {
+final public class ArrowButton extends MenuButton {
 
 	enum TYPE{INCREMENTOR, DECREMENTOR, SELECTOR}
 	private TYPE  type; 
@@ -11,7 +11,7 @@ final public class AWTArrowButton extends AWTMenuButton {
 	private Point position;
 	private int offset, size;
 	
-	public AWTArrowButton(Point POSITION, int OFFSET, int SIZE) {
+	public ArrowButton(Point POSITION, int OFFSET, int SIZE) {
 		val  = 0;
 		type = TYPE.SELECTOR;
 		position = POSITION;
@@ -25,28 +25,28 @@ final public class AWTArrowButton extends AWTMenuButton {
 	public void setUp()   {    up(this, position, offset, size); }
 	public void setDown() {  down(this, position, offset, size); }
 	
-	private static void right(AWTArrowButton b, Point p, int xoff, int size) {
+	private static void right(ArrowButton b, Point p, int xoff, int size) {
 		b.polygon = new Polygon(3);
 		b.addPointRelativeToMenuPosition(p, xoff,   0);
 		b.addPointRelativeToMenuPosition(p, xoff - size,  size);
 		b.addPointRelativeToMenuPosition(p, xoff - size, -size);
 	}
 	
-	private static void left(AWTArrowButton b, Point p, int xoff, int size) {
+	private static void left(ArrowButton b, Point p, int xoff, int size) {
 		b.polygon = new Polygon(3);
 		b.addPointRelativeToMenuPosition(p, xoff,   0);
 		b.addPointRelativeToMenuPosition(p, xoff + size,  size);
 		b.addPointRelativeToMenuPosition(p, xoff + size, -size);
 	}
 	
-	private static void up(AWTArrowButton b, Point p, int yoff, int size) {
+	private static void up(ArrowButton b, Point p, int yoff, int size) {
 		b.polygon = new Polygon(3);
 		b.addPointRelativeToMenuPosition(p, 0, yoff);
 		b.addPointRelativeToMenuPosition(p, size,  yoff-size);
 		b.addPointRelativeToMenuPosition(p, -size, yoff-size);
 	}
 	
-	private static void down(AWTArrowButton b, Point p, int yoff, int size) {
+	private static void down(ArrowButton b, Point p, int yoff, int size) {
 		b.polygon = new Polygon(3);
 		b.addPointRelativeToMenuPosition(p, 0, yoff);
 		b.addPointRelativeToMenuPosition(p, size,  yoff+size);
