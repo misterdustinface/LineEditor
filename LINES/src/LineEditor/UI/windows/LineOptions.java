@@ -1,4 +1,4 @@
-package UI.windows;
+package LineEditor.UI.windows;
 
 import java.awt.event.ActionEvent;
 

@@ -1,4 +1,4 @@
-package UI.windows;
+package LineEditor.UI.windows;
 
 import LineEditor.data.WorldGeometryData;
 import data.shapes.Circle;

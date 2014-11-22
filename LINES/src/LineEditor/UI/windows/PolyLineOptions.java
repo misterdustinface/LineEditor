@@ -1,4 +1,4 @@
-package UI.windows;
+package LineEditor.UI.windows;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
