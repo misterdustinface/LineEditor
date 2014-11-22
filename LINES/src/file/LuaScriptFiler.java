@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class LuaScriptFiler extends DataModificationNotifier implements FileBus {
-	final private static String INDENT          = "  "; 
+	final private static String INDENT          = "  ";
 	final private static String TABLE_START     = Character.toString('{');
 	final private static String TABLE_END       = Character.toString('}');
 	final private static String TABLE_DELIMITER = Character.toString(',');

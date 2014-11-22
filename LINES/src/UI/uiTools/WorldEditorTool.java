@@ -7,7 +7,7 @@ import data.shapes.Shape;
 import data.shapes.WorldGeometryData;
 
 //public abstract class WorldEditorTool implements ToolAction{
-public abstract class WorldEditorTool extends RequestibleAction{
+public abstract class WorldEditorTool extends RequestibleAction {
 
 	final public static WorldEditorTool nullTool = new WorldEditorTool(null) {
 		@Override
@@ -26,6 +26,6 @@ public abstract class WorldEditorTool extends RequestibleAction{
 	final protected void 		toggleSelected(Shape s) { worldData.toggleSelected(s); }
 
 	final protected Circle[] 	worldCircles() 		{ return worldData.getCopyOfWorldPointCollisionCircles(); }
-	final protected Pipe[] worldRectangles() 	{ return worldData.getCopyOfWorldLineCollisionBoxes(); }
+	final protected Pipe[] 		worldRectangles() 	{ return worldData.getCopyOfWorldLineCollisionBoxes(); }
 	final protected Shape[] 	collisionBounds() 	{ return worldData.getCopyOfAllCollisionBounds(); }
 }

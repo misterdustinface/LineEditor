@@ -15,7 +15,7 @@ import UI.AWT.AWTProgramWindow;
 import UI.AWT.AWTScreenShifter;
 import UI.AWT.AWTZoomWheelListener;
 import data.shapes.WorldGeometryData;
-import file.WorldGeometryLuaScriptFiler;
+import file.WorldGeometryFiler;
 
 public class AWTLineEditorProgram implements Program {
 
@@ -31,7 +31,7 @@ public class AWTLineEditorProgram implements Program {
 		worldEditorPanel.addMouseListener(screenShifter);
 		worldEditorPanel.addMouseWheelListener(new AWTZoomWheelListener(worldEditorPanel));
 		window.add(worldEditorPanel);
-		WorldGeometryLuaScriptFiler worldFiler 				= new WorldGeometryLuaScriptFiler();
+		WorldGeometryFiler worldFiler 				= new WorldGeometryFiler();
 		worldFiler.setData(worldData);
 		
 		AWTGridDrawer 					 gridDrawer 	= new AWTGridDrawer(worldEditorPanel);

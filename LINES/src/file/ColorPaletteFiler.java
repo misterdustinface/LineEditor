@@ -4,14 +4,14 @@ import generic.ColorData;
 
 import java.util.ArrayList;
 
-public class ColorPaletteLuaScriptFiler extends LuaScriptFiler {
+public class ColorPaletteFiler extends LuaScriptFiler {
 
 	private ArrayList<ColorData> loadedPalette;
 	private ArrayList<ColorData> palette;
 
-	public ColorPaletteLuaScriptFiler() {}
+	public ColorPaletteFiler() {}
 	
-	public ColorPaletteLuaScriptFiler(ArrayList<ColorData> PALETTE) {
+	public ColorPaletteFiler(ArrayList<ColorData> PALETTE) {
 		setPalette(PALETTE);
 	}
 	

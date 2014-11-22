@@ -10,44 +10,35 @@ public class StaticListMenu implements UIMenu {
 	protected ArrayList<MenuButton> buttons;
 	protected int width, height, buttonOffset, buttonWidth, buttonHeight;
 	
-	private int rows;
-	
 	public StaticListMenu() {
 		buttons = new ArrayList<MenuButton>();
 		buttonOffset = 20;
 		buttonWidth = buttonHeight = 40;
 		width = height = 140;
-		rows = 1;
 	}
 	
 	public void setButtons(MenuButton ... BUTTONS) {
 		for(int i = 0; i < BUTTONS.length; ++i)
 			addButton(BUTTONS[i]);
-		setRows(BUTTONS.length);
 	}
 	
 	public void setButtons(ArrayList<MenuButton> BUTTONS) {
 		buttons = BUTTONS;
-		setRows(BUTTONS.size());
+		resetMenuDimensions();
 	}
 	
 	public void addButton(MenuButton BUTTON) {
 		buttons.add(BUTTON);
-		setRows(buttons.size());
+		resetMenuDimensions();
 	}
 	
 	public void removeButton(MenuButton BUTTON) {
 		buttons.remove(BUTTON);
-		setRows(buttons.size());
+		resetMenuDimensions();
 	}
 	
 	public void clearButtons() {
 		buttons.clear();
-		rows = 1;
-	}
-
-	private void setRows(int ROWS) { 
-		rows = ROWS; 
 		resetMenuDimensions();
 	}
 	
@@ -80,7 +71,7 @@ public class StaticListMenu implements UIMenu {
 	
 	protected void resetMenuDimensions() {
 		width  = getSuggestedDimension(buttonOffset, buttonWidth,  1);
-		height = getSuggestedDimension(buttonOffset, buttonHeight, rows);
+		height = getSuggestedDimension(buttonOffset, buttonHeight, buttons.size());
 	}
 	
 	protected int getSuggestedDimension(int buttonOffset, int buttonSize, int numButtonsAcross){
@@ -98,7 +89,7 @@ public class StaticListMenu implements UIMenu {
 		getButton(index).makeBoxRelativeToPoint((int)position.x, (int)position.y, buttonOffset, getYOffset(index), buttonWidth, buttonHeight);
 	}
 	
-	private int getYOffset(int buttonIndex) {	
+	protected int getYOffset(int buttonIndex) {	
 		return (((buttonIndex+1) * buttonOffset) + ((buttonIndex) * buttonHeight));
 	}
 	

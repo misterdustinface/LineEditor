@@ -1,6 +1,6 @@
 package main;
 
-import file.ColorPaletteLuaScriptFiler;
+import file.ColorPaletteFiler;
 import generic.ColorData;
 
 import java.util.ArrayList;
@@ -44,8 +44,8 @@ public class AWTColorPaletteEditorProgram implements Program {
 		AWTProgramWindow window = new AWTProgramWindow("Color Palette");
 		window.setSize(400, 300);
 		
-		ArrayList<ColorData> 		colorPalette 	= new ArrayList<ColorData>();
-		ColorPaletteLuaScriptFiler 	colorFiler 		= new ColorPaletteLuaScriptFiler();
+		ArrayList<ColorData> colorPalette 	= new ArrayList<ColorData>();
+		ColorPaletteFiler 	 colorFiler 	= new ColorPaletteFiler();
 		colorFiler.setPalette(colorPalette);
 
 		AWTColorChooserMenu colorChooser = new AWTColorChooserMenu(COLOR_CHOOSER_DISPLAYBOX);
