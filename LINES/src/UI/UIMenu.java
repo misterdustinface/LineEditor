@@ -6,6 +6,7 @@ import data.shapes.Point;
 
 public abstract class UIMenu implements UILayer {
 	
+	protected Point position;
 	protected ArrayList<MenuButton> buttons;
 	protected int width, height, buttonOffset, buttonWidth, buttonHeight;
 	
@@ -14,13 +15,18 @@ public abstract class UIMenu implements UILayer {
 		buttonOffset = 20;
 		buttonWidth = buttonHeight = 40;
 		width = height = 140;
+		position = new Point(0,0);
 	}
 	
-	abstract protected void 	resetMenuDimensions();
-	abstract public    int 		getX();
-	abstract public    int 		getY();
-	abstract public    void 	setPostition(Point POSITION);
+	abstract protected void resetMenuDimensions();
 
+	public int getX() { return (int)position.x; }
+	public int getY() { return (int)position.y; }
+	
+	public void setPostition(Point POSITION) { 
+		position = POSITION;
+	}	
+	
 	public void setButtonOffset(int BUTTON_OFFSET) { 
 		buttonOffset = BUTTON_OFFSET; 
 		resetMenuDimensions();
@@ -47,21 +53,25 @@ public abstract class UIMenu implements UILayer {
 	public void setButtons(ArrayList<MenuButton> BUTTONS) {
 		buttons = BUTTONS;
 		resetMenuDimensions();
+		refreshButtons();
 	}
 	
 	public void addButton(MenuButton BUTTON) {
 		buttons.add(BUTTON);
 		resetMenuDimensions();
+		refreshButtons();
 	}
 	
 	public void removeButton(MenuButton BUTTON) {
 		buttons.remove(BUTTON);
 		resetMenuDimensions();
+		refreshButtons();
 	}
 	
 	public void clearButtons() {
 		buttons.clear();
 		resetMenuDimensions();
+		refreshButtons();
 	}
 	
 	public void refreshButtons() {

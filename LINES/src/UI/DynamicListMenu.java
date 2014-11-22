@@ -2,9 +2,7 @@ package UI;
 
 public abstract class DynamicListMenu extends StaticListMenu {
 
-	public DynamicListMenu() {
-		
-	}
+	public DynamicListMenu() {}
 	
 	public void makeButtons(int number) {
 		for(int i = 0; i < number; ++i)

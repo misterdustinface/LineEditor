@@ -107,6 +107,7 @@ public class AWTColorChooserMenu extends DataModificationNotifier implements AWT
 			formColorWithCombinedHues();
 			notifyListeners();
 		}
+		
 	}
 
 	private boolean slidersHaveChanged() {

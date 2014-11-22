@@ -2,15 +2,15 @@ package AWT.UI;
 
 import java.awt.Graphics2D;
 
+import UI.StaticGridMenu;
 import AWT.rendering.AWTMenuDrawer;
-import UI.DynamicGridMenu;
 import data.shapes.Grid;
 
-public abstract class AWTDynamicGridMenu extends DynamicGridMenu implements AWTUILayer  {
+public class AWTStaticGridMenu extends StaticGridMenu implements AWTUILayer {
 
 	protected AWTMenuDrawer menuDrawer;
 	
-	public AWTDynamicGridMenu(Grid DISPLAYGRID) {
+	public AWTStaticGridMenu(Grid DISPLAYGRID) {
 		super(DISPLAYGRID);
 		menuDrawer = new AWTMenuDrawer();
 	}
@@ -18,10 +18,7 @@ public abstract class AWTDynamicGridMenu extends DynamicGridMenu implements AWTU
 	@Override
 	public void render(Graphics2D g) {
 		menuDrawer.setGraphics(g);
-		menuDrawer.drawUIMenuFilledButtons(this);
-
-		if(canFitNewEmptyEntry()) {
-			menuDrawer.drawPlusOnButton(getEmptyEntry());
-		}
+		menuDrawer.drawUIMenu(this);
 	}
+	
 }

@@ -34,7 +34,8 @@ public class AWTColorPaletteEditorProgram {
 	static int BUTTON_ROWS   = 4;
 	static int BUTTON_COLS   = 3;
 
-	static Grid COLOR_PALETTE_DISPLAYGRID = new Grid(new Point(2*X_OFFSET + MENU_WIDTH, Y_OFFSET), BUTTON_ROWS, BUTTON_COLS);
+	static Point COLOR_PALETTE_POSITION = new Point(2*X_OFFSET + MENU_WIDTH, Y_OFFSET);
+	static Grid COLOR_PALETTE_DISPLAYGRID = new Grid(BUTTON_ROWS, BUTTON_COLS);
 	
 	static int DELETE_BUTTON_X_POS = 107;
 	static int DELETE_BUTTON_Y_POS = 80 - Y_OFFSET;
@@ -50,6 +51,7 @@ public class AWTColorPaletteEditorProgram {
 		AWTColorChooserMenu colorChooser = new AWTColorChooserMenu(COLOR_CHOOSER_DISPLAYBOX);
 		
 		AWTColorPaletteMenu paletteMenu = new AWTColorPaletteMenu(colorChooser, COLOR_PALETTE_DISPLAYGRID);
+		paletteMenu.setPostition(COLOR_PALETTE_POSITION);
 		paletteMenu.setButtonOffset(BUTTON_OFFSET);
 		paletteMenu.setButtonSize(BUTTON_SIZE);
 		paletteMenu.setPalette(colorPalette);

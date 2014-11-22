@@ -33,7 +33,7 @@ public class AWTColorPaletteMenu extends AWTDynamicGridMenu {
 	
 	public void remakeButtons() {
 		clearButtons();
-		makeButtons(paletteColors.size());
+		refreshButtons();
 	}
 	
 	public DataModificationListener getDataModificationListener() {

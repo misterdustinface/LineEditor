@@ -25,7 +25,7 @@ public class TextLabel {
 	}
 	private void modifyText() {
 		if (text.length() > maxChars) {
-			text = text.substring(0, maxChars);
+			text = text.substring(0, maxChars-3);
 			text += "...";
 		}
 	}

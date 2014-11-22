@@ -4,10 +4,9 @@ import AWT.UI.AWTBarSlider;
 import AWT.UI.AWTMenuButton;
 import AWT.UI.AWTRenderer;
 import AWT.graphicdata.AWTGraphicData;
-import UI.DynamicGridMenu;
-import UI.StaticListMenu;
 import UI.MenuButton;
 import UI.TextLabel;
+import UI.UIMenu;
 import data.shapes.Point;
 
 public class AWTMenuDrawer extends AWTRenderer {
@@ -82,14 +81,14 @@ public class AWTMenuDrawer extends AWTRenderer {
 		graphics.drawRect(X, Y, width, height);
 	}
 	
-	public void drawListMenu(StaticListMenu menu) {
+	public void drawUIMenu(UIMenu menu) {
 		drawMenu(menu.getX(), menu.getY(), menu.getWidth(), menu.getHeight());
 		for(int i = 0; i < menu.numberOfButtons(); ++i) {
 			drawButton((AWTMenuButton)menu.getButton(i));
 		}
 	}
 	
-	public void drawGridMenu(DynamicGridMenu menu) {
+	public void drawUIMenuFilledButtons(UIMenu menu) {
 		drawMenu(menu.getX(), menu.getY(), menu.getWidth(), menu.getHeight());
 		for(int i = 0; i < menu.numberOfButtons(); ++i) {
 			drawFilledButton((AWTMenuButton)menu.getButton(i));
