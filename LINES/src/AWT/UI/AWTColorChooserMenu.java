@@ -1,4 +1,4 @@
-package UI.AWT;
+package AWT.UI;
 
 import generic.ColorData;
 import generic.DataModificationNotifier;
@@ -7,7 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
 
-import rendering.AWT.AWTMenuDrawer;
+import AWT.rendering.AWTMenuDrawer;
 import UI.MouseUserDevice;
 import data.graphics.AWTGraphicData;
 import data.shapes.Rectangle;

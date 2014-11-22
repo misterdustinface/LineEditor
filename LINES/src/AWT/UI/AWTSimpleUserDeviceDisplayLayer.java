@@ -1,9 +1,9 @@
-package UI.AWT;
+package AWT.UI;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-import rendering.AWT.AWTCursorDrawer;
+import AWT.rendering.AWTCursorDrawer;
 import UI.MouseUserDevice;
 
 public class AWTSimpleUserDeviceDisplayLayer implements AWTUILayer {

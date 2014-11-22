@@ -1,7 +1,7 @@
-package rendering.AWT;
+package AWT.rendering;
 
 import rendering.CursorDrawer;
-import UI.AWT.AWTRenderer;
+import AWT.UI.AWTRenderer;
 import data.graphics.AWTGraphicData;
 
 public class AWTCursorDrawer extends AWTRenderer implements CursorDrawer {

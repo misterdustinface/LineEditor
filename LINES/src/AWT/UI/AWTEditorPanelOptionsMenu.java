@@ -1,4 +1,4 @@
-package UI.AWT;
+package AWT.UI;
 
 import java.awt.Menu;
 import java.awt.MenuItem;

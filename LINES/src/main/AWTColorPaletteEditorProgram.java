@@ -5,15 +5,15 @@ import generic.ColorData;
 
 import java.util.ArrayList;
 
-import UI.AWT.AWTColorChooserMenu;
-import UI.AWT.AWTColorPaletteMenu;
-import UI.AWT.AWTDefaultMouseUserDevice;
-import UI.AWT.AWTEditorPanel;
-import UI.AWT.AWTFileMenu;
-import UI.AWT.AWTMenuButton;
-import UI.AWT.AWTMouseUserDevice;
-import UI.AWT.AWTProgramWindow;
-import UI.AWT.AWTSimpleUserDeviceDisplayLayer;
+import AWT.UI.AWTColorChooserMenu;
+import AWT.UI.AWTColorPaletteMenu;
+import AWT.UI.AWTDefaultMouseUserDevice;
+import AWT.UI.AWTEditorPanel;
+import AWT.UI.AWTFileMenu;
+import AWT.UI.AWTMenuButton;
+import AWT.UI.AWTMouseUserDevice;
+import AWT.UI.AWTProgramWindow;
+import AWT.UI.AWTSimpleUserDeviceDisplayLayer;
 import data.shapes.Grid;
 import data.shapes.Point;
 import data.shapes.Rectangle;

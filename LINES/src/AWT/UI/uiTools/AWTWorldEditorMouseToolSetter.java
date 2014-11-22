@@ -1,10 +1,10 @@
-package UI.AWTuiTools;
+package AWT.UI.uiTools;
 
 import generic.Pair;
 
 import java.awt.event.MouseEvent;
 
-import UI.AWTuiTools.FunctionPointers.*;
+import AWT.UI.uiTools.FunctionPointers.*;
 import data.shapes.WorldGeometryData;
 
 //TODO - use a SwingVMouseDriver instead of the WorldEditorMouseToolSetter

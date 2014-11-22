@@ -1,4 +1,4 @@
-package UI.AWTuiTools.FunctionPointers;
+package AWT.UI.uiTools.FunctionPointers;
 
 import java.awt.event.MouseEvent;
 

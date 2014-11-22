@@ -1,12 +1,12 @@
-package rendering.AWT;
+package AWT.rendering;
 
+import AWT.UI.AWTBarSlider;
+import AWT.UI.AWTMenuButton;
+import AWT.UI.AWTRenderer;
 import UI.DynamicGridMenu;
 import UI.StaticListMenu;
 import UI.MenuButton;
 import UI.TextLabel;
-import UI.AWT.AWTBarSlider;
-import UI.AWT.AWTMenuButton;
-import UI.AWT.AWTRenderer;
 import data.graphics.AWTGraphicData;
 import data.shapes.Point;
 

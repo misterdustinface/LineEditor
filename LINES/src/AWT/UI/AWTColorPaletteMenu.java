@@ -1,4 +1,4 @@
-package UI.AWT;
+package AWT.UI;
 
 import generic.ColorData;
 import generic.DataModificationListener;

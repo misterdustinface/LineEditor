@@ -1,8 +1,8 @@
-package UI.AWT;
+package AWT.UI;
 
 import java.awt.Graphics2D;
 
-import rendering.AWT.AWTMenuDrawer;
+import AWT.rendering.AWTMenuDrawer;
 import UI.DynamicGridMenu;
 import data.shapes.Grid;
 

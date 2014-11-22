@@ -2,7 +2,7 @@ package UI.uiTools;
 
 import java.util.HashSet;
 
-import UI.AWTuiTools.SelectionBoxTool;
+import AWT.UI.uiTools.SelectionBoxTool;
 import data.shapes.LineSegment;
 import data.shapes.Pipe;
 import data.shapes.WorldGeometryData;

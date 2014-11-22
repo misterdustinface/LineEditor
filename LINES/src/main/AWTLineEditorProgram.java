@@ -5,15 +5,15 @@ import java.awt.MenuItem;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import rendering.AWT.AWTGridDrawer;
-import rendering.AWT.AWTWorldEditorUserDeviceRenderer;
-import UI.AWT.AWTEditorPanel;
-import UI.AWT.AWTEditorPanelOptionsMenu;
-import UI.AWT.AWTFileMenu;
-import UI.AWT.AWTLineEditorUserDevice;
-import UI.AWT.AWTProgramWindow;
-import UI.AWT.AWTScreenShifter;
-import UI.AWT.AWTZoomWheelListener;
+import AWT.UI.AWTEditorPanel;
+import AWT.UI.AWTEditorPanelOptionsMenu;
+import AWT.UI.AWTFileMenu;
+import AWT.UI.AWTLineEditorUserDevice;
+import AWT.UI.AWTProgramWindow;
+import AWT.UI.AWTScreenShifter;
+import AWT.UI.AWTZoomWheelListener;
+import AWT.rendering.AWTGridDrawer;
+import AWT.rendering.AWTWorldEditorUserDeviceRenderer;
 import data.shapes.WorldGeometryData;
 import file.WorldGeometryFiler;
 

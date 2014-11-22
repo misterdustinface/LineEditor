@@ -1,8 +1,8 @@
-package UI.AWTuiTools;
+package AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
-import rendering.AWT.AWTShapeDrawer;
+import AWT.rendering.AWTShapeDrawer;
 import data.graphics.AWTGraphicData;
 import data.shapes.Circle;
 import data.shapes.LineSegment;

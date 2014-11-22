@@ -1,4 +1,4 @@
-package UI.AWT;
+package AWT.UI;
 
 
 public class AWTTestButton extends AWTMenuButton {

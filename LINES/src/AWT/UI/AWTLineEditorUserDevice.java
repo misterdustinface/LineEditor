@@ -1,9 +1,9 @@
-package UI.AWT;
+package AWT.UI;
 
 import java.awt.event.MouseEvent;
 
-import UI.AWTuiTools.AWTWorldEditorMouseTool;
-import UI.AWTuiTools.AWTWorldEditorMouseToolSetter;
+import AWT.UI.uiTools.AWTWorldEditorMouseTool;
+import AWT.UI.uiTools.AWTWorldEditorMouseToolSetter;
 import data.shapes.WorldGeometryData;
 
 // TODO - use a SwingVMouseDriver instead of the WorldEditorMouseToolSetter

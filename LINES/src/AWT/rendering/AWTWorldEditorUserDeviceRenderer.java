@@ -1,11 +1,11 @@
-package rendering.AWT;
+package AWT.rendering;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import AWT.UI.AWTLineEditorUserDevice;
+import AWT.UI.AWTUILayer;
 import UI.MouseUserDevice;
-import UI.AWT.AWTLineEditorUserDevice;
-import UI.AWT.AWTUILayer;
 import data.graphics.AWTGraphicData;
 import data.shapes.Circle;
 import data.shapes.Pipe;

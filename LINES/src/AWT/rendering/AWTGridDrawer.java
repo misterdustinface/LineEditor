@@ -1,13 +1,13 @@
-package rendering.AWT;
+package AWT.rendering;
 
 
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
+import AWT.UI.AWTUILayer;
+import AWT.UI.AWTViewport;
 import UI.MouseUserDevice;
-import UI.AWT.AWTUILayer;
-import UI.AWT.AWTViewport;
 import data.shapes.Rectangle;
 
 public class AWTGridDrawer implements AWTUILayer {
