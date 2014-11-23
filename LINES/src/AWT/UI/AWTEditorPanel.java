@@ -20,8 +20,8 @@ public class AWTEditorPanel extends AWTViewport{
 	final public static Cursor INVISIBLE_CURSOR = Toolkit.getDefaultToolkit().createCustomCursor((Image)(new BufferedImage(4, 4, BufferedImage.TYPE_INT_ARGB)),new java.awt.Point(0, 0), "INVISIBLE");
 	
 	private HashMap<UILayer, Boolean> shouldShow;
-	private ArrayList<AWTUILayer>	 uis;
-	private AWTMouseUserDevice		 mouse;
+	private ArrayList<AWTUILayer>	  uis;
+	private AWTMouseUserDevice		  mouse;
 	
 	//private SwingVKeyDriver   vKey;
 	
@@ -34,6 +34,8 @@ public class AWTEditorPanel extends AWTViewport{
 		addViewportMouseListener(mouse);
 		addViewportMotionListener(mouse);
 		setBackground(AWTGraphicData.BACKGROUND_COLOR);
+		
+		setDoubleBuffered(true);
 	}
 	
 	public void addLayer 	(AWTUILayer ui) { uis.add(ui);    shouldShow.put(ui, true); }
@@ -43,14 +45,19 @@ public class AWTEditorPanel extends AWTViewport{
 	private boolean shouldShow(AWTUILayer ui) { return shouldShow.get(ui); }
 	
 	@Override
-    protected void paintComponent(Graphics g){
+    protected void paintComponent(Graphics g){		
 		super.paintComponent(g);
 		repaint();
+		
 		for(AWTUILayer ui : uis) {
 			if (shouldShow(ui)) {
 				ui.update(mouse);
 				ui.render((Graphics2D)g);
 			}
 		}
+		
+		try {
+			Thread.sleep(5); // Fixes really strange swing thread priority bug.
+		} catch (Exception e) {}
     }
 }

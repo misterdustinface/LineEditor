@@ -20,10 +20,26 @@ public class AWTFileChooser extends DataModificationNotifier implements AWTUILay
 	private AWTMenuButton	  exitButton;
 	private AWTMenuDrawer 	  menuDrawer;
 	
-	public int gridRows = 5;
-	public int gridCols = 5;
+	private boolean shouldDisplayAndUpdate;
+	
+	public int gridRows = 4;
+	public int gridCols = 4;
 	
 	public AWTFileChooser() {		
+		makeUpButton();
+		makeExitButton();
+		
+		fileListing = new AWTStaticGridMenu(new Grid(gridRows,gridCols));
+		fileListing.setPostition(new Point(2,48));
+		fileListing.setButtonDimensions(140, 40);
+		fileListing.setButtonOffset(4);
+		
+		menuDrawer = new AWTMenuDrawer();
+		
+		shouldDisplayAndUpdate = false;
+	}
+	
+	private void makeUpButton() {
 		upButton = new AWTMenuButton();
 		upButton.textLabel.setText("UP");
 		upButton.textLabel.center();
@@ -35,7 +51,8 @@ public class AWTFileChooser extends DataModificationNotifier implements AWTUILay
 				chooseFile(filepath.getParent());
 			}
 		});
-		
+	}
+	private void makeExitButton() {
 		exitButton = new AWTMenuButton();
 		exitButton.textLabel.setText("EXIT");
 		exitButton.textLabel.center();
@@ -47,28 +64,20 @@ public class AWTFileChooser extends DataModificationNotifier implements AWTUILay
 				exit();
 			}
 		});
-		
-		fileListing = new AWTStaticGridMenu(new Grid(gridRows,gridCols));
-		fileListing.setPostition(new Point(2,48));
-		fileListing.setButtonDimensions(80, 40);
-		fileListing.setButtonOffset(4);
-		
-		menuDrawer = new AWTMenuDrawer();
 	}
 	
 	public void chooseFile() {
+		shouldDisplayAndUpdate = true;
 		chooseFile(START_DIRECTORY);
-	}
-	
-	public File getChosenFile() {
-		return filepath;
 	}
 
 	public void exit() {
+		shouldDisplayAndUpdate = false;
 		notifyListeners();
 		fileListing.clearButtons();
-		System.out.println("DONE");
 	}
+	
+	public File getChosenFile() { return filepath; }
 	
 	private void chooseFile(String path) {
 		filepath = new File(path);
@@ -80,47 +89,61 @@ public class AWTFileChooser extends DataModificationNotifier implements AWTUILay
 	}
 	
 	private void refreshFileListing() {
-		final File[] files = filepath.listFiles();
 		fileListing.clearButtons();
 		
-		gridRows = files.length % gridCols;
-		fileListing.setGridDimensions(gridRows, gridCols);
-	
+		final File[] files = filepath.listFiles();
+		resizeGridToFitFiles(files.length);
+		
 		for(File file : files) {
 			if(! file.isHidden()) {
-				AWTMenuButton button = new AWTMenuButton();
-				button.textLabel.setText(file.getName());
-				button.textLabel.center();
-				button.makeSuggestedBoxRelativeToPoint(fileListing.getX(), fileListing.getY());
-				
-				final String PATH = file.getPath();
-				button.setButtonPressedFunction(new VoidFunctionPointer() {
-					@Override
-					public void call() {
-						chooseFile(PATH);
-					}
-				});
-				
-				fileListing.addButton(button);
+				fileListing.addButton(makeFileChooserButton(file));
 			}
 		}
 	}
 	
+	private void resizeGridToFitFiles(int numberOfFiles) {
+		gridCols = gridCols < 1 ? 1 : gridCols;
+		gridRows = numberOfFiles / gridCols;
+		gridRows = gridRows < 1 ? 1 : gridRows;
+		fileListing.setGridDimensions(gridRows, gridCols);
+	}
+	
+	private AWTMenuButton makeFileChooserButton(File file) {
+		AWTMenuButton button = new AWTMenuButton();
+		button.textLabel.setMaxTextWidth(20);
+		button.textLabel.setText(file.getName());
+		button.textLabel.center();
+		button.makeSuggestedBoxRelativeToPoint(fileListing.getX(), fileListing.getY());
+		
+		final String PATH = file.getPath();
+		button.setButtonPressedFunction(new VoidFunctionPointer() {
+			@Override
+			public void call() {
+				chooseFile(PATH);
+			}
+		});
+		return button;
+	}
+	
 	@Override
-	public void render(Graphics2D g) {
-		//fileListing.render(g);
-		menuDrawer.setGraphics(g);		
-		menuDrawer.drawButton(upButton);
-		menuDrawer.drawButton(exitButton);
+	public void render(Graphics2D g) {		
+		if(shouldDisplayAndUpdate) {
+			fileListing.render(g);
+			menuDrawer.setGraphics(g);		
+			menuDrawer.drawButton(upButton);
+			menuDrawer.drawButton(exitButton);
+		}
 	}
 
 	@Override
 	public void update(MouseUserDevice mouse) {
-		upButton.update(mouse);
-		exitButton.update(mouse);
-		//try {
-		//	fileListing.update(mouse);
-		//} catch (java.util.ConcurrentModificationException cme) {}
+		if(shouldDisplayAndUpdate) {
+			upButton.update(mouse);
+			exitButton.update(mouse);
+			try {
+				fileListing.update(mouse);
+			} catch (Exception e) {}
+		}
 	}
 	
 }
