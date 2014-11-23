@@ -12,7 +12,7 @@ import data.shapes.Pipe;
 import data.shapes.Polygon;
 import data.shapes.Rectangle;
 
-final public class AWTShapeDrawer extends AWTRenderer implements ShapeDrawer{
+final public class AWTShapeDrawer extends AWTRenderer implements ShapeDrawer {
 	
 	public AWTShapeDrawer() {}
 	
