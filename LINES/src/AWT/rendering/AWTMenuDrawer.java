@@ -1,15 +1,17 @@
 package AWT.rendering;
 
+import rendering.MenuDrawer;
 import AWT.UI.AWTBarSlider;
 import AWT.UI.AWTMenuButton;
 import AWT.UI.AWTRenderer;
 import AWT.graphicdata.AWTGraphicData;
+import UI.BarSlider;
 import UI.MenuButton;
 import UI.TextLabel;
 import UI.UIMenu;
 import data.shapes.Point;
 
-public class AWTMenuDrawer extends AWTRenderer {
+public class AWTMenuDrawer extends AWTRenderer implements MenuDrawer {
 
 	private AWTShapeDrawer shapeDrawer;
 	
@@ -23,18 +25,18 @@ public class AWTMenuDrawer extends AWTRenderer {
 		}
 	}
 	
-	public void drawButton( AWTMenuButton b ) {
+	public void drawButton( MenuButton b ) {
 		shapeDrawer.setGraphics(graphics);
-		shapeDrawer.setColor(b.getColor());
+		shapeDrawer.setColor(((AWTMenuButton)b).getColor());
 		shapeDrawer.drawPolygonBorder(b.polygon);
 		drawTextLabel(b.textLabel);
 	}
 	
-	public void drawFilledButton( AWTMenuButton b ) {
+	public void drawFilledButton( MenuButton b ) {
 		shapeDrawer.setGraphics(graphics);
-		shapeDrawer.setColor(b.getNormalColor());
+		shapeDrawer.setColor(((AWTMenuButton)b).getNormalColor());
 		shapeDrawer.drawPolygon(b.polygon);
-		shapeDrawer.setColor(b.getColor());
+		shapeDrawer.setColor(((AWTMenuButton)b).getColor());
 		shapeDrawer.drawPolygon(b.polygon);
 		drawTextLabel(b.textLabel);
 	}
@@ -54,44 +56,45 @@ public class AWTMenuDrawer extends AWTRenderer {
 		graphics.fillRect(centerX - (plusHeight>>1), centerY - (plusWidth >>1), plusHeight, plusWidth);
 	}
 	
-	public void drawSlider( AWTBarSlider s ) {
+	public void drawSlider( BarSlider s ) {
 		shapeDrawer.setGraphics(graphics);
-		shapeDrawer.setColor(s.getBaseColor());
+		shapeDrawer.setColor(((AWTBarSlider)s).getBaseColor());
 		shapeDrawer.drawRectangle(s.getBase());
-		shapeDrawer.setColor(s.getFillColor());
+		shapeDrawer.setColor(((AWTBarSlider)s).getFillColor());
 		shapeDrawer.drawRectangle(s.getFill());
 	}
 	
-	public void drawSelectorArrow( AWTMenuButton b, int x, int size ) {
+	public void drawSelectorArrow( MenuButton b, int x, int size ) {
 		int y = (int) b.polygon.getBounds().getCenterY();
-		graphics.setColor(b.getColor());
+		graphics.setColor(((AWTMenuButton)b).getColor());
 		graphics.drawLine(x,        y,        x - size, y + size);
 		graphics.drawLine(x,        y,        x - size, y - size);
 		graphics.drawLine(x - size, y - size, x - size, y + size);
 	}
 	
-	public void drawMenu( Point topLeft, int width, int height) {
-		drawMenu((int)topLeft.x, (int)topLeft.y, width, height);
+	public void drawMenuBox( Point topLeft, int width, int height) {
+		drawMenuBox((int)topLeft.x, (int)topLeft.y, width, height);
 	}
 	
-	public void drawMenu( int X, int Y, int width, int height) {
+	public void drawMenuBox( int X, int Y, int width, int height) {
 		graphics.setColor(AWTGraphicData.MENU_BACKGROUND_COLOR);
 		graphics.fillRect(X, Y, width, height);
 		graphics.setColor(AWTGraphicData.buttonColor);
 		graphics.drawRect(X, Y, width, height);
 	}
 	
-	public void drawUIMenu(UIMenu menu) {
-		drawMenu(menu.getX(), menu.getY(), menu.getWidth(), menu.getHeight());
+	public void drawUIMenu( UIMenu menu ) {
+		drawMenuBox(menu.getX(), menu.getY(), menu.getWidth(), menu.getHeight());
 		for(int i = 0; i < menu.numberOfButtons(); ++i) {
 			drawButton((AWTMenuButton)menu.getButton(i));
 		}
 	}
 	
-	public void drawUIMenuFilledButtons(UIMenu menu) {
-		drawMenu(menu.getX(), menu.getY(), menu.getWidth(), menu.getHeight());
+	public void drawUIMenuFilledButtons( UIMenu menu ) {
+		drawMenuBox(menu.getX(), menu.getY(), menu.getWidth(), menu.getHeight());
 		for(int i = 0; i < menu.numberOfButtons(); ++i) {
 			drawFilledButton((AWTMenuButton)menu.getButton(i));
 		}
 	}
+	
 }
