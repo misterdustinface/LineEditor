@@ -56,7 +56,7 @@ public class AWTColorPaletteEditorProgram {
 		paletteMenu.setButtonSize(BUTTON_SIZE);
 		paletteMenu.setPalette(colorPalette);
 		colorFiler.addDataModificationListener(paletteMenu.getDataModificationListener());
-		
+
 		//colorChooser.addButton(new ColorDeleteButton(colorChooser, paletteMenu));
 		
 		AWTMouseUserDevice 	userDevice 	= new AWTDefaultMouseUserDevice();

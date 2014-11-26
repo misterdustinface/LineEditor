@@ -1,33 +1,41 @@
 package UI;
 
+import generic.DataModificationNotifier;
+import generic.VoidFunctionPointer;
+
 import java.io.File;
 
 import data.shapes.Grid;
 import data.shapes.Point;
-import generic.DataModificationNotifier;
-import generic.VoidFunctionPointer;
 
 public abstract class FileChooser extends DataModificationNotifier implements UILayer {
 	public static String START_DIRECTORY = System.getProperty("user.home");
 	public int gridRows = 4;
 	public int gridCols = 4;
 	
-	protected StaticGridMenu 	fileListing;
-	protected MenuButton     	upButton;
-	protected MenuButton	  	exitButton;	
-	protected boolean shouldDisplayAndUpdate;
+	private StaticGridMenu 	fileListing;
+	private MenuButton     	upButton;
+	private MenuButton	  	exitButton;	
+	private boolean shouldDisplayAndUpdate;
 	
 	private File filepath;
 	
 	public FileChooser() {		
-		upButton = makeUpButton();
+		
+		upButton = makeButton();
+		upButton.textLabel.setText("UP");
+		upButton.textLabel.center();
+		upButton.makeBoxRelativeToPoint(0, 0, 2, 2, 120, 40);
 		upButton.setButtonPressedFunction(new VoidFunctionPointer() {
 			@Override
 			public void call() {
 				chooseFile(filepath.getParent());
 			}
 		});
-		exitButton = makeExitButton();
+		exitButton = makeButton();
+		exitButton.textLabel.setText("EXIT");
+		exitButton.textLabel.center();
+		exitButton.makeBoxRelativeToPoint(122, 0, 2, 2, 120, 40);
 		exitButton.setButtonPressedFunction(new VoidFunctionPointer() {
 			@Override
 			public void call() {
@@ -43,10 +51,12 @@ public abstract class FileChooser extends DataModificationNotifier implements UI
 		shouldDisplayAndUpdate = false;
 	}
 	
-	protected abstract MenuButton makeUpButton();
-	protected abstract MenuButton makeExitButton();
-	protected abstract MenuButton makeFileChooserButton(File file);
+	public boolean shouldDisplayAndUpdate() { return shouldDisplayAndUpdate; }
+	public StaticGridMenu getFileListing() { return fileListing; }
+	public MenuButton getUpButton() { return upButton; }
+	public MenuButton getExitButton() { return exitButton; }
 	
+	protected abstract MenuButton makeButton();
 	
 	public void chooseFile() {
 		shouldDisplayAndUpdate = true;
@@ -91,6 +101,15 @@ public abstract class FileChooser extends DataModificationNotifier implements UI
 		}
 	}
 	
+	private MenuButton makeFileChooserButton(File file) {
+		MenuButton button = makeButton();
+		button.textLabel.setMaxTextWidth(20);
+		button.textLabel.setText(file.getName());
+		button.textLabel.center();
+		button.makeSuggestedBoxRelativeToPoint(getFileListing().getX(), getFileListing().getY());
+		return button;
+	}
+	
 	private void resizeGridToFitFiles(int numberOfFiles) {
 		gridCols = gridCols < 1 ? 1 : gridCols;
 		gridRows = numberOfFiles / gridCols;
@@ -106,6 +125,7 @@ public abstract class FileChooser extends DataModificationNotifier implements UI
 			try {
 				fileListing.update(mouse);
 			} catch (Exception e) {}
+			mouse.intercept();
 		}
 	}
 }

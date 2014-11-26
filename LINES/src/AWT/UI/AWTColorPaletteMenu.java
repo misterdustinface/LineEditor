@@ -47,7 +47,9 @@ public class AWTColorPaletteMenu extends AWTDynamicGridMenu {
 	
 	@Override
 	protected AWTMenuButton newButton(int index) {
-		return new ColorPaletteButton(paletteColors.get(index));
+		AWTMenuButton colorPaletteButton = new ColorPaletteButton(paletteColors.get(index));
+		colorPaletteButton.fill();
+		return colorPaletteButton;
 	}
 	
 	@Override
@@ -55,7 +57,9 @@ public class AWTColorPaletteMenu extends AWTDynamicGridMenu {
 		ColorData newColor = new ColorData();
 		newColor.r = 200; newColor.g = 200; newColor.b = 200; newColor.a = 255;
 		paletteColors.add(newColor);
-		return new ColorPaletteButton(newColor);
+		AWTMenuButton colorPaletteButton = new ColorPaletteButton(newColor);
+		colorPaletteButton.fill();
+		return colorPaletteButton;
 	}	
 	
 	public void requestColorDeletion(ColorData COLOR_DATA) {

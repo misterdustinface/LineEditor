@@ -2,7 +2,6 @@ package AWT.rendering;
 
 //import uiTools.WorldEditorUITool;
 
-import AWT.UI.AWTRenderer;
 import AWT.graphicdata.AWTGraphicData;
 import rendering.ShapeDrawer;
 import data.shapes.Circle;

@@ -1,4 +1,4 @@
-package AWT.UI;
+package AWT.rendering;
 
 import java.awt.Color;
 import java.awt.Graphics2D;

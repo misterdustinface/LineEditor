@@ -7,7 +7,7 @@ import UI.DropdownMenu;
 
 public class AWTDropdownMenu extends DropdownMenu implements AWTUILayer {
 
-	private AWTMenuDrawer menuDrawer;
+	protected AWTMenuDrawer menuDrawer;
 	
 	public AWTDropdownMenu() {
 		menuDrawer = new AWTMenuDrawer();

@@ -3,9 +3,9 @@ package AWT.rendering;
 import rendering.MenuDrawer;
 import AWT.UI.AWTBarSlider;
 import AWT.UI.AWTMenuButton;
-import AWT.UI.AWTRenderer;
 import AWT.graphicdata.AWTGraphicData;
 import UI.BarSlider;
+import UI.FileChooser;
 import UI.MenuButton;
 import UI.TextLabel;
 import UI.UIMenu;
@@ -25,14 +25,22 @@ public class AWTMenuDrawer extends AWTRenderer implements MenuDrawer {
 		}
 	}
 	
-	public void drawButton( MenuButton b ) {
+	public void drawButton( MenuButton b) {
+		if(((AWTMenuButton)b).isFilled()) {
+			drawFilledButton((AWTMenuButton)b);
+		} else {
+			drawButton((AWTMenuButton)b);
+		}
+	}
+	
+	private void drawButton( AWTMenuButton b ) {
 		shapeDrawer.setGraphics(graphics);
 		shapeDrawer.setColor(((AWTMenuButton)b).getColor());
 		shapeDrawer.drawPolygonBorder(b.polygon);
 		drawTextLabel(b.textLabel);
 	}
 	
-	public void drawFilledButton( MenuButton b ) {
+	private void drawFilledButton( AWTMenuButton b ) {
 		shapeDrawer.setGraphics(graphics);
 		shapeDrawer.setColor(((AWTMenuButton)b).getNormalColor());
 		shapeDrawer.drawPolygon(b.polygon);
@@ -86,14 +94,16 @@ public class AWTMenuDrawer extends AWTRenderer implements MenuDrawer {
 	public void drawUIMenu( UIMenu menu ) {
 		drawMenuBox(menu.getX(), menu.getY(), menu.getWidth(), menu.getHeight());
 		for(int i = 0; i < menu.numberOfButtons(); ++i) {
-			drawButton((AWTMenuButton)menu.getButton(i));
+			drawButton(menu.getButton(i));
 		}
 	}
-	
-	public void drawUIMenuFilledButtons( UIMenu menu ) {
-		drawMenuBox(menu.getX(), menu.getY(), menu.getWidth(), menu.getHeight());
-		for(int i = 0; i < menu.numberOfButtons(); ++i) {
-			drawFilledButton((AWTMenuButton)menu.getButton(i));
+
+	@Override
+	public void drawFileChooser(FileChooser fileChooser) {
+		if(fileChooser.shouldDisplayAndUpdate()){
+			drawUIMenu(fileChooser.getFileListing());
+			drawButton(fileChooser.getUpButton());
+			drawButton(fileChooser.getExitButton());
 		}
 	}
 	

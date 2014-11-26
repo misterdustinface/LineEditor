@@ -1,15 +1,16 @@
 package AWT.UI;
 
+import java.awt.Graphics2D;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-import javax.swing.JFileChooser;
-
 import UI.MenuButton;
+import UI.MouseUserDevice;
 import UI.StaticListMenu;
 import data.shapes.Point;
 import file.LuaScriptFiler;
+import generic.DataModificationListener;
 import generic.VoidFunctionPointer;
 
 public class AWTFileMenu extends AWTDropdownMenu {
@@ -19,53 +20,58 @@ public class AWTFileMenu extends AWTDropdownMenu {
 	public static String SAVE_STRING = "SAVE";
 	public static String LOAD_STRING = "LOAD";
 	
+	private AWTFileChooser fileChooser;
+	private boolean	isSaving;
+	private boolean isLoading;
+	
 	public final VoidFunctionPointer SAVE = new VoidFunctionPointer() {
-
 		@Override
 		public void call() {
-			
-			JFileChooser exporter = new JFileChooser();
-			exporter.setApproveButtonText(SAVE_STRING);
-			exporter.setApproveButtonMnemonic(SAVE_STRING.charAt(0));
-			exporter.setFileHidingEnabled(true);
-			exporter.validate();
-			
-			if(exporter.showSaveDialog(null) == JFileChooser.APPROVE_OPTION){
-				try {
-					filer.save(new FileOutputStream(exporter.getSelectedFile()));
-				} catch (FileNotFoundException fnf) {
-					fnf.printStackTrace();
-				}
-			}
+			fileChooser.chooseFile();
+			isSaving = true;
 		}
-
 	};
 	
 	public final VoidFunctionPointer LOAD = new VoidFunctionPointer() {
-
 		@Override
 		public void call() {
-			
-			JFileChooser loader = new JFileChooser();
-			loader.setApproveButtonText(LOAD_STRING);
-			loader.setApproveButtonMnemonic(LOAD_STRING.charAt(0));
-			loader.setFileHidingEnabled(true);
-			loader.validate();
-			
-			if(loader.showOpenDialog(null) == JFileChooser.APPROVE_OPTION){
-				try {
-					filer.load(new FileInputStream(loader.getSelectedFile()));
-				} catch (FileNotFoundException fnf) {
-					fnf.printStackTrace();
-				}
-			}
+			fileChooser.chooseFile();
+			isLoading = true;
 		}
-		
 	};
 	
 	public AWTFileMenu(LuaScriptFiler FILER) {
 		super();
 		filer = FILER;
+		fileChooser = new AWTFileChooser();
+		
+		DataModificationListener fileSelected = new DataModificationListener(){
+			@Override
+			protected void whenMyDataIsModifiedExternally() {
+				if(isSaving){
+					try {
+						filer.save(new FileOutputStream(fileChooser.getChosenFile()));
+					} catch (FileNotFoundException fnf) {
+						fnf.printStackTrace();
+					}
+					isSaving = false;
+				}
+				if(isLoading){
+					try {
+						filer.load(new FileInputStream(fileChooser.getChosenFile()));
+					} catch (FileNotFoundException fnf) {
+						fnf.printStackTrace();
+					}
+					isLoading = false;
+				}
+			}
+		};
+		
+		fileChooser.addDataModificationListener(fileSelected);
+		
+		isSaving = false;
+		isLoading = false;
+		
 		setup();
 	}
 	
@@ -97,5 +103,17 @@ public class AWTFileMenu extends AWTDropdownMenu {
 		
 		setRoot(fileButton);
 		setMenu(list);
+	}
+	
+	@Override
+	public void update(MouseUserDevice mouse) {
+		super.update(mouse);
+		fileChooser.update(mouse);
+	}
+	
+	@Override
+	public void render(Graphics2D g) {
+		super.render(g);
+		menuDrawer.drawFileChooser(fileChooser);
 	}
 }

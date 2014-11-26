@@ -12,12 +12,14 @@ public class AWTMenuButton extends MenuButton {
 	protected Color pressedColor;
 	protected Color releasedColor;
 	protected Color highlightColor;
+	private boolean isFilled;
 	
 	public AWTMenuButton() {
 		super();
 		pressedColor  = AWTGraphicData.buttonPressedColor; 
 		releasedColor = AWTGraphicData.buttonColor;         
 		highlightColor= AWTGraphicData.buttonHighlightColor;
+		isFilled      = false;
 	}
 	
 	public void setColor(Color c) {
@@ -41,4 +43,8 @@ public class AWTMenuButton extends MenuButton {
 	public Color getNormalColor() {
 		return releasedColor;
 	}
+	
+	public boolean 	isFilled() 	{ return isFilled; }
+	public void 	fill() 		{ isFilled = true; }
+	public void 	toggleFill(){ isFilled = !isFilled; }
 }
