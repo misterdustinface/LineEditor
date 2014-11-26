@@ -2,6 +2,7 @@ package AWT.UI;
 
 import generic.ColorData;
 import generic.DataModificationListener;
+import generic.VoidFunctionPointer;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -23,24 +24,21 @@ public class AWTColorPaletteMenu extends AWTDynamicGridMenu {
 	
 	public void setPalette(ArrayList<ColorData> colorData) {
 		paletteColors = colorData;
-		remakeButtons();
+		refreshButtons();
 	}
 	
 	private void removeColorAtIndex(int i) {
-		paletteColors.remove(i);
-		remakeButtons();
-	}
-	
-	public void remakeButtons() {
-		clearButtons();
-		refreshButtons();
+		if(paletteColors.size() > 0) {
+			paletteColors.remove(i);
+			refreshButtons();
+		}
 	}
 	
 	public DataModificationListener getDataModificationListener() {
 		return new DataModificationListener() {
 			@Override
 			protected void whenMyDataIsModifiedExternally() {
-				remakeButtons();
+				refreshButtons(paletteColors.size());
 			}
 		};
 	}
@@ -54,10 +52,14 @@ public class AWTColorPaletteMenu extends AWTDynamicGridMenu {
 	
 	@Override
 	protected AWTMenuButton newEmptyButton() {
-		ColorData newColor = new ColorData();
-		newColor.r = 200; newColor.g = 200; newColor.b = 200; newColor.a = 255;
-		paletteColors.add(newColor);
-		AWTMenuButton colorPaletteButton = new ColorPaletteButton(newColor);
+		final ColorData colorData = new ColorData(200,200,200,255);
+		AWTMenuButton colorPaletteButton = new ColorPaletteButton(colorData);
+		colorPaletteButton.setButtonPressedFunction(new VoidFunctionPointer() {
+			@Override
+			public void call() {
+				paletteColors.add(colorData);
+			}
+		});
 		colorPaletteButton.fill();
 		return colorPaletteButton;
 	}	
@@ -76,13 +78,6 @@ public class AWTColorPaletteMenu extends AWTDynamicGridMenu {
 			removeColorAtIndex(toRemove);
 			removalComplete();
 		}
-		
-	}
-	
-	@Override
-	public void refreshButton(int index) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 	class ColorPaletteButton extends AWTMenuButton {

@@ -71,7 +71,6 @@ public abstract class UIMenu implements UILayer {
 	public void clearButtons() {
 		buttons.clear();
 		resetMenuDimensions();
-		refreshButtons();
 	}
 	
 	public void refreshButtons() {

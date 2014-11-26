@@ -10,9 +10,11 @@ import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
+import UI.Viewport;
+import UI.Zoomable;
 import data.shapes.Point;
 
-public class AWTViewport extends JPanel {
+public class AWTViewport extends JPanel implements Viewport, Zoomable {
 	private static final long serialVersionUID = -3215062024839871611L;
 	protected Point position;
 	private float zoomAmount;

@@ -8,13 +8,18 @@ public abstract class DynamicGridMenu extends StaticGridMenu {
 		super(DISPLAYGRID);
 	}
 	
-	public void refreshButtons() { 
-		buttons.clear();
-		for(int i = 0; i < numberOfButtons(); ++i)
+	public void refreshButtons() {
+		refreshButtons(numberOfButtons() - 1);
+	}
+	
+	protected void refreshButtons(int amount) {
+		clearButtons();
+		for(int i = 0; i < amount; ++i)
 			refreshButton(i);
 		makeNewEmptyEntry();
 		resetMenuDimensions();
 	}
+	
 	@Override
 	public void refreshButton(int index) { 
 		MenuButton button = newButton(index);

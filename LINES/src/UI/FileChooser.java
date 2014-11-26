@@ -20,10 +20,13 @@ public abstract class FileChooser extends DataModificationNotifier implements UI
 	
 	private File filepath;
 	
+	private static String UP_BUTTON_TEXT   = "UP";
+	private static String EXIT_BUTTON_TEXT = "EXIT";
+	
 	public FileChooser() {		
 		
 		upButton = makeButton();
-		upButton.textLabel.setText("UP");
+		upButton.textLabel.setText(UP_BUTTON_TEXT);
 		upButton.textLabel.center();
 		upButton.makeBoxRelativeToPoint(0, 0, 2, 2, 120, 40);
 		upButton.setButtonPressedFunction(new VoidFunctionPointer() {
@@ -32,8 +35,9 @@ public abstract class FileChooser extends DataModificationNotifier implements UI
 				chooseFile(filepath.getParent());
 			}
 		});
+		
 		exitButton = makeButton();
-		exitButton.textLabel.setText("EXIT");
+		exitButton.textLabel.setText(EXIT_BUTTON_TEXT);
 		exitButton.textLabel.center();
 		exitButton.makeBoxRelativeToPoint(122, 0, 2, 2, 120, 40);
 		exitButton.setButtonPressedFunction(new VoidFunctionPointer() {

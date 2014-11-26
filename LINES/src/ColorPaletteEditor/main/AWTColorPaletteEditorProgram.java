@@ -62,6 +62,7 @@ public class AWTColorPaletteEditorProgram {
 		AWTMouseUserDevice 	userDevice 	= new AWTDefaultMouseUserDevice();
 		AWTEditorPanel 		editorPanel = new AWTEditorPanel(userDevice);
 		AWTFileMenu 		fileMenu 	= new AWTFileMenu(colorFiler);
+				
 		editorPanel.addLayer(colorChooser);
 		editorPanel.addLayer(paletteMenu);
 		editorPanel.addLayer(fileMenu);
