@@ -10,4 +10,6 @@ public class Grid {
 	public Grid(int ROWS, int COLS) {
 		rows = ROWS; cols = COLS;
 	}
+	
+	public int getNumberOfCells() { return rows * cols; }
 }

@@ -14,11 +14,19 @@ public abstract class DynamicGridMenu extends StaticGridMenu {
 	
 	protected void refreshButtons(int amount) {
 		clearButtons();
-		for(int i = 0; i < amount; ++i)
+		for(int i = 0; i < limitNumberOfButtons(amount); ++i)
 			refreshButton(i);
-		makeNewEmptyEntry();
+		if(canFitNewEmptyEntry())
+			makeNewEmptyEntry();
 		resetMenuDimensions();
 	}
+	
+	private int limitNumberOfButtons(int desiredAmount) { 
+		int max = getMaxNumberOfButtons(); 
+		return desiredAmount > max ? max : desiredAmount;
+	}
+	
+	private int getMaxNumberOfButtons() { return displaygrid.getNumberOfCells(); }
 	
 	@Override
 	public void refreshButton(int index) { 
