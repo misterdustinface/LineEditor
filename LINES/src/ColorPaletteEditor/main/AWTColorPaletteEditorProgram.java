@@ -48,16 +48,22 @@ public class AWTColorPaletteEditorProgram {
 		ColorPaletteFiler 	 colorFiler 	= new ColorPaletteFiler();
 		colorFiler.setPalette(colorPalette);
 
-		AWTColorChooserMenu colorChooser = new AWTColorChooserMenu(COLOR_CHOOSER_DISPLAYBOX);
+		final AWTColorChooserMenu colorChooser = new AWTColorChooserMenu(COLOR_CHOOSER_DISPLAYBOX);
 		
-		AWTColorPaletteMenu paletteMenu = new AWTColorPaletteMenu(colorChooser, COLOR_PALETTE_DISPLAYGRID);
+		final AWTColorPaletteMenu paletteMenu = new AWTColorPaletteMenu(colorChooser, COLOR_PALETTE_DISPLAYGRID);
 		paletteMenu.setPostition(COLOR_PALETTE_POSITION);
 		paletteMenu.setButtonOffset(BUTTON_OFFSET);
 		paletteMenu.setButtonSize(BUTTON_SIZE);
 		paletteMenu.setPalette(colorPalette);
 		colorFiler.addDataModificationListener(paletteMenu.getDataModificationListener());
-
-		//colorChooser.addButton(new ColorDeleteButton(colorChooser, paletteMenu));
+		
+		AWTMenuButton COLOR_DELETE_BUTTON = new AWTMenuButton();
+		COLOR_DELETE_BUTTON.textLabel.setText("DELETE");
+		COLOR_DELETE_BUTTON.textLabel.center();
+		COLOR_DELETE_BUTTON.makeSuggestedBoxRelativeToPoint(DELETE_BUTTON_X_POS, DELETE_BUTTON_Y_POS);
+		COLOR_DELETE_BUTTON.setButtonPressedFunction(paletteMenu.getColorDeleteFunction());
+		
+		//colorChooser.addButton(COLOR_DELETE_BUTTON);		
 		
 		AWTMouseUserDevice 	userDevice 	= new AWTDefaultMouseUserDevice();
 		AWTEditorPanel 		editorPanel = new AWTEditorPanel(userDevice);
@@ -69,26 +75,5 @@ public class AWTColorPaletteEditorProgram {
 		editorPanel.addLayer(new AWTSimpleUserDeviceDisplayLayer(userDevice));
 		window.add(editorPanel);
 		window.revalidate();
-	}
-	
-	class ColorDeleteButton extends AWTMenuButton {
-		private AWTColorChooserMenu colorchooser;
-		private AWTColorPaletteMenu colorpalette;
-		
-		public ColorDeleteButton(AWTColorChooserMenu CHOOSER, AWTColorPaletteMenu PALETTE) {
-			textLabel.setText("DELETE COLOR");
-			makeSuggestedBoxRelativeToPoint(DELETE_BUTTON_X_POS, DELETE_BUTTON_Y_POS);
-			textLabel.center();
-			colorchooser = CHOOSER;
-			colorpalette = PALETTE;
-		}
-		
-		@Override
-		protected void pressAction() {
-			colorpalette.requestColorDeletion(colorchooser.getColorData());
-		}
-
-		@Override
-		protected void releaseAction() {}
 	}
 }

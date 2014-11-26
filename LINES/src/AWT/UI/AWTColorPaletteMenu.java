@@ -64,10 +64,16 @@ public class AWTColorPaletteMenu extends AWTDynamicGridMenu {
 		return colorPaletteButton;
 	}	
 	
-	public void requestColorDeletion(ColorData COLOR_DATA) {
-		setColorToRemove(COLOR_DATA);
+	public VoidFunctionPointer getColorDeleteFunction() {
+		return new VoidFunctionPointer() {
+			@Override
+			public void call() {
+				requestColorDeletion(colorChooser.getColorData());
+			}
+		};
 	}
 	
+	private void requestColorDeletion(ColorData COLOR_DATA) { setColorToRemove(COLOR_DATA); }
 	private boolean shouldRemoveColor() 			{ return toRemove != -1; }
 	private void	setColorToRemove(ColorData cd) 	{ toRemove = paletteColors.indexOf(cd); }
 	private void    removalComplete()   			{ toRemove = -1; }
