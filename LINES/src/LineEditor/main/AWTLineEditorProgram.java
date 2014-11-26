@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import AWT.UI.AWTEditorPanel;
 import AWT.UI.AWTEditorPanelOptionsMenu;
+import AWT.UI.AWTFileMenu;
 import AWT.UI.AWTLineEditorUserDevice;
 import AWT.UI.AWTProgramWindow;
 import AWT.UI.AWTScreenShifter;
@@ -34,14 +35,14 @@ public class AWTLineEditorProgram {
 		
 		AWTGridDrawer 					 gridDrawer 	= new AWTGridDrawer(worldEditorPanel);
 		AWTWorldEditorUserDeviceRenderer deviceRenderer = new AWTWorldEditorUserDeviceRenderer(lineEditorUserDevice);
+		AWTFileMenu fileMenu = new AWTFileMenu(worldFiler);
 		
 		worldEditorPanel.addLayer(gridDrawer);
+		worldEditorPanel.addLayer(fileMenu);
 		worldEditorPanel.addLayer(deviceRenderer);
-		//worldEditorPanel.addUI(new AWTTestMenu(new Point(20,20), 172, 180)); // TESTING FEATURES
 		
 		MenuBar menuBar = new MenuBar();
-		//menuBar.add(new AWTFileMenu(worldFiler, worldEditorPanel)); //TODO FIXME
-		
+				
 		AWTEditorPanelOptionsMenu optionsMenu = new AWTEditorPanelOptionsMenu(worldEditorPanel);
 		MenuItem resetZoom  = new MenuItem("Reset Zoom");
 		MenuItem gotoOrigin = new MenuItem("Go To Origin");

@@ -139,5 +139,4 @@ public class AWTColorPaletteMenu extends AWTDynamicGridMenu {
 		}
 		
 	}
-
 }
