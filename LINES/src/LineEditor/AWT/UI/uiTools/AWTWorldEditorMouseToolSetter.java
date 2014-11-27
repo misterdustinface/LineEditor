@@ -1,49 +1,32 @@
 package LineEditor.AWT.UI.uiTools;
 
 import generic.Pair;
-
-import java.awt.event.MouseEvent;
-
-import LineEditor.AWT.UI.uiTools.FunctionPointers.*;
+import LineEditor.UI.uiTools.WorldEditorMouseToolSelectorConditions;
+import LineEditor.UI.uiTools.WorldEditorMouseToolSetter;
 import LineEditor.data.WorldGeometryData;
+import UI.MouseUserDevice;
 
 //TODO - use a SwingVMouseDriver instead of the WorldEditorMouseToolSetter
-final public class AWTWorldEditorMouseToolSetter {
+final public class AWTWorldEditorMouseToolSetter extends WorldEditorMouseToolSetter {
 
-	private Pair<AWTWorldEditorMouseToolSelectCondition, AWTWorldEditorMouseTool>[] clickTools;
-	private Pair<AWTWorldEditorMouseToolSelectCondition, AWTWorldEditorMouseTool>[] pressTools;
-	
 	public AWTWorldEditorMouseToolSetter(WorldGeometryData DATA){		
-		AWTWorldEditorMouseToolSelectorConditions.setWorldData(DATA);
-		
+		super(DATA);
 		clickTools = new Pair[] {
-				new Pair(AWTWorldEditorMouseToolSelectorConditions.deleteToolSelectCondition,		new ShapeDeleteTool(DATA))		,
-				new Pair(AWTWorldEditorMouseToolSelectorConditions.pointCreateToolSelectCondition,	new CircleCreatorTool(DATA))	,
-				new Pair(AWTWorldEditorMouseToolSelectorConditions.valueEditorToolSelectCondition,	new ShapeValueEditorTool(DATA))	,
-				new Pair(AWTWorldEditorMouseToolSelectorConditions.selectPointToolSelectCondition, 	new SelectionPointTool(DATA))
+				new Pair(WorldEditorMouseToolSelectorConditions.deleteToolSelectCondition,		new ShapeDeleteTool(DATA))		,
+				new Pair(WorldEditorMouseToolSelectorConditions.pointCreateToolSelectCondition,	new CircleCreatorTool(DATA))	,
+				new Pair(WorldEditorMouseToolSelectorConditions.valueEditorToolSelectCondition,	new ShapeValueEditorTool(DATA))	,
+				new Pair(WorldEditorMouseToolSelectorConditions.selectPointToolSelectCondition, new SelectionPointTool(DATA))
 		};
 		
 		pressTools = new Pair[] {
-				new Pair(AWTWorldEditorMouseToolSelectorConditions.moveCircleToolSelectCondition,	new CircleMoverTool(DATA))		,
-				new Pair(AWTWorldEditorMouseToolSelectorConditions.tracerLineToolSelectCondition,	new TracerLineTool(DATA))		,
-				new Pair(AWTWorldEditorMouseToolSelectorConditions.selectionBoxToolSelectCondition,	new SelectionBoxTool(DATA))
+				new Pair(WorldEditorMouseToolSelectorConditions.moveCircleToolSelectCondition,	new CircleMoverTool(DATA))		,
+				new Pair(WorldEditorMouseToolSelectorConditions.tracerLineToolSelectCondition,	new TracerLineTool(DATA))		,
+				new Pair(WorldEditorMouseToolSelectorConditions.selectionBoxToolSelectCondition,new SelectionBoxTool(DATA))
 		};
 	}
 
-	public AWTWorldEditorMouseTool mouseClicked(MouseEvent arg0) {
-		return selectTool(arg0, clickTools);
-	}
-
-	public AWTWorldEditorMouseTool mousePressed(MouseEvent arg0) {
-		return selectTool(arg0, pressTools);
-	}
-	
-	private AWTWorldEditorMouseTool selectTool(MouseEvent arg0, Pair<AWTWorldEditorMouseToolSelectCondition, AWTWorldEditorMouseTool>[] tools) {
-		for(Pair<AWTWorldEditorMouseToolSelectCondition, AWTWorldEditorMouseTool> pair : tools) {
-			if(pair.first.shouldBeSelected(arg0)) {
-				return pair.second;
-			}
-		}
+	@Override
+	protected MouseUserDevice defaultTool() {
 		return AWTWorldEditorMouseTool.defaultMouseTool;
 	}
 

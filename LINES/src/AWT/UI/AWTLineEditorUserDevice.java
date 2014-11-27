@@ -45,7 +45,7 @@ public class AWTLineEditorUserDevice extends AWTMouseUserDevice{
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
 		super.mouseClicked(arg0);
-		currentTool = toolSetter.mouseClicked(arg0);
+		currentTool = (AWTWorldEditorMouseTool) toolSetter.getTool(this);
 		currentTool.mouseClicked(arg0);
 		currentTool = AWTWorldEditorMouseTool.defaultMouseTool;
 	}
@@ -53,7 +53,7 @@ public class AWTLineEditorUserDevice extends AWTMouseUserDevice{
 	@Override
 	public void mousePressed(MouseEvent arg0) {
 		super.mousePressed(arg0);
-		currentTool = toolSetter.mousePressed(arg0);
+		currentTool = (AWTWorldEditorMouseTool) toolSetter.getTool(this);
 		currentTool.mousePressed(arg0);
 	}
 	@Override
