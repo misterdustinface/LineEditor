@@ -7,25 +7,21 @@ import LineEditor.AWT.UI.uiTools.AWTWorldEditorMouseToolSetter;
 import LineEditor.data.WorldGeometryData;
 
 // TODO - use a SwingVMouseDriver instead of the WorldEditorMouseToolSetter
-public class AWTLineEditorUserDevice extends AWTMouseUserDevice{
+public class AWTLineEditorUserDevice extends AWTMouseUserDevice {
 	
 	private WorldGeometryData 				data;
-	private AWTWorldEditorMouseToolSetter 	toolSetter;
 	private AWTWorldEditorMouseTool 		currentTool;
+	private AWTWorldEditorMouseToolSetter 	toolSetter;
 	
 	public AWTLineEditorUserDevice(WorldGeometryData DATA){
 		super();
-		data 			= DATA;
-		toolSetter 		= new AWTWorldEditorMouseToolSetter(DATA);
-		currentTool 	= AWTWorldEditorMouseTool.defaultMouseTool;
+		data 		= DATA;
+		toolSetter 	= new AWTWorldEditorMouseToolSetter(DATA);
+		currentTool = AWTWorldEditorMouseTool.defaultMouseTool;
 	}
 	
-	public WorldGeometryData getData(){
-		return data;
-	}
-	public AWTWorldEditorMouseTool getCurrentMouseTool(){
-		return currentTool;
-	}
+	public WorldGeometryData 		getData() 				{ return data; 			}
+	public AWTWorldEditorMouseTool 	getCurrentMouseTool() 	{ return currentTool; 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////
 	@Override
@@ -56,6 +52,7 @@ public class AWTLineEditorUserDevice extends AWTMouseUserDevice{
 		currentTool = (AWTWorldEditorMouseTool) toolSetter.getTool(this);
 		currentTool.mousePressed(arg0);
 	}
+	
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		super.mouseReleased(arg0);
