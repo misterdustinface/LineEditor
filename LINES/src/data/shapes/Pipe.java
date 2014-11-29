@@ -20,6 +20,7 @@ public class Pipe implements Shape{
 		centerLine = CENTERLINE; thickness = THICKNESS;
 		previousA  = new Point(centerLine.a.x, centerLine.a.y);
 		previousB  = new Point(centerLine.b.x, centerLine.b.y);
+		area       = new Polygon(4);
 		calculateArea();
 	}
 	
@@ -50,7 +51,8 @@ public class Pipe implements Shape{
 		float yOff 			= (float)java.lang.Math.cos(perpTheta)*thickness;
 		float xOff 			= (float)java.lang.Math.sin(perpTheta)*thickness;
 		
-		area = new Polygon(4);
+		area.clearPoints();
+		
 		area.addPoint(	(int)(centerLine.a.x - xOff), 
 						(int)(centerLine.a.y - yOff));
 		area.addPoint(	(int)(centerLine.a.x + xOff), 

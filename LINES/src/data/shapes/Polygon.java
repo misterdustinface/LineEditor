@@ -14,6 +14,10 @@ public class Polygon {
 		this.MAX_NUMBER_OF_POINTS = MAX_NUMBER_OF_POINTS;
 	}
 	
+	public void clearPoints() {
+		points = 0;
+	}
+	
 	public void addPoint(int x, int y) {
 		if (points < MAX_NUMBER_OF_POINTS) {
 			xpoints[points] = x;
@@ -53,31 +57,31 @@ public class Polygon {
 	
 	private int smallestY() {
 		int result = Integer.MAX_VALUE;
-		for(int y : ypoints) {
-			if(y < result) { result = y; }
-		}
+		for(int i = 0; i < points; ++i)
+			if(ypoints[i] < result)
+				result = ypoints[i];
 		return result;
 	}
 	private int smallestX() {
 		int result = Integer.MAX_VALUE;
-		for(int x : xpoints) {
-			if(x < result) { result = x; }
-		}
+		for(int i = 0; i < points; ++i)
+			if(xpoints[i] < result)
+				result = xpoints[i];
 		return result;
 	}
 
 	private int largestY() {
 		int result = Integer.MIN_VALUE;
-		for(int y : ypoints) {
-			if(y > result) { result = y; }
-		}
+		for(int i = 0; i < points; ++i)
+			if(ypoints[i] > result)
+				result = ypoints[i];
 		return result;
 	}
 	private int largestX() {
 		int result = Integer.MIN_VALUE;
-		for(int x : xpoints) {
-			if(x > result) { result = x; }
-		}
+		for(int i = 0; i < points; ++i)
+			if(xpoints[i] > result)
+				result = xpoints[i];
 		return result;
 	}
 
