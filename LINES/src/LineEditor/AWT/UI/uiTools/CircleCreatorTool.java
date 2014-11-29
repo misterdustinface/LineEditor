@@ -1,5 +1,7 @@
 package LineEditor.AWT.UI.uiTools;
 
+import generic.DebounceTimer;
+
 import java.awt.Graphics2D;
 
 import LineEditor.data.WorldGeometryData;
@@ -9,10 +11,13 @@ public class CircleCreatorTool extends AWTWorldEditorMouseTool{
 
 	private int currentX;
 	private int currentY;
+	private DebounceTimer debounceTimer;
 	
 	public CircleCreatorTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		currentX = currentY = 0;
+		debounceTimer = new DebounceTimer();
+		debounceTimer.setDebounceTime_sec(1);
 	}
 
 	@Override
@@ -51,11 +56,12 @@ public class CircleCreatorTool extends AWTWorldEditorMouseTool{
 
 	@Override
 	protected boolean shouldAcceptRequest() {
-		return true;
+		return debounceTimer.isDebounceComplete();
 	}
 
 	@Override
 	protected void performAction() {
+		debounceTimer.reset();
 		if(pointIntersectsSomeWorldRectangle(currentX, currentY)){
 			splitIntersectedRectangleAtMidpoint();
 		}else{

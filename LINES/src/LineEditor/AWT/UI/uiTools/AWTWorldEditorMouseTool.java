@@ -3,20 +3,19 @@ package LineEditor.AWT.UI.uiTools;
 import generic.Requestible;
 
 import java.awt.Graphics2D;
-import java.awt.event.MouseEvent;
 
-import rendering.Renderable;
-import AWT.UI.AWTMouseUserDevice;
+import AWT.UI.AWTUILayer;
 import AWT.graphicdata.AWTGraphicData;
 import AWT.rendering.AWTCursorDrawer;
 import LineEditor.data.WorldGeometryData;
+import UI.MouseUserDevice;
 import data.shapes.Circle;
 import data.shapes.Pipe;
 import data.shapes.Point;
 import data.shapes.Shape;
 
 
-public abstract class AWTWorldEditorMouseTool extends AWTMouseUserDevice implements Renderable, Requestible {
+public abstract class AWTWorldEditorMouseTool implements Requestible, AWTUILayer {
 
 	final public static AWTWorldEditorMouseTool defaultMouseTool = new AWTWorldEditorMouseTool(null) {
 		private Point position = new Point(0,0);
@@ -37,12 +36,14 @@ public abstract class AWTWorldEditorMouseTool extends AWTMouseUserDevice impleme
 	};
 	
 	
-	protected AWTCursorDrawer cursorDrawer;
+	protected AWTCursorDrawer 	cursorDrawer;
 	protected WorldGeometryData worldData;
+	private   Point 			cursorPosition;
 	
 	AWTWorldEditorMouseTool(WorldGeometryData WORLD_DATA){
 		worldData    = WORLD_DATA;
 		cursorDrawer = new AWTCursorDrawer();
+		cursorPosition = new Point(0,0);
 	}
 	
 	@Override
@@ -76,35 +77,13 @@ public abstract class AWTWorldEditorMouseTool extends AWTMouseUserDevice impleme
 	}
 	
 	@Override
-	final public void mouseEntered(MouseEvent e) {}
-	@Override
-	final public void mouseExited(MouseEvent e) {}
-	@Override
-	final public void mouseClicked(MouseEvent e) {
-		super.mouseClicked(e);
-		setCurrentPosition(e.getX(), e.getY());
-		request();
-	}
-	@Override
-	final public void mousePressed(MouseEvent e) {
-		super.mousePressed(e);
-		setInitialPosition(e.getX(), e.getY());
-		setCurrentPosition(e.getX(), e.getY());
-	}
-	@Override
-	final public void mouseReleased(MouseEvent e) {
-		super.mouseReleased(e);
-		setCurrentPosition(e.getX(), e.getY());
-		request();
-	}
-	@Override
-	final public void mouseDragged(MouseEvent e) {
-		super.mouseDragged(e);
-		setCurrentPosition(e.getX(), e.getY());
-	}
-	@Override
-	final public void mouseMoved(MouseEvent e) {
-		super.mouseMoved(e);
-		setCurrentPosition(e.getX(), e.getY());
+	public void update(MouseUserDevice mouse) {
+		cursorPosition.set(mouse.getCursorPosition());
+		if(mouse.isPressed())
+			setInitialPosition((int)cursorPosition.x, (int)cursorPosition.y);
+		//if(!mouse.wasIntercepted())
+			setCurrentPosition((int)cursorPosition.x, (int)cursorPosition.y);	
+		if(mouse.isClicked() || mouse.isReleased())
+			request();
 	}
 }

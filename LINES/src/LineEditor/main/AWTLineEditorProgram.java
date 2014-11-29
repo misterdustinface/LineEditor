@@ -13,7 +13,7 @@ import AWT.UI.AWTProgramWindow;
 import AWT.UI.AWTScreenShifter;
 import AWT.UI.AWTZoomWheelListener;
 import AWT.rendering.AWTGridDrawer;
-import LineEditor.AWT.rendering.AWTWorldEditorUserDeviceRenderer;
+import LineEditor.AWT.rendering.AWTLinesRenderer;
 import LineEditor.data.WorldGeometryData;
 import LineEditor.file.WorldGeometryFiler;
 
@@ -23,23 +23,24 @@ public class AWTLineEditorProgram {
 		AWTProgramWindow window = new AWTProgramWindow("Lines");
 		
 		WorldGeometryData 			worldData 				= new WorldGeometryData();
+		AWTLinesRenderer			worldRenderer  			= new AWTLinesRenderer(worldData);
+		WorldGeometryFiler 			worldFiler 				= new WorldGeometryFiler();
+		worldFiler.setData(worldData);
+		AWTFileMenu 				fileMenu 				= new AWTFileMenu(worldFiler);
 		AWTLineEditorUserDevice 	lineEditorUserDevice 	= new AWTLineEditorUserDevice(worldData);
 		final AWTEditorPanel 		worldEditorPanel 		= new AWTEditorPanel(lineEditorUserDevice);
+		AWTGridDrawer 				gridDrawer 				= new AWTGridDrawer(worldEditorPanel);
 		AWTScreenShifter			screenShifter 			= new AWTScreenShifter(worldEditorPanel);
 		worldEditorPanel.addMouseMotionListener(screenShifter);
 		worldEditorPanel.addMouseListener(screenShifter);
 		worldEditorPanel.addMouseWheelListener(new AWTZoomWheelListener(worldEditorPanel));
 		window.add(worldEditorPanel);
-		WorldGeometryFiler worldFiler 				= new WorldGeometryFiler();
-		worldFiler.setData(worldData);
 		
-		AWTGridDrawer 					 gridDrawer 	= new AWTGridDrawer(worldEditorPanel);
-		AWTWorldEditorUserDeviceRenderer deviceRenderer = new AWTWorldEditorUserDeviceRenderer(lineEditorUserDevice);
-		AWTFileMenu fileMenu = new AWTFileMenu(worldFiler);
 		
 		worldEditorPanel.addLayer(gridDrawer);
+		worldEditorPanel.addLayer(worldRenderer);
 		worldEditorPanel.addLayer(fileMenu);
-		worldEditorPanel.addLayer(deviceRenderer);
+		worldEditorPanel.addLayer(lineEditorUserDevice);
 		
 		MenuBar menuBar = new MenuBar();
 				
@@ -63,10 +64,9 @@ public class AWTLineEditorProgram {
 		optionsMenu.add(resetZoom);
 		optionsMenu.add(gotoOrigin);
 		optionsMenu.addMenuItemToggleUI("Toggle Grid",   gridDrawer);
-		optionsMenu.addMenuItemToggleUI("Toggle Editor", deviceRenderer);
+		optionsMenu.addMenuItemToggleUI("Toggle Editor", lineEditorUserDevice);
 		menuBar.add(optionsMenu);
 		
 		window.setMenuBar(menuBar);
 	}
-
 }

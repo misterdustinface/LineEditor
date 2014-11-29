@@ -1,13 +1,16 @@
 package AWT.UI;
 
-import java.awt.event.MouseEvent;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import LineEditor.AWT.UI.uiTools.AWTWorldEditorMouseTool;
 import LineEditor.AWT.UI.uiTools.AWTWorldEditorMouseToolSetter;
 import LineEditor.data.WorldGeometryData;
+import UI.MouseUserDevice;
+import data.shapes.Shape;
 
 // TODO - use a SwingVMouseDriver instead of the WorldEditorMouseToolSetter
-public class AWTLineEditorUserDevice extends AWTMouseUserDevice {
+public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implements AWTUILayer {
 	
 	private WorldGeometryData 				data;
 	private AWTWorldEditorMouseTool 		currentTool;
@@ -20,49 +23,26 @@ public class AWTLineEditorUserDevice extends AWTMouseUserDevice {
 		currentTool = AWTWorldEditorMouseTool.defaultMouseTool;
 	}
 	
-	public WorldGeometryData 		getData() 				{ return data; 			}
-	public AWTWorldEditorMouseTool 	getCurrentMouseTool() 	{ return currentTool; 	}
-	
-	///////////////////////////////////////////////////////////////////////////////////
+	public boolean isSelected(Shape s) { return data.isSelected(s); }
+
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		super.mouseDragged(arg0);
-		cursorPosition.set(arg0.getX(), arg0.getY());
-		currentTool.mouseDragged(arg0);
-	}
-	
-	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		super.mouseMoved(arg0);
-		cursorPosition.set(arg0.getX(), arg0.getY());
-		currentTool.mouseMoved(arg0);
+	public void update(MouseUserDevice mouse) {
+		if(mouse.isClicked() || mouse.isPressed()) {
+			currentTool = toolSetter.getTool(mouse);
+		}
+		
+		currentTool.update(mouse);
+		
+		if(mouse.isClicked() || mouse.isReleased()) {
+			currentTool = AWTWorldEditorMouseTool.defaultMouseTool;
+			currentTool.setCurrentPosition((int)cursorPosition.x, (int)cursorPosition.y);
+		}
 	}
 
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		super.mouseClicked(arg0);
-		currentTool = (AWTWorldEditorMouseTool) toolSetter.getTool(this);
-		currentTool.mouseClicked(arg0);
-		currentTool = AWTWorldEditorMouseTool.defaultMouseTool;
+	public void render(Graphics2D g) {
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);		
+		g.drawString("LINES: " + data.totalNumberOfLines(), getCursorX(), 14);
+		currentTool.render(g);
 	}
-
-	@Override
-	public void mousePressed(MouseEvent arg0) {
-		super.mousePressed(arg0);
-		currentTool = (AWTWorldEditorMouseTool) toolSetter.getTool(this);
-		currentTool.mousePressed(arg0);
-	}
-	
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		super.mouseReleased(arg0);
-		currentTool.mouseReleased(arg0);
-		currentTool = AWTWorldEditorMouseTool.defaultMouseTool;
-		currentTool.setCurrentPosition(arg0.getX(), arg0.getY());
-	}
-	
-	@Override
-	public void mouseEntered(MouseEvent arg0) {}
-	@Override
-	public void mouseExited(MouseEvent arg0) {}
 }

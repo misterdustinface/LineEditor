@@ -29,4 +29,8 @@ public abstract class AWTMouseUserDevice extends MouseUserDevice implements Mous
 		}
 	}
 
+	@Override
+	public void mouseEntered(MouseEvent e) {}
+	@Override
+	public void mouseExited(MouseEvent e) {}
 }

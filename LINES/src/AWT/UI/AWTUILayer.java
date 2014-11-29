@@ -1,9 +1,6 @@
 package AWT.UI;
 
-import java.awt.Graphics2D;
-
+import rendering.Renderable;
 import UI.UILayer;
 
-public interface AWTUILayer extends UILayer {
-	public void render(Graphics2D g);
-}
+public interface AWTUILayer extends UILayer, Renderable {}

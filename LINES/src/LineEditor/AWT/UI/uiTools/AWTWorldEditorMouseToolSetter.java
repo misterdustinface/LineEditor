@@ -1,16 +1,17 @@
 package LineEditor.AWT.UI.uiTools;
 
 import generic.Pair;
+import LineEditor.UI.uiTools.WorldEditorMouseToolSelectCondition;
 import LineEditor.UI.uiTools.WorldEditorMouseToolSelectorConditions;
-import LineEditor.UI.uiTools.WorldEditorMouseToolSetter;
 import LineEditor.data.WorldGeometryData;
 import UI.MouseUserDevice;
 
 //TODO - use a SwingVMouseDriver instead of the WorldEditorMouseToolSetter
-final public class AWTWorldEditorMouseToolSetter extends WorldEditorMouseToolSetter {
+final public class AWTWorldEditorMouseToolSetter { //extends WorldEditorMouseToolSetter {
 
 	public AWTWorldEditorMouseToolSetter(WorldGeometryData DATA){		
-		super(DATA);
+		//super(DATA);
+		WorldEditorMouseToolSelectorConditions.setWorldData(DATA);
 		clickTools = new Pair[] {
 				new Pair(WorldEditorMouseToolSelectorConditions.deleteToolSelectCondition,		new ShapeDeleteTool(DATA))		,
 				new Pair(WorldEditorMouseToolSelectorConditions.pointCreateToolSelectCondition,	new CircleCreatorTool(DATA))	,
@@ -25,8 +26,29 @@ final public class AWTWorldEditorMouseToolSetter extends WorldEditorMouseToolSet
 		};
 	}
 
-	@Override
-	protected MouseUserDevice defaultTool() {
+	protected Pair<WorldEditorMouseToolSelectCondition, AWTWorldEditorMouseTool>[] clickTools;
+	protected Pair<WorldEditorMouseToolSelectCondition, AWTWorldEditorMouseTool>[] pressTools;
+	
+	final public AWTWorldEditorMouseTool getTool(MouseUserDevice mouse) {
+		if(mouse.isClicked()) {
+			return selectTool(mouse, clickTools);
+		} else if(mouse.isPressed()) {
+			return selectTool(mouse, pressTools);
+		} else {
+			return defaultTool();
+		}
+	}
+	
+	private AWTWorldEditorMouseTool selectTool(MouseUserDevice mouse, Pair<WorldEditorMouseToolSelectCondition, AWTWorldEditorMouseTool>[] tools) {
+		for(Pair<WorldEditorMouseToolSelectCondition, AWTWorldEditorMouseTool> pair : tools) {
+			if(pair.first.shouldBeSelected(mouse)) {
+				return pair.second;
+			}
+		}
+		return defaultTool();
+	}
+	
+	private AWTWorldEditorMouseTool defaultTool() {
 		return AWTWorldEditorMouseTool.defaultMouseTool;
 	}
 
