@@ -27,16 +27,13 @@ public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implement
 
 	@Override
 	public void update(MouseUserDevice mouse) {
-		if(mouse.isClicked() || mouse.isPressed()) {
+		if(mouse.isClicked() || mouse.isPressed())
 			currentTool = toolSetter.getTool(mouse);
-		}
-		
+
 		currentTool.update(mouse);
-		
-		if(mouse.isClicked() || mouse.isReleased()) {
+
+		if(mouse.isClicked() || mouse.isReleased())
 			currentTool = AWTWorldEditorMouseTool.defaultMouseTool;
-			currentTool.setCurrentPosition((int)cursorPosition.x, (int)cursorPosition.y);
-		}
 	}
 
 	@Override

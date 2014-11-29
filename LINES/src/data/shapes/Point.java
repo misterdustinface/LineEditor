@@ -9,7 +9,7 @@ public class Point {
 	public Point copy() 				{ return new Point(x,y); }
 	
 	public void set(float X, float Y) 	{ x = X; y = Y; }
-	public void set(Point other) 		{ x = other.x; y = other.y; }
+	public void setPosition(Point other){ x = other.x; y = other.y; }
 	public void shift(float X, float Y) { x += X; y += Y; }
 	
 	public boolean equals(Point other)  { return x == other.x & y == other.y; }

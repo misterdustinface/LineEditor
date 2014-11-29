@@ -35,15 +35,12 @@ public abstract class AWTWorldEditorMouseTool implements Requestible, AWTUILayer
 		}
 	};
 	
-	
 	protected AWTCursorDrawer 	cursorDrawer;
 	protected WorldGeometryData worldData;
-	private   Point 			cursorPosition;
 	
 	AWTWorldEditorMouseTool(WorldGeometryData WORLD_DATA){
 		worldData    = WORLD_DATA;
 		cursorDrawer = new AWTCursorDrawer();
-		cursorPosition = new Point(0,0);
 	}
 	
 	@Override
@@ -78,11 +75,11 @@ public abstract class AWTWorldEditorMouseTool implements Requestible, AWTUILayer
 	
 	@Override
 	public void update(MouseUserDevice mouse) {
-		cursorPosition.set(mouse.getCursorPosition());
-		if(mouse.isPressed())
-			setInitialPosition((int)cursorPosition.x, (int)cursorPosition.y);
-		//if(!mouse.wasIntercepted())
-			setCurrentPosition((int)cursorPosition.x, (int)cursorPosition.y);	
+		if(mouse.isClicked() || mouse.isPressed())
+			setInitialPosition((int)mouse.getCursorX(), (int)mouse.getCursorY());
+		
+		setCurrentPosition((int)mouse.getCursorX(), (int)mouse.getCursorY());	
+		
 		if(mouse.isClicked() || mouse.isReleased())
 			request();
 	}

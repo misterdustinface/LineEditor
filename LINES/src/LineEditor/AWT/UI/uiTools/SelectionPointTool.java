@@ -8,13 +8,17 @@ import data.shapes.Shape;
 
 public class SelectionPointTool extends AWTWorldEditorMouseTool{
 
-	private Point position;
+	private Point	positionOfLastUse;
+	private Point 	position;
 	
 	public SelectionPointTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		position = new Point(0,0);
+		positionOfLastUse = new Point(0,0);
 	}
 
+	private boolean hasBeenMovedSinceLastUse() { return ! positionOfLastUse.equals(position); }
+	
 	@Override
 	public void setInitialPosition(int x, int y) {
 		position.set(x, y);
@@ -33,11 +37,12 @@ public class SelectionPointTool extends AWTWorldEditorMouseTool{
 
 	@Override
 	protected boolean shouldAcceptRequest() {
-		return true;
+		return hasBeenMovedSinceLastUse();
 	}
 
 	@Override
 	protected void performAction() {
+		positionOfLastUse.setPosition(position);
 		selectWorldShapes(position);
 	}
 

@@ -1,24 +1,24 @@
 package LineEditor.AWT.UI.uiTools;
 
-import generic.DebounceTimer;
-
 import java.awt.Graphics2D;
 
 import LineEditor.data.WorldGeometryData;
 import data.shapes.Pipe;
+import data.shapes.Point;
 
 public class CircleCreatorTool extends AWTWorldEditorMouseTool{
 
 	private int currentX;
 	private int currentY;
-	private DebounceTimer debounceTimer;
+	private Point positionOfLastUse;
 	
 	public CircleCreatorTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		currentX = currentY = 0;
-		debounceTimer = new DebounceTimer();
-		debounceTimer.setDebounceTime_sec(1);
+		positionOfLastUse = new Point(0,0);
 	}
+	
+	private boolean hasBeenMovedSinceLastUse() { return positionOfLastUse.x != currentX || positionOfLastUse.y != currentY; }
 
 	@Override
 	public void setInitialPosition(int x, int y) {
@@ -56,12 +56,12 @@ public class CircleCreatorTool extends AWTWorldEditorMouseTool{
 
 	@Override
 	protected boolean shouldAcceptRequest() {
-		return debounceTimer.isDebounceComplete();
+		return hasBeenMovedSinceLastUse();
 	}
 
 	@Override
 	protected void performAction() {
-		debounceTimer.reset();
+		positionOfLastUse.set(currentX, currentY);
 		if(pointIntersectsSomeWorldRectangle(currentX, currentY)){
 			splitIntersectedRectangleAtMidpoint();
 		}else{

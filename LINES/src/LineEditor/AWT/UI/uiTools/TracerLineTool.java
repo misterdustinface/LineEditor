@@ -11,9 +11,9 @@ import data.shapes.Point;
 
 public class TracerLineTool extends AWTWorldEditorMouseTool{
 
-	private Point	start;
-	private Point 	end;
-	private LineSegment 	tracerLine;	
+	private Point		start;
+	private Point 		end;
+	private LineSegment tracerLine;	
 	
 	private AWTShapeDrawer  shapeDrawer;
 	

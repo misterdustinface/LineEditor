@@ -1,5 +1,7 @@
 package LineEditor.AWT.UI.uiTools;
 
+import generic.DebounceTimer;
+
 import java.awt.Graphics2D;
 
 import LineEditor.data.WorldGeometryData;
@@ -8,11 +10,14 @@ import data.shapes.Shape;
 
 public class ShapeDeleteTool extends AWTWorldEditorMouseTool {
 
-	private Point position;
+	private Point 			position;
+	private DebounceTimer 	debounceTimer;
 	
 	public ShapeDeleteTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		position = new Point(0,0);
+		debounceTimer = new DebounceTimer();
+		debounceTimer.setDebounceTime_sec(0.5);
 	}
 
 	@Override
@@ -36,11 +41,12 @@ public class ShapeDeleteTool extends AWTWorldEditorMouseTool {
 
 	@Override
 	protected boolean shouldAcceptRequest() {
-		return true;
+		return debounceTimer.isDebounceComplete();
 	}
 
 	@Override
 	protected void performAction() {
+		debounceTimer.reset();
 		findAndRemoveFirstFoundWorldShapeAtPoint(position);
 	}
 
