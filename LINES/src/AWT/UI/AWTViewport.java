@@ -126,8 +126,7 @@ public class AWTViewport extends JPanel implements Viewport, Zoomable {
 		AffineTransform zoom = new AffineTransform();
 		zoom.scale(zoomAmount, zoomAmount);
 		zoom.translate(position.x, position.y);
-		Graphics2D g2d = (Graphics2D)g;
-		g2d.setTransform(zoom);
+		((Graphics2D)g).setTransform(zoom);
 	}
 	
 	private MouseEvent getWorldMouseEvent(MouseEvent panelEvent) {		

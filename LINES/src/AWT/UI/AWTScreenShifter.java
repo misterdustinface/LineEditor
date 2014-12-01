@@ -32,14 +32,7 @@ public class AWTScreenShifter implements MouseListener, MouseMotionListener {
 		viewport.repaint();
 	}
 	@Override
-	public void mouseClicked(MouseEvent e) {
-		if(e.getButton() == MouseEvent.BUTTON2
-		||(e.getButton() == MouseEvent.BUTTON1 && e.isControlDown())){
-			viewport.setPosition(viewport.getWidth()>>1 - e.getX(), viewport.getHeight()>>1 - e.getY());
-		}
-		
-		viewport.repaint();
-	}
+	public void mouseClicked(MouseEvent e) {}
 	@Override
 	public void mouseEntered(MouseEvent e) {}
 	@Override

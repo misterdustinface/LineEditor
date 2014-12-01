@@ -30,6 +30,7 @@ public class StaticListMenu extends UIMenu {
 			for(MenuButton button : buttons) {
 				button.update(mouse);
 			}
+			mouse.intercept();
 		}
 	}
 }
