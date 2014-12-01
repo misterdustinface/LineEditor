@@ -35,12 +35,12 @@ public abstract class BarSlider extends UIElement {
 		
 		if( base.contains(mouse.getCursorX(), mouse.getCursorY())) {
 			highlight();
-			if ( mouse.isPressed() || mouse.isDragged() ) { press(); }
+			if ( mouse.isPressed()  || mouse.isDragged() ) { press();   }
+			if ( mouse.isReleased() || mouse.isClicked() ) { release(); }
 		} else {
 			removeHighlight();
+			release();
 		}
-		
-		if ( mouse.isReleased() || mouse.isClicked() ) { release(); }
 	}
 	
 	private void updateSlider(float mouseX, float mouseY) {
