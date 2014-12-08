@@ -1,10 +1,10 @@
-package AWT.UI;
+package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-import LineEditor.AWT.UI.uiTools.AWTWorldEditorMouseTool;
-import LineEditor.AWT.UI.uiTools.AWTWorldEditorMouseToolSetter;
+import AWT.UI.AWTDefaultMouseUserDevice;
+import AWT.UI.AWTUILayer;
 import LineEditor.data.WorldGeometryData;
 import UI.MouseUserDevice;
 import data.shapes.Shape;
