@@ -1,28 +1,20 @@
 package LineEditor.AWT.UI.uiTools;
 
-import generic.Requestible;
-
 import java.awt.Graphics2D;
 
 import AWT.UI.AWTUILayer;
 import AWT.graphicdata.AWTGraphicData;
 import AWT.rendering.AWTCursorDrawer;
+import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
 import UI.MouseUserDevice;
 import data.shapes.Circle;
-import data.shapes.Pipe;
 import data.shapes.Point;
-import data.shapes.Shape;
 
 
-public abstract class AWTWorldEditorMouseTool implements Requestible, AWTUILayer {
+public abstract class AWTWorldEditorMouseTool extends WorldEditorMouseTool implements AWTUILayer {
 
 	final public static AWTWorldEditorMouseTool defaultMouseTool = new AWTWorldEditorMouseTool(null) {
-		private Point position = new Point(0,0);
-		@Override
-		public void setInitialPosition(int x, int y) {position.set(x, y);}
-		@Override
-		public void setCurrentPosition(int x, int y) {position.set(x, y);}
 		@Override
 		protected boolean shouldAcceptRequest() { return false; }
 		@Override
@@ -36,31 +28,11 @@ public abstract class AWTWorldEditorMouseTool implements Requestible, AWTUILayer
 	};
 	
 	protected AWTCursorDrawer 	cursorDrawer;
-	protected WorldGeometryData worldData;
-	
+
 	AWTWorldEditorMouseTool(WorldGeometryData WORLD_DATA){
-		worldData    = WORLD_DATA;
+		super(WORLD_DATA);
 		cursorDrawer = new AWTCursorDrawer();
 	}
-	
-	@Override
-	final public void request(){
-		if(shouldAcceptRequest())
-			performAction();
-	}
-	
-	abstract public    void 	setInitialPosition(int x, int y);
-	abstract public    void 	setCurrentPosition(int x, int y);
-	abstract protected boolean 	shouldAcceptRequest();
-	abstract protected void		performAction();
-
-	final protected void 		select(Shape s) 		{ worldData.select(s); }
-	final protected boolean 	isSelected(Shape s) 	{ return worldData.isSelected(s); }
-	final protected void 		toggleSelected(Shape s) { worldData.toggleSelected(s); }
-
-	final protected Circle[] 	worldCircles() 		{ return worldData.getWorldPointCollisionCircles(); }
-	final protected Pipe[] 		worldRectangles() 	{ return worldData.getWorldLineCollisionBoxes(); }
-	final protected Shape[] 	collisionBounds() 	{ return worldData.getAllCollisionBounds(); }
 	
 	final protected boolean pointShouldSnapToCenterOfWorldCircle(Point point, Circle worldCircle) {
 		return worldCircle.contains(point);

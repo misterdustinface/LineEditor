@@ -6,36 +6,21 @@ import LineEditor.data.WorldGeometryData;
 import data.shapes.Pipe;
 import data.shapes.Point;
 
-public class CircleCreatorTool extends AWTWorldEditorMouseTool{
+public class AWTCircleCreatorTool extends AWTWorldEditorMouseTool{
 
-	private int currentX;
-	private int currentY;
 	private Point positionOfLastUse;
 	
-	public CircleCreatorTool(WorldGeometryData WORLD_DATA) {
+	public AWTCircleCreatorTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
-		currentX = currentY = 0;
 		positionOfLastUse = new Point(0,0);
 	}
 	
-	private boolean hasBeenMovedSinceLastUse() { return positionOfLastUse.x != currentX || positionOfLastUse.y != currentY; }
-
-	@Override
-	public void setInitialPosition(int x, int y) {
-		currentX = x;
-		currentY = y;
-	}
-
-	@Override
-	public void setCurrentPosition(int x, int y) {
-		currentX = x;
-		currentY = y;
-	}
+	private boolean hasBeenMovedSinceLastUse() { return ! positionOfLastUse.equals(position); }
 	
 	private void createWorldCircleAtPoint(int x, int y){worldData.createPoint(x,y);}
 	
 	private void splitIntersectedRectangleAtMidpoint(){
-		worldData.splitCollisionBox(getIntersectedRectangle(currentX, currentY), 50);
+		worldData.splitCollisionBox(getIntersectedRectangle(position.x, position.y), 50);
 	}
 	private boolean pointIntersectsSomeWorldRectangle(float x, float y){
 		for(Pipe worldRectangle : worldRectangles()){
@@ -61,11 +46,11 @@ public class CircleCreatorTool extends AWTWorldEditorMouseTool{
 
 	@Override
 	protected void performAction() {
-		positionOfLastUse.set(currentX, currentY);
-		if(pointIntersectsSomeWorldRectangle(currentX, currentY)){
+		positionOfLastUse.set(position.x, position.y);
+		if(pointIntersectsSomeWorldRectangle(position.x, position.y)){
 			splitIntersectedRectangleAtMidpoint();
 		}else{
-			createWorldCircleAtPoint(currentX, currentY);
+			createWorldCircleAtPoint((int)position.x, (int)position.y);
 		}
 	}
 

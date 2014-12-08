@@ -13,16 +13,16 @@ final public class AWTWorldEditorMouseToolSetter { //extends WorldEditorMouseToo
 		//super(DATA);
 		WorldEditorMouseToolSelectorConditions.setWorldData(DATA);
 		clickTools = new Pair[] {
-				new Pair(WorldEditorMouseToolSelectorConditions.deleteToolSelectCondition,		new ShapeDeleteTool(DATA))		,
-				new Pair(WorldEditorMouseToolSelectorConditions.pointCreateToolSelectCondition,	new CircleCreatorTool(DATA))	,
-				new Pair(WorldEditorMouseToolSelectorConditions.valueEditorToolSelectCondition,	new ShapeValueEditorTool(DATA))	,
-				new Pair(WorldEditorMouseToolSelectorConditions.selectPointToolSelectCondition, new SelectionPointTool(DATA))
+				new Pair(WorldEditorMouseToolSelectorConditions.deleteToolSelectCondition,		new AWTShapeDeleteTool(DATA))		,
+				new Pair(WorldEditorMouseToolSelectorConditions.pointCreateToolSelectCondition,	new AWTCircleCreatorTool(DATA))	,
+				new Pair(WorldEditorMouseToolSelectorConditions.valueEditorToolSelectCondition,	new AWTShapeValueEditorTool(DATA))	,
+				new Pair(WorldEditorMouseToolSelectorConditions.selectPointToolSelectCondition, new AWTSelectionPointTool(DATA))
 		};
 		
 		pressTools = new Pair[] {
-				new Pair(WorldEditorMouseToolSelectorConditions.moveCircleToolSelectCondition,	new CircleMoverTool(DATA))		,
-				new Pair(WorldEditorMouseToolSelectorConditions.tracerLineToolSelectCondition,	new TracerLineTool(DATA))		,
-				new Pair(WorldEditorMouseToolSelectorConditions.selectionBoxToolSelectCondition,new SelectionBoxTool(DATA))
+				new Pair(WorldEditorMouseToolSelectorConditions.moveCircleToolSelectCondition,	new AWTCircleMoverTool(DATA))		,
+				new Pair(WorldEditorMouseToolSelectorConditions.tracerLineToolSelectCondition,	new AWTTracerLineTool(DATA))		,
+				new Pair(WorldEditorMouseToolSelectorConditions.selectionBoxToolSelectCondition,new AWTSelectionBoxTool(DATA))
 		};
 	}
 

@@ -1,19 +1,18 @@
-package LineEditor.UI.uiTools;
+package LineEditor.AWT.UI.uiTools;
 
 import java.util.HashSet;
 
-import LineEditor.AWT.UI.uiTools.SelectionBoxTool;
 import LineEditor.data.WorldGeometryData;
 import data.shapes.LineSegment;
 import data.shapes.Pipe;
 
-public class CopyTool extends SelectionBoxTool{
+public class AWTCopyTool extends AWTSelectionBoxTool{
 
 
 	private HashSet<LineSegment>		copiedLines;
 	//private HashSet<Polyline> 	copiedPolylines;
 	
-	public CopyTool(WorldGeometryData WORLD_DATA) {
+	public AWTCopyTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		copiedLines		= new HashSet<LineSegment>();
 		//copiedPolylines = new HashSet<Polyline>();

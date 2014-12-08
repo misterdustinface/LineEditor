@@ -6,31 +6,28 @@ import AWT.graphicdata.AWTGraphicData;
 import AWT.rendering.AWTShapeDrawer;
 import LineEditor.data.WorldGeometryData;
 import data.shapes.Circle;
-import data.shapes.Point;
 
-public class CircleMoverTool extends AWTWorldEditorMouseTool{
+public class AWTCircleMoverTool extends AWTWorldEditorMouseTool{
 
 	private AWTShapeDrawer  shapeDrawer;
 	
 	private Circle circleToMove;
-	private Point  position;
 	
-	public CircleMoverTool(WorldGeometryData WORLD_DATA) {
+	public AWTCircleMoverTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		circleToMove = new Circle(0,0,0);
-		position 	 = new Point(0,0);
 		shapeDrawer  = new AWTShapeDrawer();
 	}
 	
 	@Override
 	public void setInitialPosition(int x, int y) {
-		position.set(x, y);
+		super.setInitialPosition(x, y);
 		circleToMove = retrieveSelectedCircleToMove();
 	}
 
 	@Override
 	public void setCurrentPosition(int x, int y) {
-		position.set(x, y);
+		super.setCurrentPosition(x, y);
 		performAction();
 	}
 	

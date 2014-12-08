@@ -9,33 +9,31 @@ import data.shapes.Circle;
 import data.shapes.LineSegment;
 import data.shapes.Point;
 
-public class TracerLineTool extends AWTWorldEditorMouseTool{
+public class AWTTracerLineTool extends AWTWorldEditorMouseTool{
 
 	private Point		start;
-	private Point 		end;
 	private LineSegment tracerLine;	
 	
 	private AWTShapeDrawer  shapeDrawer;
 	
-	public TracerLineTool(WorldGeometryData WORLD_DATA) {
+	public AWTTracerLineTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		start = new Point(0,0);
-		end = new Point(0,0);
-		tracerLine 	= new LineSegment(start,end);
+		tracerLine 	= new LineSegment(start,position);
 		shapeDrawer = new AWTShapeDrawer();
 	}
 
 	@Override
 	public void setInitialPosition(int x, int y) {
+		super.setInitialPosition(x, y);
 		start.set(x, y);
-		end.set(x, y);
 		snapTracerLinePointToSomeWorldCircleIfWithinCircleBounds(start);
 	}
 
 	@Override
 	public void setCurrentPosition(int x, int y) {
-		end.set(x, y);
-		snapTracerLinePointToSomeWorldCircleIfWithinCircleBounds(end);
+		super.setCurrentPosition(x, y);
+		snapTracerLinePointToSomeWorldCircleIfWithinCircleBounds(position);
 	}
 	
 	private boolean pointsNotEquivalent(Point A, Point B){
@@ -66,10 +64,10 @@ public class TracerLineTool extends AWTWorldEditorMouseTool{
 
 	@Override
 	protected void performAction() {
-		if(pointsNotEquivalent(start, end)){
+		if(pointsNotEquivalent(start, position)){
 			for(Circle worldCircle : worldCircles()){
-				if(pointShouldSnapToCenterOfWorldCircle(end, worldCircle)){
-					createWorldLine(start, end);
+				if(pointShouldSnapToCenterOfWorldCircle(position, worldCircle)){
+					createWorldLine(start, position);
 					return;
 				}
 			}
@@ -85,11 +83,11 @@ public class TracerLineTool extends AWTWorldEditorMouseTool{
 			
 			cursorDrawer.setGraphics(g);
 			cursorDrawer.setColor(AWTGraphicData.cursorColor);
-			cursorDrawer.drawTriangularCrosshairCursor((int)end.x, (int)end.y);
+			cursorDrawer.drawTriangularCrosshairCursor((int)position.x, (int)position.y);
 		} else {
 			cursorDrawer.setGraphics(g);
 			cursorDrawer.setColor(AWTGraphicData.cursorColor);
-			cursorDrawer.drawSmallXCursor((int)end.x, (int)end.y);
+			cursorDrawer.drawSmallXCursor((int)position.x, (int)position.y);
 		}
 	}
 

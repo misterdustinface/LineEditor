@@ -6,23 +6,10 @@ import LineEditor.data.WorldGeometryData;
 import data.shapes.Point;
 import data.shapes.Shape;
 
-public class ShapeValueEditorTool extends AWTWorldEditorMouseTool{
+public class AWTShapeValueEditorTool extends AWTWorldEditorMouseTool{
 
-	private Point position;
-	
-	public ShapeValueEditorTool(WorldGeometryData WORLD_DATA) {
+	public AWTShapeValueEditorTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
-		position = new Point(0,0);
-	}
-
-	@Override
-	public void setInitialPosition(int x, int y) {
-		position.set(x, y);
-	}
-
-	@Override
-	public void setCurrentPosition(int x, int y) {
-		position.set(x, y);
 	}
 
 	private void selectAndOpenValueEditorWindowForFirstMatchingIntersection(Point point){

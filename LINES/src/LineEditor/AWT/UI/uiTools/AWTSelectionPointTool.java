@@ -6,28 +6,16 @@ import LineEditor.data.WorldGeometryData;
 import data.shapes.Point;
 import data.shapes.Shape;
 
-public class SelectionPointTool extends AWTWorldEditorMouseTool{
+public class AWTSelectionPointTool extends AWTWorldEditorMouseTool{
 
 	private Point	positionOfLastUse;
-	private Point 	position;
 	
-	public SelectionPointTool(WorldGeometryData WORLD_DATA) {
+	public AWTSelectionPointTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
-		position = new Point(0,0);
 		positionOfLastUse = new Point(0,0);
 	}
 
 	private boolean hasBeenMovedSinceLastUse() { return ! positionOfLastUse.equals(position); }
-	
-	@Override
-	public void setInitialPosition(int x, int y) {
-		position.set(x, y);
-	}
-
-	@Override
-	public void setCurrentPosition(int x, int y) {
-		position.set(x, y);
-	}
 	
 	private void selectWorldShapes(Point selectionPoint){
 		for(Shape s : collisionBounds())

@@ -10,30 +10,24 @@ import data.shapes.LineSegment;
 import data.shapes.Pipe;
 import data.shapes.Point;
 
-public class SelectionBoxTool extends AWTWorldEditorMouseTool{
+public class AWTSelectionBoxTool extends AWTWorldEditorMouseTool {
 
-	protected Point a; // keep point in scope
-	protected Point b; // keep point in scope
+	protected Point boxStart; // keep point in scope
 	protected Pipe selectionBox; // scope of points is hidden.
 	
 	private AWTShapeDrawer  shapeDrawer;
 	
-	public SelectionBoxTool(WorldGeometryData WORLD_DATA){
+	public AWTSelectionBoxTool(WorldGeometryData WORLD_DATA){
 		super(WORLD_DATA);
-		a = new Point(0,0);
-		b = new Point(0,0);
-		selectionBox = new Pipe(new LineSegment(a, b), 1);
+		boxStart = new Point(0,0);
+		selectionBox = new Pipe(new LineSegment(boxStart, position), 1);
 		shapeDrawer  = new AWTShapeDrawer();
 	}
 	
 	@Override
 	public void setInitialPosition(int x, int y) {
-		a.set(x, y);
-		b.set(x, y);
-	}
-	@Override
-	public void setCurrentPosition(int x, int y){
-		b.set(x, y);
+		super.setInitialPosition(x, y);
+		boxStart.set(x, y);
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////
@@ -81,7 +75,7 @@ public class SelectionBoxTool extends AWTWorldEditorMouseTool{
 
 		cursorDrawer.setGraphics(g);
 		cursorDrawer.setColor(AWTGraphicData.cursorColor);
-		cursorDrawer.drawCrosshairCursor((int)b.x, (int)b.y);
+		cursorDrawer.drawCrosshairCursor((int)position.x, (int)position.y);
 	}
 
 }
