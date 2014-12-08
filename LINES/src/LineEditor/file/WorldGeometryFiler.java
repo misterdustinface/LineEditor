@@ -14,7 +14,7 @@ public class WorldGeometryFiler extends LuaScriptFiler {
 	
 	protected String dataToLuaScript() {
 		String script = new String();
-		for(Pipe collisionBox : programData.getCopyOfWorldLineCollisionBoxes()){
+		for(Pipe collisionBox : programData.getWorldLineCollisionBoxes()){
 			script += createEntry(	String.valueOf(collisionBox.centerLine.a().x),
 									String.valueOf(collisionBox.centerLine.a().y),
 									String.valueOf(collisionBox.centerLine.b().x),

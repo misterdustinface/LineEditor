@@ -51,7 +51,7 @@ public class TextLabel {
 	
 	public void alignText(Polygon polygon) {
 		if(hasText()) {
-			Rectangle bounding = polygon.getBounds();
+			Rectangle bounding = polygon.getBoundingRectangle();
 			int width  = isCentered() ? text.length() : maxChars; 
 			float xoff = width * 3.75f;
 			if(isRightJustified()) { xoff = -xoff; }

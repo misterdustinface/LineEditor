@@ -38,10 +38,11 @@ public class SelectionBoxTool extends AWTWorldEditorMouseTool{
 	
 	/////////////////////////////////////////////////////////////////////////////////
 	
-	private void selectWorldShapes(Pipe selectionRectangle){
-		selectWorldCircles(selectionRectangle);
-		selectWorldRectangles(selectionRectangle);
+	private void selectWorldShapes(){
+		selectWorldCircles(selectionBox);
+		selectWorldRectangles(selectionBox);
 	}
+
 	private void selectWorldCircles(Pipe selectionRectangle){
 		for(Circle worldCircle : worldCircles())
 			if(selectionRectangleContainsCircleCenter(selectionRectangle, worldCircle))
@@ -54,10 +55,10 @@ public class SelectionBoxTool extends AWTWorldEditorMouseTool{
 	}
 	
 	protected boolean selectionRectangleContainsCircleCenter(Pipe selectionRectangle, Circle circle){
-		return selectionRectangle.getArea().getBounds().contains(circle.x(), circle.y());
+		return selectionRectangle.contains(circle.center());
 	}
-	protected boolean selectionRectangleContainsRectangle(Pipe selectionRectangle, Pipe rectangle){
-		return rectangle.getArea().intersects(selectionRectangle.getArea().getBounds());
+	protected boolean selectionRectangleContainsRectangle(Pipe selectionRectangle, Pipe rectangularPipe){
+		return selectionRectangle.intersects(rectangularPipe.getBoundingRectangle());
 	}
 
 	@Override
@@ -67,7 +68,7 @@ public class SelectionBoxTool extends AWTWorldEditorMouseTool{
 
 	@Override
 	protected void performAction() {
-		selectWorldShapes(selectionBox);
+		selectWorldShapes();
 	}
 
 	@Override

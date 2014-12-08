@@ -40,6 +40,10 @@ public class Pipe implements Shape{
 		return area;
 	}
 	
+	public Rectangle getBoundingRectangle(){
+		return getArea().getBoundingRectangle();
+	}
+	
 	private void resetPreviousPoints(){
 		previousA.set(centerLine.a.x, centerLine.a.y);
 		previousB.set(centerLine.b.x, centerLine.b.y);
@@ -66,6 +70,14 @@ public class Pipe implements Shape{
 	@Override
 	public boolean contains(Point point) {
 		return getArea().contains(point.x, point.y);
+	}
+	@Override
+	public boolean contains(float x, float y) {
+		return getArea().contains(x, y);
+	}
+	
+	public boolean intersects(Rectangle rect){
+		return getArea().intersects(rect);
 	}
 	
 	@Override

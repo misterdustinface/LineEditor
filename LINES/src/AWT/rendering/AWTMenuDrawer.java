@@ -73,7 +73,7 @@ public class AWTMenuDrawer extends AWTRenderer implements MenuDrawer {
 	}
 	
 	public void drawSelectorArrow( MenuButton b, int x, int size ) {
-		int y = (int) b.polygon.getBounds().getCenterY();
+		int y = (int) b.polygon.getBoundingRectangle().getCenterY();
 		graphics.setColor(((AWTMenuButton)b).getColor());
 		graphics.drawLine(x,        y,        x - size, y + size);
 		graphics.drawLine(x,        y,        x - size, y - size);

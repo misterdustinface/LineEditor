@@ -24,8 +24,8 @@ public class AWTLinesRenderer implements AWTUILayer {
 		shapeDrawer   = new AWTShapeDrawer();
 	}
 	
-	private Circle[] getWorldCircles()    { return worldGeometry.getCopyOfWorldPointCollisionCircles(); }
-	private Pipe[]   getWorldRectangles() { return worldGeometry.getCopyOfWorldLineCollisionBoxes(); }
+	private Circle[] getWorldCircles()    { return worldGeometry.getWorldPointCollisionCircles(); }
+	private Pipe[]   getWorldRectangles() { return worldGeometry.getWorldLineCollisionBoxes(); }
 	private boolean  isEditorCursorHoveredOver(Shape s) { return s.contains(device.getCursorPosition()); }
 	
 	@Override
@@ -36,10 +36,14 @@ public class AWTLinesRenderer implements AWTUILayer {
 	@Override
 	public void render(Graphics2D g) {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		//g.setRenderingHint(RenderingHints.KEY_RENDERING, 	RenderingHints.VALUE_RENDER_DEFAULT);
 		
 		shapeDrawer.setGraphics(g);
 		drawLines();
 		drawPoints();
+		
+		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_DEFAULT);
+		//g.setRenderingHint(RenderingHints.KEY_RENDERING, 	RenderingHints.VALUE_RENDER_DEFAULT);
 	}
 	
 	private void drawPoints() {
@@ -54,7 +58,7 @@ public class AWTLinesRenderer implements AWTUILayer {
 			shapeDrawer.drawCircle(worldCircle);
 		}
 		shapeDrawer.setColor(isPointSelected ? AWTGraphicData.selectedPoint : AWTGraphicData.point);
-		shapeDrawer.drawPoint(worldCircle.centerCopy());
+		shapeDrawer.drawPoint(worldCircle.center());
 	}
 	
 	private void drawLines() {

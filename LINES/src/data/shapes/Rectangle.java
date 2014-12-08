@@ -33,5 +33,4 @@ public class Rectangle {
 	
 	public int getCenterX() { return x + (width /2); }
 	public int getCenterY() { return y + (height/2); }
-
 }

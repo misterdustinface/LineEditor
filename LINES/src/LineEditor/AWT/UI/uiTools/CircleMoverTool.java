@@ -35,7 +35,7 @@ public class CircleMoverTool extends AWTWorldEditorMouseTool{
 	}
 	
 	private Circle retrieveSelectedCircleToMove(){
-		for(Circle worldCircle : worldData.getCopyOfWorldPointCollisionCircles()){
+		for(Circle worldCircle : worldData.getWorldPointCollisionCircles()){
 			if(worldCircle.contains(position)){
 				if(isSelected(worldCircle)){
 					return worldCircle;

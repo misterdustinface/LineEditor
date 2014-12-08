@@ -50,10 +50,10 @@ public class MenuButton extends FunctionButton {
 		polygon.addPoint(menuPointX + x, menuPointY + y);
 	}
 	
-	public int getWidth()   { return polygon.getBounds().width;  }
-	public int getHeight()  { return polygon.getBounds().height; }
-	public int getCenterX() { return polygon.getBounds().getCenterX(); }
-	public int getCenterY() { return polygon.getBounds().getCenterY(); }
+	public int getWidth()   { return polygon.getBoundingRectangle().width;  }
+	public int getHeight()  { return polygon.getBoundingRectangle().height; }
+	public int getCenterX() { return polygon.getBoundingRectangle().getCenterX(); }
+	public int getCenterY() { return polygon.getBoundingRectangle().getCenterY(); }
 	
 	@Override
 	public void update(MouseUserDevice mouse) {

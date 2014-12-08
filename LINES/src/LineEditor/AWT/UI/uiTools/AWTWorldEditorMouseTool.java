@@ -45,9 +45,8 @@ public abstract class AWTWorldEditorMouseTool implements Requestible, AWTUILayer
 	
 	@Override
 	final public void request(){
-		if(shouldAcceptRequest()){
+		if(shouldAcceptRequest())
 			performAction();
-		}
 	}
 	
 	abstract public    void 	setInitialPosition(int x, int y);
@@ -59,9 +58,9 @@ public abstract class AWTWorldEditorMouseTool implements Requestible, AWTUILayer
 	final protected boolean 	isSelected(Shape s) 	{ return worldData.isSelected(s); }
 	final protected void 		toggleSelected(Shape s) { worldData.toggleSelected(s); }
 
-	final protected Circle[] 	worldCircles() 		{ return worldData.getCopyOfWorldPointCollisionCircles(); }
-	final protected Pipe[] 		worldRectangles() 	{ return worldData.getCopyOfWorldLineCollisionBoxes(); }
-	final protected Shape[] 	collisionBounds() 	{ return worldData.getCopyOfAllCollisionBounds(); }
+	final protected Circle[] 	worldCircles() 		{ return worldData.getWorldPointCollisionCircles(); }
+	final protected Pipe[] 		worldRectangles() 	{ return worldData.getWorldLineCollisionBoxes(); }
+	final protected Shape[] 	collisionBounds() 	{ return worldData.getAllCollisionBounds(); }
 	
 	final protected boolean pointShouldSnapToCenterOfWorldCircle(Point point, Circle worldCircle) {
 		return worldCircle.contains(point);

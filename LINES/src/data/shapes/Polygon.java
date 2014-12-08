@@ -51,6 +51,16 @@ public class Polygon {
 		return (Y < A) ^ (Y < B);
 	}
 	
+//	public boolean intersects(Polygon poly) {
+//		for(int i = 0; i < poly.points; ++i)
+//			if(contains(poly.xpoints[i], poly.ypoints[i]))
+//				return true;
+//		for(int i = 0; i < points; ++i)
+//			if(poly.contains(xpoints[i], ypoints[i]))
+//				return true;
+//		return false;
+//	}
+	
 	public boolean intersects(Rectangle rect) {
 		return intersectsX(rect) && intersectsY(rect);
 	}
@@ -67,7 +77,7 @@ public class Polygon {
 		return (x1 <= x2 && x2 <= X1 ) || (x1 <= X2 && X2 <= X1 );
 	}
 	
-	public Rectangle getBounds() {
+	public Rectangle getBoundingRectangle() {
 		int x = smallest(xpoints);
 		int y = smallest(ypoints);
 		return new Rectangle(x, y, largest(xpoints) - x, largest(ypoints) - y);
