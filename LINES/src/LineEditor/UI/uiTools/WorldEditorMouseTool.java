@@ -1,10 +1,20 @@
 package LineEditor.UI.uiTools;
 
+import data.shapes.Circle;
 import data.shapes.Point;
 import LineEditor.data.WorldGeometryData;
+import UI.MouseUserDevice;
+import UI.UILayer;
 
-public abstract class WorldEditorMouseTool extends WorldEditorTool {
+public abstract class WorldEditorMouseTool extends WorldEditorTool implements UILayer {
 
+	final public static WorldEditorMouseTool defaultMouseTool = new WorldEditorMouseTool(null) {
+		@Override
+		protected boolean shouldAcceptRequest() { return false; }
+		@Override
+		protected void performAction() {}
+	};
+	
 	protected Point position;
 	
 	public WorldEditorMouseTool(WorldGeometryData WORLD_DATA) {
@@ -15,4 +25,24 @@ public abstract class WorldEditorMouseTool extends WorldEditorTool {
 	public void setInitialPosition(int x, int y) { position.set(x, y); }
 	public void setCurrentPosition(int x, int y) { position.set(x, y); }
 
+	final protected boolean pointShouldSnapToCenterOfWorldCircle(Point point, Circle worldCircle) {
+		return worldCircle.contains(point);
+	}
+	final protected void createWorldLine(Point A, Point B) {
+		worldData.createLine(A, B);
+	}
+	final protected void snapPointToCircleCenter(Point point, Circle circle){
+		point.set(circle.x(), circle.y());
+	}
+	
+	@Override
+	public void update(MouseUserDevice mouse) {
+		if(mouse.isClicked() || mouse.isPressed())
+			setInitialPosition((int)mouse.getCursorX(), (int)mouse.getCursorY());
+		
+		setCurrentPosition((int)mouse.getCursorX(), (int)mouse.getCursorY());	
+		
+		if(mouse.isClicked() || mouse.isReleased())
+			request();
+	}
 }

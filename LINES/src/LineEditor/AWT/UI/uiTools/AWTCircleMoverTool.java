@@ -2,21 +2,25 @@ package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
+import AWT.UI.AWTUILayer;
 import AWT.graphicdata.AWTGraphicData;
+import AWT.rendering.AWTCursorDrawer;
 import AWT.rendering.AWTShapeDrawer;
+import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
 import data.shapes.Circle;
 
-public class AWTCircleMoverTool extends AWTWorldEditorMouseTool{
+public class AWTCircleMoverTool extends WorldEditorMouseTool implements AWTUILayer {
 
 	private AWTShapeDrawer  shapeDrawer;
-	
+	private AWTCursorDrawer cursorDrawer;
 	private Circle circleToMove;
 	
 	public AWTCircleMoverTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		circleToMove = new Circle(0,0,0);
 		shapeDrawer  = new AWTShapeDrawer();
+		cursorDrawer = new AWTCursorDrawer();
 	}
 	
 	@Override

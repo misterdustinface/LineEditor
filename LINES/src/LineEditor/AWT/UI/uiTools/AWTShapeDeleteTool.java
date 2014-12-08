@@ -4,11 +4,13 @@ import generic.DebounceTimer;
 
 import java.awt.Graphics2D;
 
+import AWT.UI.AWTUILayer;
+import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
 import data.shapes.Point;
 import data.shapes.Shape;
 
-public class AWTShapeDeleteTool extends AWTWorldEditorMouseTool {
+public class AWTShapeDeleteTool extends WorldEditorMouseTool implements AWTUILayer {
 
 	private DebounceTimer 	debounceTimer;
 	

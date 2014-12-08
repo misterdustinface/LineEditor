@@ -5,6 +5,8 @@ import java.awt.RenderingHints;
 
 import AWT.UI.AWTDefaultMouseUserDevice;
 import AWT.UI.AWTUILayer;
+import LineEditor.UI.uiTools.WorldEditorMouseTool;
+import LineEditor.UI.uiTools.AWTWorldEditorMouseToolSetter;
 import LineEditor.data.WorldGeometryData;
 import UI.MouseUserDevice;
 import data.shapes.Shape;
@@ -13,14 +15,14 @@ import data.shapes.Shape;
 public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implements AWTUILayer {
 	
 	private WorldGeometryData 				data;
-	private AWTWorldEditorMouseTool 		currentTool;
+	private WorldEditorMouseTool 			currentTool;
 	private AWTWorldEditorMouseToolSetter 	toolSetter;
 	
 	public AWTLineEditorUserDevice(WorldGeometryData DATA){
 		super();
 		data 		= DATA;
 		toolSetter 	= new AWTWorldEditorMouseToolSetter(DATA);
-		currentTool = AWTWorldEditorMouseTool.defaultMouseTool;
+		currentTool = WorldEditorMouseTool.defaultMouseTool;
 	}
 	
 	public boolean isSelected(Shape s) { return data.isSelected(s); }
@@ -33,7 +35,7 @@ public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implement
 		currentTool.update(mouse);
 
 		if(mouse.isClicked() || mouse.isReleased())
-			currentTool = AWTWorldEditorMouseTool.defaultMouseTool;
+			currentTool = WorldEditorMouseTool.defaultMouseTool;
 	}
 
 	@Override
@@ -42,7 +44,7 @@ public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implement
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, 	RenderingHints.VALUE_RENDER_SPEED);
 		
 		g.drawString("LINES: " + data.totalNumberOfLines(), getCursorX(), 14);
-		currentTool.render(g);
+		//((AWTUILayer)currentTool).render(g);
 		
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_DEFAULT);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, 	RenderingHints.VALUE_RENDER_DEFAULT);

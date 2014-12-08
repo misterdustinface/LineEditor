@@ -2,24 +2,30 @@ package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
+import AWT.UI.AWTUILayer;
 import AWT.graphicdata.AWTGraphicData;
+import AWT.rendering.AWTCursorDrawer;
 import AWT.rendering.AWTShapeDrawer;
+import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
 import data.shapes.Circle;
 import data.shapes.LineSegment;
 import data.shapes.Point;
 
-public class AWTTracerLineTool extends AWTWorldEditorMouseTool{
+public class AWTTracerLineTool extends WorldEditorMouseTool implements AWTUILayer {
 
 	private Point		start;
 	private LineSegment tracerLine;	
 	
+	private AWTCursorDrawer cursorDrawer;
 	private AWTShapeDrawer  shapeDrawer;
 	
 	public AWTTracerLineTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		start = new Point(0,0);
 		tracerLine 	= new LineSegment(start,position);
+		
+		cursorDrawer = new AWTCursorDrawer();
 		shapeDrawer = new AWTShapeDrawer();
 	}
 

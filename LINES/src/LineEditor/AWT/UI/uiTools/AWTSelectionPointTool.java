@@ -2,11 +2,13 @@ package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
+import AWT.UI.AWTUILayer;
+import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
 import data.shapes.Point;
 import data.shapes.Shape;
 
-public class AWTSelectionPointTool extends AWTWorldEditorMouseTool{
+public class AWTSelectionPointTool extends WorldEditorMouseTool implements AWTUILayer {
 
 	private Point	positionOfLastUse;
 	
