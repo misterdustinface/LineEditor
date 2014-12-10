@@ -7,13 +7,6 @@ import UI.MouseUserDevice;
 import UI.UILayer;
 
 public abstract class WorldEditorMouseTool extends WorldEditorTool implements UILayer {
-
-	final public static WorldEditorMouseTool defaultMouseTool = new WorldEditorMouseTool(null) {
-		@Override
-		protected boolean shouldAcceptRequest() { return false; }
-		@Override
-		protected void performAction() {}
-	};
 	
 	protected Point position;
 	

@@ -7,8 +7,14 @@ import UI.MouseUserDevice;
 
 public class WorldEditorMouseToolSetter {
 
+	private WorldEditorMouseTool defaultTool;
+	
 	public WorldEditorMouseToolSetter(WorldGeometryData DATA) {
 		WorldEditorMouseToolSelectorConditions.setWorldData(DATA);
+	}
+	
+	final public void setDefaultTool(WorldEditorMouseTool DEFAULT_TOOL) {
+		defaultTool = DEFAULT_TOOL;
 	}
 	
 	protected Pair<WorldEditorMouseToolSelectCondition, WorldEditorMouseTool>[] clickTools;
@@ -20,7 +26,7 @@ public class WorldEditorMouseToolSetter {
 		} else if(mouse.isPressed()) {
 			return selectTool(mouse, pressTools);
 		} else {
-			return defaultTool();
+			return defaultTool;
 		}
 	}
 	
@@ -30,10 +36,6 @@ public class WorldEditorMouseToolSetter {
 				return pair.second;
 			}
 		}
-		return defaultTool();
-	}
-	
-	private WorldEditorMouseTool defaultTool() {
-		return WorldEditorMouseTool.defaultMouseTool;
+		return defaultTool;
 	}
 }
