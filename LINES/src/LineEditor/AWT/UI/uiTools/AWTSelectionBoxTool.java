@@ -73,9 +73,10 @@ public class AWTSelectionBoxTool extends WorldEditorMouseTool implements AWTUILa
 	public void render(Graphics2D g) {
 		shapeDrawer.setGraphics(g);
 		shapeDrawer.setColor(AWTGraphicData.dragSelectionBoxTransparentArea);
-		shapeDrawer.drawPipe(selectionBox);
+				
+		shapeDrawer.drawFilledRectangle(selectionBox.getBoundingRectangle());
 		shapeDrawer.setColor(AWTGraphicData.dragSelectionBoxBorder);
-		shapeDrawer.drawPipeBorder(selectionBox);
+		shapeDrawer.drawRectangle(selectionBox.getBoundingRectangle());
 
 		cursorDrawer.setGraphics(g);
 		cursorDrawer.setColor(AWTGraphicData.cursorColor);

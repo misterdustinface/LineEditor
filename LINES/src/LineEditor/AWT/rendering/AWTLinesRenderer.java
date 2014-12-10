@@ -70,7 +70,7 @@ public class AWTLinesRenderer implements AWTUILayer {
 		boolean isLineSelected = device.isSelected(worldRectangle);
 		if(isEditorCursorHoveredOver(worldRectangle)) {
 			shapeDrawer.setColor(isLineSelected ? AWTGraphicData.selectedLineBoxHighlight : AWTGraphicData.lineBoxHighlight);
-			shapeDrawer.drawPolygonBorder(worldRectangle.getArea());
+			shapeDrawer.drawPolygon(worldRectangle.getArea());
 		}
 		shapeDrawer.setColor(isLineSelected ? AWTGraphicData.selectedLine : AWTGraphicData.line);
 		shapeDrawer.drawLineSegment(worldRectangle.centerLine);
