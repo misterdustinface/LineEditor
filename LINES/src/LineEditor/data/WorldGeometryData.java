@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import AWT.graphicdata.AWTGraphicData;
 import data.shapes.Circle;
-import data.shapes.CollisionBoundSelectorMap;
+import data.shapes.ShapeSelectorMap;
 import data.shapes.LineSegment;
 import data.shapes.Pipe;
 import data.shapes.Point;
@@ -15,13 +15,13 @@ public class WorldGeometryData{
 	private ArrayList<Shape> 			worldCollisionBounds;
 	private ArrayList<Circle> 			worldPointCollisionCircles;
 	private ArrayList<Pipe> 			worldLineCollisionBoxes;
-	private CollisionBoundSelectorMap 	selectionMap;
+	private ShapeSelectorMap 	selectionMap;
 	
 	public WorldGeometryData() {
 		worldPointCollisionCircles 	= new ArrayList<Circle>();
 		worldLineCollisionBoxes 	= new ArrayList<Pipe>();		
 		worldCollisionBounds		= new ArrayList<Shape>();
-		selectionMap 				= new CollisionBoundSelectorMap();
+		selectionMap 				= new ShapeSelectorMap();
 	}
 	
 	public void load(WorldGeometryData other) {
