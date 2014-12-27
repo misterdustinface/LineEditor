@@ -7,7 +7,7 @@ import AWT.UI.AWTMenuBar;
 import AWT.UI.AWTProgramWindow;
 import AWT.UI.AWTScreenShifter;
 import AWT.UI.AWTToggleLayersMenu;
-import AWT.UI.AWTViewportOptionsMenu;
+import AWT.UI.AWTViewOptionsMenu;
 import AWT.UI.AWTZoomWheelListener;
 import AWT.rendering.AWTGridDrawer;
 import AWT.update.AWTProgramMain;
@@ -26,10 +26,13 @@ public class AWTLineEditorProgram {
 		WorldGeometryFiler 			worldFiler 				= new WorldGeometryFiler();
 		worldFiler.setData(worldData);
 		AWTLineEditorUserDevice 	lineEditorUserDevice 	= new AWTLineEditorUserDevice(worldData);
-		AWTEditorPanel 				worldEditorPanel 		= new AWTEditorPanel(lineEditorUserDevice);
+		
+		AWTEditorPanel worldEditorPanel = new AWTEditorPanel();	
+		worldEditorPanel.addViewportMotionListener(lineEditorUserDevice);
+		worldEditorPanel.addViewportMouseListener(lineEditorUserDevice);
 		
 		AWTLinesRenderer			worldRenderer  			= new AWTLinesRenderer(worldData);
-		AWTGridDrawer 				gridDrawer 				= new AWTGridDrawer(worldEditorPanel);
+		AWTGridDrawer 				gridDrawer 				= new AWTGridDrawer(worldEditorPanel, worldEditorPanel);
 		AWTScreenShifter			screenShifter 			= new AWTScreenShifter(worldEditorPanel);
 		UILayerManager 				layerManager 			= new UILayerManager();
 		
@@ -47,7 +50,7 @@ public class AWTLineEditorProgram {
 		menuBar.setViewport(worldEditorPanel);
 		menuBar.setOffset(16, 8);
 		menuBar.setSpacing(4);
-		menuBar.addUIMenus( new AWTViewportOptionsMenu(worldEditorPanel),
+		menuBar.addUIMenus( new AWTViewOptionsMenu(worldEditorPanel, worldEditorPanel),
 							toggleLayersMenu,
 							new AWTFileMenu(worldFiler));
 		

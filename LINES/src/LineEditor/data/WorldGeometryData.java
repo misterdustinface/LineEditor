@@ -12,9 +12,9 @@ import data.shapes.Shape;
 
 public class WorldGeometryData{
 
-	private ArrayList<Shape> 			worldCollisionBounds;
-	private ArrayList<Circle> 			worldPointCollisionCircles;
-	private ArrayList<Pipe> 			worldLineCollisionBoxes;
+	private ArrayList<Shape> 	worldCollisionBounds;
+	private ArrayList<Circle> 	worldPointCollisionCircles;
+	private ArrayList<Pipe> 	worldLineCollisionBoxes;
 	private ShapeSelectorMap 	selectionMap;
 	
 	public WorldGeometryData() {
