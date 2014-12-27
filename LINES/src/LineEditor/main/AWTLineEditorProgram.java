@@ -2,11 +2,12 @@ package LineEditor.main;
 
 import generic.EditorProgram;
 import AWT.UI.AWTEditorPanel;
-import AWT.UI.AWTViewportOptionsMenu;
 import AWT.UI.AWTFileMenu;
+import AWT.UI.AWTMenuBar;
 import AWT.UI.AWTProgramWindow;
 import AWT.UI.AWTScreenShifter;
 import AWT.UI.AWTToggleLayersMenu;
+import AWT.UI.AWTViewportOptionsMenu;
 import AWT.UI.AWTZoomWheelListener;
 import AWT.rendering.AWTGridDrawer;
 import AWT.update.AWTProgramMain;
@@ -14,7 +15,7 @@ import LineEditor.AWT.UI.uiTools.AWTLineEditorUserDevice;
 import LineEditor.AWT.rendering.AWTLinesRenderer;
 import LineEditor.data.WorldGeometryData;
 import LineEditor.file.WorldGeometryFiler;
-import UI.LayerManager;
+import UI.UILayerManager;
 
 public class AWTLineEditorProgram {
 	
@@ -30,7 +31,7 @@ public class AWTLineEditorProgram {
 		AWTLinesRenderer			worldRenderer  			= new AWTLinesRenderer(worldData);
 		AWTGridDrawer 				gridDrawer 				= new AWTGridDrawer(worldEditorPanel);
 		AWTScreenShifter			screenShifter 			= new AWTScreenShifter(worldEditorPanel);
-		LayerManager 				layerManager 			= new LayerManager();
+		UILayerManager 				layerManager 			= new UILayerManager();
 		
 		worldEditorPanel.setLayerManager(layerManager);
 		worldEditorPanel.addMouseMotionListener(screenShifter);
@@ -41,15 +42,19 @@ public class AWTLineEditorProgram {
 		AWTToggleLayersMenu	toggleLayersMenu = new AWTToggleLayersMenu(layerManager);
 		toggleLayersMenu.addMenuItemToggleUI("GRID",   gridDrawer);
 		toggleLayersMenu.addMenuItemToggleUI("EDITOR", worldRenderer);
+
+		AWTMenuBar menuBar = new AWTMenuBar();
+		menuBar.setViewport(worldEditorPanel);
+		menuBar.setOffset(16, 8);
+		menuBar.setSpacing(4);
+		menuBar.addUIMenus( new AWTViewportOptionsMenu(worldEditorPanel),
+							toggleLayersMenu,
+							new AWTFileMenu(worldFiler));
 		
 		layerManager.addLayers(gridDrawer,
-							   worldRenderer);
-		// Make a menubar which is a set of dropdown menus or roots buttons. Somehow stop the viewport from changing it.
-		layerManager.addLayers( new AWTViewportOptionsMenu(worldEditorPanel),
-								toggleLayersMenu,
-								new AWTFileMenu(worldFiler));
-		// end menubar
-		layerManager.addLayer(lineEditorUserDevice);
+							   worldRenderer,
+							   menuBar,
+							   lineEditorUserDevice);
 		
 		window.revalidate();
 		
