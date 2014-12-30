@@ -3,13 +3,13 @@ package LineEditor.AWT.UI.uiTools;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
+import shapes.Shape;
 import AWT.UI.AWTDefaultMouseUserDevice;
 import AWT.UI.AWTUILayer;
 import LineEditor.UI.uiTools.AWTWorldEditorMouseToolSetter;
 import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
 import UI.MouseUserDevice;
-import data.shapes.Shape;
 
 public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implements AWTUILayer {
 	

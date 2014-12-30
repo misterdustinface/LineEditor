@@ -1,7 +1,7 @@
 package LineEditor.UI.uiTools;
 
-import data.shapes.Circle;
-import data.shapes.Point;
+import shapes.Circle;
+import shapes.Point;
 import LineEditor.data.WorldGeometryData;
 import UI.MouseUserDevice;
 import UI.UILayer;

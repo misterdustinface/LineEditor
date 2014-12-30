@@ -2,16 +2,16 @@ package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
+import shapes.Circle;
+import shapes.LineSegment;
+import shapes.Pipe;
+import shapes.Point;
 import AWT.UI.AWTUILayer;
 import AWT.graphicdata.AWTGraphicData;
 import AWT.rendering.AWTCursorDrawer;
 import AWT.rendering.AWTShapeDrawer;
 import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
-import data.shapes.Circle;
-import data.shapes.LineSegment;
-import data.shapes.Pipe;
-import data.shapes.Point;
 
 public class AWTSelectionBoxTool extends WorldEditorMouseTool implements AWTUILayer {
 

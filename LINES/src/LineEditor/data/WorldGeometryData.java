@@ -2,13 +2,13 @@ package LineEditor.data;
 
 import java.util.ArrayList;
 
+import shapes.Circle;
+import shapes.LineSegment;
+import shapes.Pipe;
+import shapes.Point;
+import shapes.Shape;
+import shapes.ShapeSelectorMap;
 import AWT.graphicdata.AWTGraphicData;
-import data.shapes.Circle;
-import data.shapes.ShapeSelectorMap;
-import data.shapes.LineSegment;
-import data.shapes.Pipe;
-import data.shapes.Point;
-import data.shapes.Shape;
 
 public class WorldGeometryData{
 

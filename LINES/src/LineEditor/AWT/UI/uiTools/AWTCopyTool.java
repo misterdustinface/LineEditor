@@ -2,9 +2,9 @@ package LineEditor.AWT.UI.uiTools;
 
 import java.util.HashSet;
 
+import shapes.LineSegment;
+import shapes.Pipe;
 import LineEditor.data.WorldGeometryData;
-import data.shapes.LineSegment;
-import data.shapes.Pipe;
 
 public class AWTCopyTool extends AWTSelectionBoxTool{
 

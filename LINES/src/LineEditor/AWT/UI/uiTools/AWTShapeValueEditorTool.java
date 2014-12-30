@@ -2,11 +2,11 @@ package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
+import shapes.Point;
+import shapes.Shape;
 import AWT.UI.AWTUILayer;
 import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
-import data.shapes.Point;
-import data.shapes.Shape;
 
 public class AWTShapeValueEditorTool extends WorldEditorMouseTool implements AWTUILayer {
 

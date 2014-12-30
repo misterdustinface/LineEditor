@@ -5,8 +5,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import shapes.Pipe;
 import LineEditor.data.WorldGeometryData;
-import data.shapes.Pipe;
 
 /*
  * To change this license header, choose License Headers in Project Properties.

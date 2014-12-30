@@ -1,8 +1,8 @@
 package LineEditor.UI.uiTools;
 
+import shapes.Pipe;
+import shapes.Point;
 import LineEditor.data.WorldGeometryData;
-import data.shapes.Pipe;
-import data.shapes.Point;
 
 public class CircleCreatorTool extends WorldEditorMouseTool {
 	private Point positionOfLastUse;

@@ -2,13 +2,13 @@ package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
+import shapes.Circle;
 import AWT.UI.AWTUILayer;
 import AWT.graphicdata.AWTGraphicData;
 import AWT.rendering.AWTCursorDrawer;
 import AWT.rendering.AWTShapeDrawer;
 import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
-import data.shapes.Circle;
 
 public class AWTCircleMoverTool extends WorldEditorMouseTool implements AWTUILayer {
 

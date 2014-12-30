@@ -1,8 +1,8 @@
 package LineEditor.UI.uiTools;
 
-import data.shapes.Circle;
-import data.shapes.Pipe;
-import data.shapes.Shape;
+import shapes.Circle;
+import shapes.Pipe;
+import shapes.Shape;
 import LineEditor.data.WorldGeometryData;
 import generic.Requestible;
 

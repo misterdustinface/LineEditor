@@ -3,9 +3,9 @@ package LineEditor.AWT.rendering;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 
-import data.shapes.Circle;
-import data.shapes.Pipe;
-import data.shapes.Shape;
+import shapes.Circle;
+import shapes.Pipe;
+import shapes.Shape;
 import LineEditor.AWT.UI.uiTools.AWTLineEditorUserDevice;
 import LineEditor.data.WorldGeometryData;
 import UI.MouseUserDevice;

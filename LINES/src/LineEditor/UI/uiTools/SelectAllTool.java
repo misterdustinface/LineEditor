@@ -1,7 +1,7 @@
 package LineEditor.UI.uiTools;
 
+import shapes.Shape;
 import LineEditor.data.WorldGeometryData;
-import data.shapes.Shape;
 
 public class SelectAllTool extends WorldEditorTool {
 
