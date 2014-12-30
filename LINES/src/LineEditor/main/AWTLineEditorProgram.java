@@ -1,6 +1,7 @@
 package LineEditor.main;
 
 import generic.EditorProgram;
+import AWT.UI.AWTDropdownMenuBar;
 import AWT.UI.AWTEditorPanel;
 import AWT.UI.AWTFileMenu;
 import AWT.UI.AWTMenuBar;
@@ -48,15 +49,17 @@ public class AWTLineEditorProgram {
 
 		AWTMenuBar menuBar = new AWTMenuBar();
 		menuBar.setViewport(worldEditorPanel);
-		menuBar.setOffset(16, 8);
+		menuBar.setOffset(32, 8);
 		menuBar.setSpacing(4);
 		menuBar.addUIMenus( new AWTViewOptionsMenu(worldEditorPanel, worldEditorPanel),
 							toggleLayersMenu,
 							new AWTFileMenu(worldFiler));
+		AWTDropdownMenuBar dropdown = new AWTDropdownMenuBar();
+		dropdown.setMenuBar(menuBar);
 		
 		layerManager.addLayers(gridDrawer,
 							   worldRenderer,
-							   menuBar,
+							   dropdown,
 							   lineEditorUserDevice);
 		
 		window.revalidate();
