@@ -19,8 +19,8 @@ public class AWTCircleMoverTool extends WorldEditorMouseTool implements AWTUILay
 	public AWTCircleMoverTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		circleToMove = new Circle(0,0,0);
-		shapeDrawer  = new AWTShapeDrawer();
-		cursorDrawer = new AWTCursorDrawer();
+		shapeDrawer  = AWTShapeDrawer.getShapeDrawer();
+		cursorDrawer = AWTCursorDrawer.getCursorDrawer();
 	}
 	
 	@Override

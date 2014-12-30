@@ -14,7 +14,7 @@ public class AWTDefaultMouseTool extends DefaultMouseTool implements AWTUILayer 
 	
 	public AWTDefaultMouseTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
-		cursorDrawer = new AWTCursorDrawer();
+		cursorDrawer = AWTCursorDrawer.getCursorDrawer();
 	}
 
 	@Override

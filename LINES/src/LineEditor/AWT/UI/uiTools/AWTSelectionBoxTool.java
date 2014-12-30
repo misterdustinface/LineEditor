@@ -24,8 +24,8 @@ public class AWTSelectionBoxTool extends WorldEditorMouseTool implements AWTUILa
 		super(WORLD_DATA);
 		boxStart = new Point(0,0);
 		selectionBox = new Pipe(new LineSegment(boxStart, position), 1);
-		cursorDrawer = new AWTCursorDrawer();
-		shapeDrawer  = new AWTShapeDrawer();
+		cursorDrawer = AWTCursorDrawer.getCursorDrawer();
+		shapeDrawer  = AWTShapeDrawer.getShapeDrawer();
 	}
 	
 	@Override

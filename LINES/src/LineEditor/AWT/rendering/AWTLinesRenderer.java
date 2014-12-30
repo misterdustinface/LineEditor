@@ -21,7 +21,7 @@ public class AWTLinesRenderer implements AWTUILayer {
 
 	public AWTLinesRenderer(WorldGeometryData WORLD_GEOMETRY) {
 		worldGeometry = WORLD_GEOMETRY;
-		shapeDrawer   = new AWTShapeDrawer();
+		shapeDrawer   = AWTShapeDrawer.getShapeDrawer();
 	}
 	
 	private Circle[] getWorldCircles()    { return worldGeometry.getWorldPointCollisionCircles(); }

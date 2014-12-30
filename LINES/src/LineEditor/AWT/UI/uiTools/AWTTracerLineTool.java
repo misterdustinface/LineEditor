@@ -25,8 +25,8 @@ public class AWTTracerLineTool extends WorldEditorMouseTool implements AWTUILaye
 		start = new Point(0,0);
 		tracerLine 	= new LineSegment(start,position);
 		
-		cursorDrawer = new AWTCursorDrawer();
-		shapeDrawer = new AWTShapeDrawer();
+		cursorDrawer = AWTCursorDrawer.getCursorDrawer();
+		shapeDrawer = AWTShapeDrawer.getShapeDrawer();
 	}
 
 	@Override
