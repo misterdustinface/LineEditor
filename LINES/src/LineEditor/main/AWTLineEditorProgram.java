@@ -54,12 +54,10 @@ public class AWTLineEditorProgram {
 		menuBar.addUIMenus( new AWTViewOptionsMenu(worldEditorPanel, worldEditorPanel),
 							toggleLayersMenu,
 							new AWTFileMenu(worldFiler));
-		AWTDropdownMenuBar dropdown = new AWTDropdownMenuBar();
-		dropdown.setMenuBar(menuBar);
 		
 		layerManager.addLayers(gridDrawer,
 							   worldRenderer,
-							   dropdown,
+							   new AWTDropdownMenuBar(menuBar),
 							   lineEditorUserDevice);
 		
 		window.revalidate();
