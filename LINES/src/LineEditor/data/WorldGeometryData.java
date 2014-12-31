@@ -8,7 +8,7 @@ import shapes.Pipe;
 import shapes.Point;
 import shapes.Shape;
 import shapes.ShapeSelectorMap;
-import AWT.graphicdata.AWTGraphicData;
+import LineEditor.AWT.graphicdata.LineEditorAWTGraphicData;
 
 public class WorldGeometryData{
 
@@ -17,11 +17,15 @@ public class WorldGeometryData{
 	private ArrayList<Pipe> 	worldLineCollisionBoxes;
 	private ShapeSelectorMap 	selectionMap;
 	
+	private LineEditorAWTGraphicData lineEditorGraphicData;
+	
 	public WorldGeometryData() {
 		worldPointCollisionCircles 	= new ArrayList<Circle>();
 		worldLineCollisionBoxes 	= new ArrayList<Pipe>();		
 		worldCollisionBounds		= new ArrayList<Shape>();
 		selectionMap 				= new ShapeSelectorMap();
+		
+		lineEditorGraphicData = LineEditorAWTGraphicData.getGraphicData();
 	}
 	
 	public void load(WorldGeometryData other) {
@@ -60,7 +64,7 @@ public class WorldGeometryData{
 	}
 	
 	public void scaleSelectionAreaSizeForWorldGeometry(float percent){
-		AWTGraphicData.scaleHighlightedWorldGeometry(percent);
+		lineEditorGraphicData.scaleHighlightedWorldGeometry(percent);
 		for(Shape s : worldCollisionBounds)
 			s.scale(percent);
 	}
@@ -70,14 +74,14 @@ public class WorldGeometryData{
 	}
 	
 	public void createPoint(float x, float y){
-		Circle temp = new Circle(x, y, AWTGraphicData.pointHighlightCircleThickness);
+		Circle temp = new Circle(x, y, lineEditorGraphicData.pointHighlightCircleThickness);
 		if(! pointHasDuplicate(temp.center()))
 			add(temp);
 	}
 	public void createLine(Point A, Point B){
 		A = getPointDirectlyToCenterOfEquivalentCollisionCircle(A);
 		B = getPointDirectlyToCenterOfEquivalentCollisionCircle(B);
-		Pipe temp = new Pipe(new LineSegment(A,B), AWTGraphicData.lineHighlightBoxThickness);
+		Pipe temp = new Pipe(new LineSegment(A,B), lineEditorGraphicData.lineHighlightBoxThickness);
 		add(temp);
 	}
 	
@@ -129,7 +133,7 @@ public class WorldGeometryData{
 	public void splitCollisionBox(Pipe collisionBox, int percent){
 
 		LineSegment newLine 	= collisionBox.centerLine.split(percent / 100f);
-		Circle 		newCircle 	= new Circle(newLine.a, AWTGraphicData.pointHighlightCircleThickness);
+		Circle 		newCircle 	= new Circle(newLine.a, lineEditorGraphicData.pointHighlightCircleThickness);
 		newLine.a = collisionBox.centerLine.b  = newCircle.center(); // Circle makes copy of point. Get the new point and set the ends of the line to the point.
 		Pipe newRect = new Pipe(newLine, collisionBox.thickness());
 		

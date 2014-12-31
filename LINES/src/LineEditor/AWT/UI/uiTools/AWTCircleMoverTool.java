@@ -4,9 +4,9 @@ import java.awt.Graphics2D;
 
 import shapes.Circle;
 import AWT.UI.AWTUILayer;
-import AWT.graphicdata.AWTGraphicData;
 import AWT.rendering.AWTCursorDrawer;
 import AWT.rendering.AWTShapeDrawer;
+import LineEditor.AWT.graphicdata.LineEditorAWTGraphicData;
 import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
 
@@ -59,11 +59,11 @@ public class AWTCircleMoverTool extends WorldEditorMouseTool implements AWTUILay
 	@Override
 	public void render(Graphics2D g) {
 		shapeDrawer.setGraphics(g);
-		shapeDrawer.setColor(AWTGraphicData.movePointHighlight);
+		shapeDrawer.setColor(LineEditorAWTGraphicData.movePointHighlight);
 		shapeDrawer.drawCircle(circleToMove);
 
 		cursorDrawer.setGraphics(g);
-		cursorDrawer.setColor(AWTGraphicData.cursorColor);
+		cursorDrawer.setColor(LineEditorAWTGraphicData.cursorColor);
 		cursorDrawer.drawCrosshairCursor((int)position.x, (int)position.y);
 	}
 

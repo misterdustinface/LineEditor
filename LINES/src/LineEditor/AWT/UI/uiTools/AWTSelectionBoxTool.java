@@ -7,9 +7,9 @@ import shapes.LineSegment;
 import shapes.Pipe;
 import shapes.Point;
 import AWT.UI.AWTUILayer;
-import AWT.graphicdata.AWTGraphicData;
 import AWT.rendering.AWTCursorDrawer;
 import AWT.rendering.AWTShapeDrawer;
+import LineEditor.AWT.graphicdata.LineEditorAWTGraphicData;
 import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
 
@@ -72,14 +72,14 @@ public class AWTSelectionBoxTool extends WorldEditorMouseTool implements AWTUILa
 	@Override
 	public void render(Graphics2D g) {
 		shapeDrawer.setGraphics(g);
-		shapeDrawer.setColor(AWTGraphicData.dragSelectionBoxTransparentArea);
+		shapeDrawer.setColor(LineEditorAWTGraphicData.dragSelectionBoxTransparentArea);
 				
 		shapeDrawer.drawFilledRectangle(selectionBox.getBoundingRectangle());
-		shapeDrawer.setColor(AWTGraphicData.dragSelectionBoxBorder);
+		shapeDrawer.setColor(LineEditorAWTGraphicData.dragSelectionBoxBorder);
 		shapeDrawer.drawRectangle(selectionBox.getBoundingRectangle());
 
 		cursorDrawer.setGraphics(g);
-		cursorDrawer.setColor(AWTGraphicData.cursorColor);
+		cursorDrawer.setColor(LineEditorAWTGraphicData.cursorColor);
 		cursorDrawer.drawCrosshairCursor((int)position.x, (int)position.y);
 	}
 

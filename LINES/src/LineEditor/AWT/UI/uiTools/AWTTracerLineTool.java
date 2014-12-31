@@ -6,9 +6,9 @@ import shapes.Circle;
 import shapes.LineSegment;
 import shapes.Point;
 import AWT.UI.AWTUILayer;
-import AWT.graphicdata.AWTGraphicData;
 import AWT.rendering.AWTCursorDrawer;
 import AWT.rendering.AWTShapeDrawer;
+import LineEditor.AWT.graphicdata.LineEditorAWTGraphicData;
 import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
 
@@ -84,15 +84,15 @@ public class AWTTracerLineTool extends WorldEditorMouseTool implements AWTUILaye
 	public void render(Graphics2D g) {
 		if (shouldAcceptRequest()) {
 			shapeDrawer.setGraphics(g);
-			shapeDrawer.setColor(AWTGraphicData.dragLineTracingLine);
+			shapeDrawer.setColor(LineEditorAWTGraphicData.dragLineTracingLine);
 			shapeDrawer.drawLineSegment(tracerLine);
 			
 			cursorDrawer.setGraphics(g);
-			cursorDrawer.setColor(AWTGraphicData.cursorColor);
+			cursorDrawer.setColor(LineEditorAWTGraphicData.cursorColor);
 			cursorDrawer.drawTriangularCrosshairCursor((int)position.x, (int)position.y);
 		} else {
 			cursorDrawer.setGraphics(g);
-			cursorDrawer.setColor(AWTGraphicData.cursorColor);
+			cursorDrawer.setColor(LineEditorAWTGraphicData.cursorColor);
 			cursorDrawer.drawSmallXCursor((int)position.x, (int)position.y);
 		}
 	}

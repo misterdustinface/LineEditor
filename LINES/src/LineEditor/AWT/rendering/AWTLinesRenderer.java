@@ -6,12 +6,12 @@ import java.awt.RenderingHints;
 import shapes.Circle;
 import shapes.Pipe;
 import shapes.Shape;
+import AWT.UI.AWTUILayer;
+import AWT.rendering.AWTShapeDrawer;
 import LineEditor.AWT.UI.uiTools.AWTLineEditorUserDevice;
+import LineEditor.AWT.graphicdata.LineEditorAWTGraphicData;
 import LineEditor.data.WorldGeometryData;
 import UI.MouseUserDevice;
-import AWT.UI.AWTUILayer;
-import AWT.graphicdata.AWTGraphicData;
-import AWT.rendering.AWTShapeDrawer;
 
 public class AWTLinesRenderer implements AWTUILayer {
 
@@ -54,10 +54,10 @@ public class AWTLinesRenderer implements AWTUILayer {
 	private void drawPoint(Circle worldCircle) {
 		boolean isPointSelected = device.isSelected(worldCircle);
 		if(isEditorCursorHoveredOver(worldCircle)) {
-			shapeDrawer.setColor(isPointSelected ? AWTGraphicData.selectedPointCircleHighlight : AWTGraphicData.pointCircleHighlight);
+			shapeDrawer.setColor(isPointSelected ? LineEditorAWTGraphicData.selectedPointCircleHighlight : LineEditorAWTGraphicData.pointCircleHighlight);
 			shapeDrawer.drawCircle(worldCircle);
 		}
-		shapeDrawer.setColor(isPointSelected ? AWTGraphicData.selectedPoint : AWTGraphicData.point);
+		shapeDrawer.setColor(isPointSelected ? LineEditorAWTGraphicData.selectedPoint : LineEditorAWTGraphicData.point);
 		shapeDrawer.drawPoint(worldCircle.center());
 	}
 	
@@ -69,10 +69,10 @@ public class AWTLinesRenderer implements AWTUILayer {
 	private void drawLine(Pipe worldRectangle) {
 		boolean isLineSelected = device.isSelected(worldRectangle);
 		if(isEditorCursorHoveredOver(worldRectangle)) {
-			shapeDrawer.setColor(isLineSelected ? AWTGraphicData.selectedLineBoxHighlight : AWTGraphicData.lineBoxHighlight);
+			shapeDrawer.setColor(isLineSelected ? LineEditorAWTGraphicData.selectedLineBoxHighlight : LineEditorAWTGraphicData.lineBoxHighlight);
 			shapeDrawer.drawPolygon(worldRectangle.getArea());
 		}
-		shapeDrawer.setColor(isLineSelected ? AWTGraphicData.selectedLine : AWTGraphicData.line);
+		shapeDrawer.setColor(isLineSelected ? LineEditorAWTGraphicData.selectedLine : LineEditorAWTGraphicData.line);
 		shapeDrawer.drawLineSegment(worldRectangle.centerLine);
 	}
 
