@@ -6,7 +6,6 @@ import java.awt.RenderingHints;
 import shapes.Shape;
 import AWT.UI.AWTUILayer;
 import AWT.UI.Mouse.AWTDefaultMouseUserDevice;
-import LineEditor.UI.uiTools.AWTWorldEditorMouseToolSetter;
 import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
 import UI.MouseUserDevice;

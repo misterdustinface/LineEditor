@@ -1,6 +1,5 @@
-package LineEditor.AWT.UI.uiTools;
+package LineEditor.UI.uiTools;
 
-import LineEditor.UI.uiTools.WorldEditorMouseToolSelectCondition;
 import LineEditor.data.WorldGeometryData;
 import UI.MouseUserDevice;
 

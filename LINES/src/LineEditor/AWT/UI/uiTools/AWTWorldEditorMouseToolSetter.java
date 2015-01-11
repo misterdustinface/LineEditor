@@ -1,14 +1,8 @@
-package LineEditor.UI.uiTools;
+package LineEditor.AWT.UI.uiTools;
 
 import generic.Pair;
-import LineEditor.AWT.UI.uiTools.AWTCircleCreatorTool;
-import LineEditor.AWT.UI.uiTools.AWTCircleMoverTool;
-import LineEditor.AWT.UI.uiTools.AWTSelectionBoxTool;
-import LineEditor.AWT.UI.uiTools.AWTSelectionPointTool;
-import LineEditor.AWT.UI.uiTools.AWTShapeDeleteTool;
-import LineEditor.AWT.UI.uiTools.AWTShapeValueEditorTool;
-import LineEditor.AWT.UI.uiTools.AWTTracerLineTool;
-import LineEditor.AWT.UI.uiTools.WorldEditorMouseToolSelectorConditions;
+import LineEditor.UI.uiTools.WorldEditorMouseToolSelectorConditions;
+import LineEditor.UI.uiTools.WorldEditorMouseToolSetter;
 import LineEditor.data.WorldGeometryData;
 
 final public class AWTWorldEditorMouseToolSetter extends WorldEditorMouseToolSetter {
