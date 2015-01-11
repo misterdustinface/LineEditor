@@ -3,6 +3,7 @@ package LineEditor.main;
 import generic.EditorProgram;
 import AWT.UI.AWTDropdownMenuBar;
 import AWT.UI.AWTEditorPanel;
+import AWT.UI.AWTGridLayer;
 import AWT.UI.AWTMenuBar;
 import AWT.UI.AWTProgramWindow;
 import AWT.UI.CommonMenus.AWTFileMenu;
@@ -10,7 +11,6 @@ import AWT.UI.CommonMenus.AWTToggleLayersMenu;
 import AWT.UI.CommonMenus.AWTViewOptionsMenu;
 import AWT.UI.Mouse.AWTScreenShifter;
 import AWT.UI.Mouse.AWTZoomWheelListener;
-import AWT.rendering.AWTGridDrawer;
 import AWT.update.AWTProgramMain;
 import LineEditor.AWT.UI.uiTools.AWTLineEditorUserDevice;
 import LineEditor.AWT.rendering.AWTLinesRenderer;
@@ -33,7 +33,7 @@ public class AWTLineEditorProgram {
 		worldEditorPanel.addViewportMouseListener(lineEditorUserDevice);
 		
 		AWTLinesRenderer			worldRenderer  			= new AWTLinesRenderer(worldData);
-		AWTGridDrawer 				gridDrawer 				= new AWTGridDrawer(worldEditorPanel, worldEditorPanel);
+		AWTGridLayer 				gridDrawer 				= new AWTGridLayer(worldEditorPanel, worldEditorPanel);
 		AWTScreenShifter			screenShifter 			= new AWTScreenShifter(worldEditorPanel);
 		UILayerManager 				layerManager 			= new UILayerManager();
 		
