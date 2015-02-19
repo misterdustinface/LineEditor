@@ -12,28 +12,32 @@ public class CircleCreatorTool extends WorldEditorMouseTool {
 		positionOfLastUse = new Point(0,0);
 	}
 	
-	private boolean hasBeenMovedSinceLastUse() { return ! positionOfLastUse.equals(position); }
+	private boolean hasBeenMovedSinceLastUse() { 
+		return ! positionOfLastUse.equals(position); 
+	}
 	
-	private void createWorldCircleAtPoint(int x, int y){worldData.createPoint(x,y);}
+	private void createWorldCircleAtPoint(int x, int y) {
+		worldData.createPoint(x,y);
+	}
 	
-	private void splitIntersectedRectangleAtMidpoint(){
+	private void splitIntersectedRectangleAtMidpoint() {
 		worldData.splitCollisionBox(getIntersectedRectangle(position.x, position.y), 50);
 	}
-	private boolean pointIntersectsSomeWorldRectangle(float x, float y){
-		for(Pipe worldRectangle : worldRectangles()){
-			if(worldRectangle.getArea().contains(x, y)){
+	private boolean pointIntersectsSomeWorldRectangle(float x, float y) {
+		for (Pipe worldRectangle : worldRectangles()) {
+			if (worldRectangle.getArea().contains(x, y)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	private Pipe getIntersectedRectangle(float x, float y){
-		for(Pipe worldRectangle : worldRectangles()){
-			if(worldRectangle.getArea().contains(x, y)){
+	private Pipe getIntersectedRectangle(float x, float y) {
+		for (Pipe worldRectangle : worldRectangles()) {
+			if (worldRectangle.getArea().contains(x, y)) {
 				return worldRectangle;
 			}
 		}
-		return null; // throw exception
+		return null; // TODO throw exception
 	}
 
 	@Override
@@ -44,9 +48,9 @@ public class CircleCreatorTool extends WorldEditorMouseTool {
 	@Override
 	protected void performAction() {
 		positionOfLastUse.set(position.x, position.y);
-		if(pointIntersectsSomeWorldRectangle(position.x, position.y)){
+		if (pointIntersectsSomeWorldRectangle(position.x, position.y)) {
 			splitIntersectedRectangleAtMidpoint();
-		}else{
+		} else {
 			createWorldCircleAtPoint((int)position.x, (int)position.y);
 		}
 	}

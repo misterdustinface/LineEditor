@@ -15,15 +15,16 @@ import LineEditor.data.WorldGeometryData;
 
 public class AWTSelectionBoxTool extends WorldEditorMouseTool implements AWTUILayer {
 
-	protected Point boxStart; // keep point in scope
-	protected Pipe selectionBox; // scope of points is hidden.
+	protected Point 		startPoint;
+	protected Pipe 			selectionBox;
 	private AWTCursorDrawer cursorDrawer;
 	private AWTShapeDrawer  shapeDrawer;
 	
 	public AWTSelectionBoxTool(WorldGeometryData WORLD_DATA){
 		super(WORLD_DATA);
-		boxStart = new Point(0,0);
-		selectionBox = new Pipe(new LineSegment(boxStart, position), 1);
+		startPoint   = new Point(0,0);
+		LineSegment spanLine = new LineSegment(startPoint, position);
+		selectionBox = new Pipe(spanLine, 1);
 		cursorDrawer = AWTCursorDrawer.getCursorDrawer();
 		shapeDrawer  = AWTShapeDrawer.getShapeDrawer();
 	}
@@ -31,7 +32,7 @@ public class AWTSelectionBoxTool extends WorldEditorMouseTool implements AWTUILa
 	@Override
 	public void setInitialPosition(int x, int y) {
 		super.setInitialPosition(x, y);
-		boxStart.set(x, y);
+		startPoint.set(x, y);
 	}
 	
 	/////////////////////////////////////////////////////////////////////////////////
@@ -53,7 +54,7 @@ public class AWTSelectionBoxTool extends WorldEditorMouseTool implements AWTUILa
 	}
 	
 	protected boolean selectionRectangleContainsCircleCenter(Pipe selectionRectangle, Circle circle){
-		return selectionRectangle.contains(circle.center());
+		return selectionRectangle.getBoundingRectangle().contains(circle.center());
 	}
 	protected boolean selectionRectangleContainsRectangle(Pipe selectionRectangle, Pipe rectangularPipe){
 		return selectionRectangle.intersects(rectangularPipe.getBoundingRectangle());

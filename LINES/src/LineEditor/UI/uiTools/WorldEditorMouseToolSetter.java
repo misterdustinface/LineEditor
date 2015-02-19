@@ -20,9 +20,9 @@ public class WorldEditorMouseToolSetter {
 	protected Pair<WorldEditorMouseToolSelectCondition, WorldEditorMouseTool>[] pressTools;
 	
 	final public WorldEditorMouseTool getTool(MouseUserDevice mouse) {
-		if(mouse.isClicked()) {
+		if (mouse.isClicked()) {
 			return selectTool(mouse, clickTools);
-		} else if(mouse.isPressed()) {
+		} else if (mouse.isPressed()) {
 			return selectTool(mouse, pressTools);
 		} else {
 			return defaultTool;
@@ -30,8 +30,8 @@ public class WorldEditorMouseToolSetter {
 	}
 	
 	private WorldEditorMouseTool selectTool(MouseUserDevice mouse, Pair<WorldEditorMouseToolSelectCondition, WorldEditorMouseTool>[] tools) {
-		for(Pair<WorldEditorMouseToolSelectCondition, WorldEditorMouseTool> pair : tools) {
-			if(pair.first.shouldBeSelected(mouse)) {
+		for (Pair<WorldEditorMouseToolSelectCondition, WorldEditorMouseTool> pair : tools) {
+			if (pair.first.shouldBeSelected(mouse)) {
 				return pair.second;
 			}
 		}

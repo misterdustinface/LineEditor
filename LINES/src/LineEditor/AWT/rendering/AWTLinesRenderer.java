@@ -24,9 +24,15 @@ public class AWTLinesRenderer implements AWTUILayer {
 		shapeDrawer   = AWTShapeDrawer.getShapeDrawer();
 	}
 	
-	private Circle[] getWorldCircles()    { return worldGeometry.getWorldPointCollisionCircles(); }
-	private Pipe[]   getWorldRectangles() { return worldGeometry.getWorldLineCollisionBoxes(); }
-	private boolean  isEditorCursorHoveredOver(Shape s) { return s.contains(device.getCursorPosition()); }
+	private Circle[] getWorldCircles() { 
+		return worldGeometry.getWorldPointCollisionCircles(); 
+	}
+	private Pipe[] getWorldRectangles() { 
+		return worldGeometry.getWorldLineCollisionBoxes(); 
+	}
+	private boolean isEditorCursorHoveredOver(Shape s) { 
+		return s.contains(device.getCursorPosition()); 
+	}
 	
 	@Override
 	public void update(MouseUserDevice mouse) {
@@ -47,13 +53,13 @@ public class AWTLinesRenderer implements AWTUILayer {
 	}
 	
 	private void drawPoints() {
-		for(Circle worldCircle : getWorldCircles())
+		for (Circle worldCircle : getWorldCircles())
 			drawPoint(worldCircle);
 	}
 	
 	private void drawPoint(Circle worldCircle) {
 		boolean isPointSelected = device.isSelected(worldCircle);
-		if(isEditorCursorHoveredOver(worldCircle)) {
+		if (isEditorCursorHoveredOver(worldCircle)) {
 			shapeDrawer.setColor(isPointSelected ? LineEditorAWTGraphicData.selectedPointCircleHighlight : LineEditorAWTGraphicData.pointCircleHighlight);
 			shapeDrawer.drawCircle(worldCircle);
 		}
@@ -62,13 +68,13 @@ public class AWTLinesRenderer implements AWTUILayer {
 	}
 	
 	private void drawLines() {
-		for(Pipe worldRectangle : getWorldRectangles())
+		for (Pipe worldRectangle : getWorldRectangles())
 			drawLine(worldRectangle);
 	}
 	
 	private void drawLine(Pipe worldRectangle) {
 		boolean isLineSelected = device.isSelected(worldRectangle);
-		if(isEditorCursorHoveredOver(worldRectangle)) {
+		if (isEditorCursorHoveredOver(worldRectangle)) {
 			shapeDrawer.setColor(isLineSelected ? LineEditorAWTGraphicData.selectedLineBoxHighlight : LineEditorAWTGraphicData.lineBoxHighlight);
 			shapeDrawer.drawPolygon(worldRectangle.getArea());
 		}

@@ -14,17 +14,29 @@ public abstract class WorldEditorTool implements Requestible {
 		worldData = WORLD_DATA;
 	}
 	
-	final protected void 		select(Shape s) 		{ worldData.select(s); }
-	final protected boolean 	isSelected(Shape s) 	{ return worldData.isSelected(s); }
-	final protected void 		toggleSelected(Shape s) { worldData.toggleSelected(s); }
+	final protected void select(Shape s) { 
+		worldData.select(s); 
+	}
+	final protected boolean isSelected(Shape s) { 
+		return worldData.isSelected(s); 
+	}
+	final protected void toggleSelected(Shape s) { 
+		worldData.toggleSelected(s); 
+	}
 
-	final protected Circle[] 	worldCircles() 		{ return worldData.getWorldPointCollisionCircles(); }
-	final protected Pipe[] 		worldRectangles() 	{ return worldData.getWorldLineCollisionBoxes(); }
-	final protected Shape[] 	collisionBounds() 	{ return worldData.getAllCollisionBounds(); }
+	final protected Circle[] worldCircles() { 
+		return worldData.getWorldPointCollisionCircles(); 
+	}
+	final protected Pipe[] worldRectangles() { 
+		return worldData.getWorldLineCollisionBoxes(); 
+	}
+	final protected Shape[] collisionBounds() { 
+		return worldData.getAllCollisionBounds(); 
+	}
 	
 	@Override
-	final public void request(){
-		if(shouldAcceptRequest())
+	final public void request() {
+		if (shouldAcceptRequest())
 			performAction();
 	}
 	
