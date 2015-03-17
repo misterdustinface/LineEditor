@@ -1,24 +1,20 @@
 package LineEditor.AWT.graphicdata;
 
+import generic.tags.NamedData;
 import generic.tags.Singleton;
 
 import java.awt.Color;
-import java.util.HashMap;
 
+import AWT.graphicdata.EditorAWTGraphicData;
 import AWT.graphicdata.AWTGraphicData;
 
-public class LineEditorAWTGraphicData implements Singleton {
+public class LineEditorAWTGraphicData extends AWTGraphicData implements Singleton, NamedData {
 	
-	private AWTGraphicData graphicData;
+	private EditorAWTGraphicData graphicData;
 	private static LineEditorAWTGraphicData lineEditorGraphicData = new LineEditorAWTGraphicData();
 	
-	private HashMap<String, Color> colors;
-	private HashMap<String, Integer> thicknesses;
-	
 	private LineEditorAWTGraphicData() {
-		graphicData = AWTGraphicData.getGraphicData();
-		colors = new HashMap<String, Color>();
-		thicknesses = new HashMap<String, Integer>();
+		graphicData = EditorAWTGraphicData.getGraphicData();
 		loadColors();
 		loadThicknesses();
 	}
@@ -54,9 +50,9 @@ public class LineEditorAWTGraphicData implements Singleton {
 	}
 	
 	private void loadThicknesses() {
-		thicknesses.put("INITIAL_pointSize", graphicData.pointSize);
-		thicknesses.put("INITIAL_pointHighlightCircle", graphicData.pointSize * 3);
-		thicknesses.put("INITIAL_lineHighlightBox", graphicData.pointSize * 2);
+		thicknesses.put("INITIAL_pointSize", graphicData.getThicknessOf("pointSize"));
+		thicknesses.put("INITIAL_pointHighlightCircle", graphicData.getThicknessOf("pointSize") * 3);
+		thicknesses.put("INITIAL_lineHighlightBox", graphicData.getThicknessOf("pointSize") * 2);
 		thicknesses.put("pointHighlightCircle", thicknesses.get("INITIAL_pointHighlightCircle"));
 		thicknesses.put("lineHighlightBox", thicknesses.get("INITIAL_lineHighlightBox"));
 	}
@@ -66,8 +62,8 @@ public class LineEditorAWTGraphicData implements Singleton {
 		thicknesses.put("lineHighlightBox", (int) (thicknesses.get("lineHighlightBox") * scale) );
 	}
 	
-	public void scaleWorldGeometry(float scale){
-		graphicData.pointSize *= scale;
+	public void scaleWorldGeometry(float scale) {
+		graphicData.scaleThicknessOf("pointSize", scale);
 	}
 	
 	public void resetHighlightedWorldGeometryScales(){
@@ -76,15 +72,7 @@ public class LineEditorAWTGraphicData implements Singleton {
 	}
 	
 	public void resetWorldGeometryScales(){
-		graphicData.pointSize = thicknesses.get("INITIAL_pointSize");
-	}
-	
-	public Color getColorOf(String name) {
-		return colors.containsKey(name) ? colors.get(name) : Color.LIGHT_GRAY;
-	}
-	
-	public int getThicknessOf(String name) {
-		return thicknesses.containsKey(name) ? thicknesses.get(name) : 0;
+		graphicData.setThicknessOf("pointSize", thicknesses.get("INITIAL_pointSize"));
 	}
 	
 }
