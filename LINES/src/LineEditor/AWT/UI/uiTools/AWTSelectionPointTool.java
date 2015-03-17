@@ -5,8 +5,8 @@ import java.awt.Graphics2D;
 import shapes.Point;
 import shapes.Shape;
 import AWT.UI.AWTUILayer;
-import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
+import LineEditor.tools.mouse.WorldEditorMouseTool;
 
 public class AWTSelectionPointTool extends WorldEditorMouseTool implements AWTUILayer {
 

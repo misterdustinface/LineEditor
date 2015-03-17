@@ -99,7 +99,7 @@ public class WorldGeometryData extends DataModificationNotifier {
 	}
 	
 	public void createPoint(float x, float y){
-		Circle temp = new Circle(x, y, lineEditorGraphicData.pointHighlightCircleThickness);
+		Circle temp = new Circle(x, y, lineEditorGraphicData.getThicknessOf("pointHighlightCircle"));
 		if (!pointHasDuplicate(temp.center()))
 			add(temp);
 		notifyDataModified();
@@ -108,7 +108,7 @@ public class WorldGeometryData extends DataModificationNotifier {
 	public void createLine(Point A, Point B){
 		A = getPointDirectlyToCenterOfEquivalentCollisionCircle(A);
 		B = getPointDirectlyToCenterOfEquivalentCollisionCircle(B);
-		Pipe temp = new Pipe(new LineSegment(A,B), lineEditorGraphicData.lineHighlightBoxThickness);
+		Pipe temp = new Pipe(new LineSegment(A,B), lineEditorGraphicData.getThicknessOf("lineHighlightBox"));
 		add(temp);
 		notifyDataModified();
 	}
@@ -172,7 +172,7 @@ public class WorldGeometryData extends DataModificationNotifier {
 	public void splitCollisionBox(Pipe collisionBox, int percent) {
 
 		LineSegment newLine 	= collisionBox.centerLine.split(percent / 100f);
-		Circle 		newCircle 	= new Circle(newLine.a, lineEditorGraphicData.pointHighlightCircleThickness);
+		Circle 		newCircle 	= new Circle(newLine.a, lineEditorGraphicData.getThicknessOf("pointHighlightCircle"));
 		newLine.a = collisionBox.centerLine.b  = newCircle.center(); // Circle makes copy of point. Get the new point and set the ends of the line to the point.
 		Pipe newRect = new Pipe(newLine, collisionBox.thickness());
 		

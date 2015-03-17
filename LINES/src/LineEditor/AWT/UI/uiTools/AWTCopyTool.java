@@ -1,58 +1,39 @@
 package LineEditor.AWT.UI.uiTools;
 
-import java.util.HashSet;
+import java.awt.Graphics2D;
 
-import shapes.LineSegment;
-import shapes.Pipe;
+import AWT.UI.AWTUILayer;
+import AWT.rendering.AWTCursorDrawer;
+import AWT.rendering.AWTShapeDrawer;
+import LineEditor.AWT.graphicdata.LineEditorAWTGraphicData;
 import LineEditor.data.WorldGeometryData;
+import LineEditor.tools.mouse.CopyTool;
 
-public class AWTCopyTool extends AWTSelectionBoxTool{
-
-
-	private HashSet<LineSegment>		copiedLines;
-	//private HashSet<Polyline> 	copiedPolylines;
+public class AWTCopyTool extends CopyTool implements AWTUILayer {
 	
-	public AWTCopyTool(WorldGeometryData WORLD_DATA) {
+	private AWTCursorDrawer cursorDrawer;
+	private AWTShapeDrawer  shapeDrawer;
+	private LineEditorAWTGraphicData graphicData;
+	
+	public AWTCopyTool(WorldGeometryData WORLD_DATA){
 		super(WORLD_DATA);
-		copiedLines		= new HashSet<LineSegment>();
-		//copiedPolylines = new HashSet<Polyline>();
+		cursorDrawer = AWTCursorDrawer.getCursorDrawer();
+		shapeDrawer  = AWTShapeDrawer.getShapeDrawer();
+		graphicData = LineEditorAWTGraphicData.getGraphicData();
 	}
-
+	
 	@Override
-	public void setInitialPosition(int x, int y) {
-		super.setInitialPosition(x, y);
+	public void render(Graphics2D g) {
+		shapeDrawer.setGraphics(g);
+		shapeDrawer.setColor(graphicData.getColorOf("dragSelectionBoxTransparentArea"));
+				
+		shapeDrawer.drawFilledRectangle(selectionBox.getBoundingRectangle());
+		shapeDrawer.setColor(graphicData.getColorOf("dragSelectionBoxBorder"));
+		shapeDrawer.drawRectangle(selectionBox.getBoundingRectangle());
+
+		cursorDrawer.setGraphics(g);
+		cursorDrawer.setColor(graphicData.getColorOf("cursor"));
+		cursorDrawer.drawCrosshairCursor((int)position.x, (int)position.y);
 	}
 
-	@Override
-	public void setCurrentPosition(int x, int y) {
-		super.setCurrentPosition(x, y);
-	}
-
-	@Override
-	protected boolean shouldAcceptRequest() {
-		return copiedLines.size() > 0;
-	}
-
-	@Override
-	protected void performAction() {
-		copyWorldShapes();
-	}
-
-	private void copyWorldShapes(){
-		setWorldShapesToCopy();
-
-		copyShapesIntoWorldData();
-	}
-
-	private void setWorldShapesToCopy(){
-		for(Pipe worldRectangle : worldRectangles()){
-			if(selectionRectangleContainsRectangle(selectionBox, worldRectangle)){
-				copiedLines.add(worldRectangle.centerLine);
-			}
-		}
-	}
-	private void copyShapesIntoWorldData(){
-		// make copies
-		// move copies
-	}
 }

@@ -18,10 +18,12 @@ public class AWTLinesRenderer implements AWTUILayer {
 	private AWTLineEditorUserDevice device;
 	private WorldGeometryData 		worldGeometry;
 	private AWTShapeDrawer 			shapeDrawer;
+	private LineEditorAWTGraphicData graphicData;
 
 	public AWTLinesRenderer(WorldGeometryData WORLD_GEOMETRY) {
 		worldGeometry = WORLD_GEOMETRY;
 		shapeDrawer   = AWTShapeDrawer.getShapeDrawer();
+		graphicData = LineEditorAWTGraphicData.getGraphicData();
 	}
 	
 	private Circle[] getWorldCircles() { 
@@ -60,10 +62,10 @@ public class AWTLinesRenderer implements AWTUILayer {
 	private void drawPoint(Circle worldCircle) {
 		boolean isPointSelected = device.isSelected(worldCircle);
 		if (isEditorCursorHoveredOver(worldCircle)) {
-			shapeDrawer.setColor(isPointSelected ? LineEditorAWTGraphicData.selectedPointCircleHighlight : LineEditorAWTGraphicData.pointCircleHighlight);
+			shapeDrawer.setColor(isPointSelected ? graphicData.getColorOf("selectedPointCircleHighlight") : graphicData.getColorOf("pointCircleHighlight"));
 			shapeDrawer.drawCircle(worldCircle);
 		}
-		shapeDrawer.setColor(isPointSelected ? LineEditorAWTGraphicData.selectedPoint : LineEditorAWTGraphicData.point);
+		shapeDrawer.setColor(isPointSelected ? graphicData.getColorOf("selectedPoint") : graphicData.getColorOf("point"));
 		shapeDrawer.drawPoint(worldCircle.center());
 	}
 	
@@ -75,10 +77,10 @@ public class AWTLinesRenderer implements AWTUILayer {
 	private void drawLine(Pipe worldRectangle) {
 		boolean isLineSelected = device.isSelected(worldRectangle);
 		if (isEditorCursorHoveredOver(worldRectangle)) {
-			shapeDrawer.setColor(isLineSelected ? LineEditorAWTGraphicData.selectedLineBoxHighlight : LineEditorAWTGraphicData.lineBoxHighlight);
+			shapeDrawer.setColor(isLineSelected ? graphicData.getColorOf("selectedLineBoxHighlight") : graphicData.getColorOf("lineBoxHighlight"));
 			shapeDrawer.drawPolygon(worldRectangle.getArea());
 		}
-		shapeDrawer.setColor(isLineSelected ? LineEditorAWTGraphicData.selectedLine : LineEditorAWTGraphicData.line);
+		shapeDrawer.setColor(isLineSelected ? graphicData.getColorOf("selectedLine") : graphicData.getColorOf("line"));
 		shapeDrawer.drawLineSegment(worldRectangle.centerLine);
 	}
 

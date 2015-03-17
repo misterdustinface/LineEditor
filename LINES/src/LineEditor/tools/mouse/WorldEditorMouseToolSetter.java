@@ -1,4 +1,4 @@
-package LineEditor.UI.uiTools;
+package LineEditor.tools.mouse;
 
 import generic.Pair;
 import LineEditor.data.WorldGeometryData;

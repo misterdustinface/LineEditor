@@ -9,8 +9,8 @@ import AWT.UI.AWTUILayer;
 import AWT.rendering.AWTCursorDrawer;
 import AWT.rendering.AWTShapeDrawer;
 import LineEditor.AWT.graphicdata.LineEditorAWTGraphicData;
-import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
+import LineEditor.tools.mouse.WorldEditorMouseTool;
 
 public class AWTTracerLineTool extends WorldEditorMouseTool implements AWTUILayer {
 
@@ -19,6 +19,7 @@ public class AWTTracerLineTool extends WorldEditorMouseTool implements AWTUILaye
 	
 	private AWTCursorDrawer cursorDrawer;
 	private AWTShapeDrawer  shapeDrawer;
+	private LineEditorAWTGraphicData graphicData;
 	
 	public AWTTracerLineTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
@@ -27,6 +28,7 @@ public class AWTTracerLineTool extends WorldEditorMouseTool implements AWTUILaye
 		
 		cursorDrawer = AWTCursorDrawer.getCursorDrawer();
 		shapeDrawer = AWTShapeDrawer.getShapeDrawer();
+		graphicData = LineEditorAWTGraphicData.getGraphicData();
 	}
 
 	@Override
@@ -84,15 +86,15 @@ public class AWTTracerLineTool extends WorldEditorMouseTool implements AWTUILaye
 	public void render(Graphics2D g) {
 		if (shouldAcceptRequest()) {
 			shapeDrawer.setGraphics(g);
-			shapeDrawer.setColor(LineEditorAWTGraphicData.dragLineTracingLine);
+			shapeDrawer.setColor(graphicData.getColorOf("dragLineTracingLine"));
 			shapeDrawer.drawLineSegment(tracerLine);
 			
 			cursorDrawer.setGraphics(g);
-			cursorDrawer.setColor(LineEditorAWTGraphicData.cursorColor);
+			cursorDrawer.setColor(graphicData.getColorOf("cursor"));
 			cursorDrawer.drawTriangularCrosshairCursor((int)position.x, (int)position.y);
 		} else {
 			cursorDrawer.setGraphics(g);
-			cursorDrawer.setColor(LineEditorAWTGraphicData.cursorColor);
+			cursorDrawer.setColor(graphicData.getColorOf("cursor"));
 			cursorDrawer.drawSmallXCursor((int)position.x, (int)position.y);
 		}
 	}

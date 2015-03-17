@@ -1,4 +1,4 @@
-package LineEditor.UI.uiTools;
+package LineEditor.tools;
 
 import shapes.Shape;
 import LineEditor.data.WorldGeometryData;

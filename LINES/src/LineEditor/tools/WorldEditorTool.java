@@ -1,4 +1,4 @@
-package LineEditor.UI.uiTools;
+package LineEditor.tools;
 
 import shapes.Circle;
 import shapes.Pipe;
@@ -17,9 +17,11 @@ public abstract class WorldEditorTool implements Requestible {
 	final protected void select(Shape s) { 
 		worldData.select(s); 
 	}
+	
 	final protected boolean isSelected(Shape s) { 
 		return worldData.isSelected(s); 
 	}
+	
 	final protected void toggleSelected(Shape s) { 
 		worldData.toggleSelected(s); 
 	}
@@ -27,9 +29,11 @@ public abstract class WorldEditorTool implements Requestible {
 	final protected Circle[] worldCircles() { 
 		return worldData.getWorldPointCollisionCircles(); 
 	}
+	
 	final protected Pipe[] worldRectangles() { 
 		return worldData.getWorldLineCollisionBoxes(); 
 	}
+	
 	final protected Shape[] collisionBounds() { 
 		return worldData.getAllCollisionBounds(); 
 	}

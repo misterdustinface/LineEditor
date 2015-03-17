@@ -1,9 +1,9 @@
 package LineEditor.AWT.UI.uiTools;
 
 import generic.Pair;
-import LineEditor.UI.uiTools.WorldEditorMouseToolSelectorConditions;
-import LineEditor.UI.uiTools.WorldEditorMouseToolSetter;
 import LineEditor.data.WorldGeometryData;
+import LineEditor.tools.mouse.WorldEditorMouseToolSelectorConditions;
+import LineEditor.tools.mouse.WorldEditorMouseToolSetter;
 
 final public class AWTWorldEditorMouseToolSetter extends WorldEditorMouseToolSetter {
 

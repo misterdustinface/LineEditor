@@ -3,8 +3,8 @@ package LineEditor.AWT.UI.uiTools;
 import java.awt.Graphics2D;
 
 import AWT.UI.AWTUILayer;
-import LineEditor.UI.uiTools.CircleCreatorTool;
 import LineEditor.data.WorldGeometryData;
+import LineEditor.tools.mouse.CircleCreatorTool;
 
 public class AWTCircleCreatorTool extends CircleCreatorTool implements AWTUILayer {
 

@@ -1,10 +1,11 @@
-package LineEditor.UI.uiTools;
+package LineEditor.tools.mouse;
 
 import shapes.Pipe;
 import shapes.Point;
 import LineEditor.data.WorldGeometryData;
 
 public class CircleCreatorTool extends WorldEditorMouseTool {
+	
 	private Point positionOfLastUse;
 	
 	public CircleCreatorTool(WorldGeometryData WORLD_DATA) {
@@ -23,6 +24,7 @@ public class CircleCreatorTool extends WorldEditorMouseTool {
 	private void splitIntersectedRectangleAtMidpoint() {
 		worldData.splitCollisionBox(getIntersectedRectangle(position.x, position.y), 50);
 	}
+	
 	private boolean pointIntersectsSomeWorldRectangle(float x, float y) {
 		for (Pipe worldRectangle : worldRectangles()) {
 			if (worldRectangle.getArea().contains(x, y)) {
@@ -31,6 +33,7 @@ public class CircleCreatorTool extends WorldEditorMouseTool {
 		}
 		return false;
 	}
+	
 	private Pipe getIntersectedRectangle(float x, float y) {
 		for (Pipe worldRectangle : worldRectangles()) {
 			if (worldRectangle.getArea().contains(x, y)) {
