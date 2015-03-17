@@ -26,7 +26,9 @@ public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implement
 		currentTool = defaultTool;
 	}
 	
-	public boolean isSelected(Shape s) { return data.isSelected(s); }
+	public boolean isSelected(Shape s) { 
+		return data.isSelected(s); 
+	}
 
 	@Override
 	public void update(MouseUserDevice mouse) {

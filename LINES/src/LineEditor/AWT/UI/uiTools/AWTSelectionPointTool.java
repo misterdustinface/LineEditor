@@ -2,38 +2,14 @@ package LineEditor.AWT.UI.uiTools;
 
 import java.awt.Graphics2D;
 
-import shapes.Point;
-import shapes.Shape;
 import AWT.UI.AWTUILayer;
 import LineEditor.data.WorldGeometryData;
-import LineEditor.tools.mouse.WorldEditorMouseTool;
+import LineEditor.tools.mouse.SelectionPointTool;
 
-public class AWTSelectionPointTool extends WorldEditorMouseTool implements AWTUILayer {
-
-	private Point	positionOfLastUse;
+public class AWTSelectionPointTool extends SelectionPointTool implements AWTUILayer {
 	
 	public AWTSelectionPointTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
-		positionOfLastUse = new Point(0,0);
-	}
-
-	private boolean hasBeenMovedSinceLastUse() { return ! positionOfLastUse.equals(position); }
-	
-	private void selectWorldShapes(Point selectionPoint){
-		for(Shape s : collisionBounds())
-			if(s.contains(selectionPoint))
-				toggleSelected(s);
-	}
-
-	@Override
-	protected boolean shouldAcceptRequest() {
-		return hasBeenMovedSinceLastUse();
-	}
-
-	@Override
-	protected void performAction() {
-		positionOfLastUse.setPosition(position);
-		selectWorldShapes(position);
 	}
 
 	@Override
