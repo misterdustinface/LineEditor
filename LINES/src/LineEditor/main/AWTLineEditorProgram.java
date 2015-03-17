@@ -1,6 +1,6 @@
 package LineEditor.main;
 
-import generic.EditorProgram;
+import generic.Application;
 import AWT.UI.AWTDropdownMenuBar;
 import AWT.UI.AWTEditorPanel;
 import AWT.UI.AWTGridLayer;
@@ -62,7 +62,7 @@ public class AWTLineEditorProgram {
 		
 		window.revalidate();
 		
-		EditorProgram editorProgram = new EditorProgram();
+		Application editorProgram = new Application();
 		editorProgram.setMain(AWTProgramMain.create(layerManager, lineEditorUserDevice));
 		editorProgram.start();
 	}

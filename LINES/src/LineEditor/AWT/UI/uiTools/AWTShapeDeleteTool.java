@@ -1,6 +1,6 @@
 package LineEditor.AWT.UI.uiTools;
 
-import generic.DebounceTimer;
+import generic.timers.DebounceTimer;
 
 import java.awt.Graphics2D;
 

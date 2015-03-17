@@ -1,5 +1,7 @@
 package LineEditor.data;
 
+import generic.ListenerPattern.Descriptive.DataModificationNotifier;
+
 import java.util.ArrayList;
 
 import shapes.Circle;
@@ -10,8 +12,8 @@ import shapes.Shape;
 import shapes.ShapeSelectorMap;
 import LineEditor.AWT.graphicdata.LineEditorAWTGraphicData;
 
-public class WorldGeometryData{
-
+public class WorldGeometryData extends DataModificationNotifier {
+	
 	private ArrayList<Shape> 	worldCollisionBounds;
 	private ArrayList<Circle> 	worldPointCollisionCircles;
 	private ArrayList<Pipe> 	worldLineCollisionBoxes;
@@ -33,6 +35,7 @@ public class WorldGeometryData{
 		this.worldLineCollisionBoxes 	= other.worldLineCollisionBoxes;
 		this.worldCollisionBounds		= other.worldCollisionBounds;
 		this.selectionMap 				= other.selectionMap;
+		notifyDataModified();
 	}
 	
 	public void append(WorldGeometryData other) {
@@ -40,24 +43,32 @@ public class WorldGeometryData{
 			add(s);
 			if (other.isSelected(s))
 				select(s); 
-		}		
+		}
+		notifyDataModified();
 	}
 	
 	public boolean isSelected(Shape s) { 
 		return selectionMap.isSelected(s); 
 	}
+	
 	public void toggleSelected(Shape s) { 
-		selectionMap.toggleSelected(s); 
+		selectionMap.toggleSelected(s);
+		notifyDataModified();
 	}
+	
 	public void select(Shape s) { 
-		selectionMap.select(s); 
+		selectionMap.select(s);
+		notifyDataModified();
 	}
+	
 	public int totalNumberOfShapes() { 
 		return totalNumberOfPoints() + totalNumberOfLines(); 
 	}
+	
 	public int totalNumberOfPoints() { 
 		return worldPointCollisionCircles.size(); 
 	}
+	
 	public int totalNumberOfLines() { 
 		return worldLineCollisionBoxes.size(); 
 	}
@@ -80,6 +91,7 @@ public class WorldGeometryData{
 		lineEditorGraphicData.scaleHighlightedWorldGeometry(percent);
 		for (Shape s : worldCollisionBounds)
 			s.scale(percent);
+		notifyDataModified();
 	}
 	
 	private boolean pointHasDuplicate(Point p) {
@@ -90,12 +102,15 @@ public class WorldGeometryData{
 		Circle temp = new Circle(x, y, lineEditorGraphicData.pointHighlightCircleThickness);
 		if (!pointHasDuplicate(temp.center()))
 			add(temp);
+		notifyDataModified();
 	}
+	
 	public void createLine(Point A, Point B){
 		A = getPointDirectlyToCenterOfEquivalentCollisionCircle(A);
 		B = getPointDirectlyToCenterOfEquivalentCollisionCircle(B);
 		Pipe temp = new Pipe(new LineSegment(A,B), lineEditorGraphicData.lineHighlightBoxThickness);
 		add(temp);
+		notifyDataModified();
 	}
 	
 	private Point getPointDirectlyToCenterOfEquivalentCollisionCircle(Point point){
@@ -113,12 +128,15 @@ public class WorldGeometryData{
 	private Shape[] shapeArray = new Shape[] {};
 	private Circle[] circleArray = new Circle[] {};
 	private Pipe[] pipeArray = new Pipe[] {};
+	
 	public Shape[] getAllCollisionBounds() { 
 		return worldCollisionBounds.toArray(shapeArray); 
 	}
+	
 	public Circle[] getWorldPointCollisionCircles() { 
 		return worldPointCollisionCircles.toArray(circleArray); 
 	}
+	
 	public Pipe[] getWorldLineCollisionBoxes() { 
 		return worldLineCollisionBoxes.toArray(pipeArray); 
 	}
@@ -126,27 +144,29 @@ public class WorldGeometryData{
 	public void add(Shape s) {
 		selectionMap.put(s);
 		worldCollisionBounds.add(s);
-		if (s instanceof Pipe)
-			worldLineCollisionBoxes.add((Pipe)s);
-		if (s instanceof Circle)
-	    	worldPointCollisionCircles.add((Circle)s);
+		if (s instanceof Pipe)   worldLineCollisionBoxes.add((Pipe)s);
+		if (s instanceof Circle) worldPointCollisionCircles.add((Circle)s);
+		notifyDataModified();
 	}
 	
 	public void remove(Shape s) {
 		selectionMap.remove(s);
 		worldCollisionBounds.remove(s);
-		if (s instanceof Pipe)
+		if (s instanceof Pipe) {
 			worldLineCollisionBoxes.remove(s);
+		}
 		if (s instanceof Circle){
 	    	worldPointCollisionCircles.remove(s);
 	    	removeAssociatedLines(((Circle)s).center());
 		}
+		notifyDataModified();
 	}
 
 	private void removeAssociatedLines(Point point) {
 		for (Pipe collisionBox : getWorldLineCollisionBoxes())
 			if (collisionBox.centerLine.isEdge(point))
 				remove(collisionBox);
+		notifyDataModified();
 	}
 
 	public void splitCollisionBox(Pipe collisionBox, int percent) {
@@ -160,6 +180,7 @@ public class WorldGeometryData{
 		add(newRect);
 		select(newCircle);
 		//select(newRect);
+		notifyDataModified();
 	}
 	
 //	/**
