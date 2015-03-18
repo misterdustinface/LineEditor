@@ -81,7 +81,7 @@ public class AWTLineEditorProgramV2 {
 		
 		Application editorProgram = new Application();
 		editorProgram.setMain(AWTProgramMain.create(menuLayerManager, lineEditorUserDevice));
-		editorProgram.setAudioSystem(AWTProgramMain.create(worldLayerManager, lineEditorUserDevice));
+		editorProgram.setAudioSystem(AWTProgramMain.create(worldLayerManager, lineEditorUserDevice)); // Because I had to use a thread...
 		
 		FixedDrawer fixedDrawer = new FixedDrawer(worldDrawer);
 		fixedDrawer.setDrawsPerSecond(20);

@@ -19,6 +19,7 @@ public abstract class WorldEditorMouseTool extends WorldEditorTool implements UI
 	public void setInitialPosition(int x, int y) { 
 		position.set(x, y); 
 	}
+	
 	public void setCurrentPosition(int x, int y) { 
 		position.set(x, y); 
 	}
@@ -26,9 +27,11 @@ public abstract class WorldEditorMouseTool extends WorldEditorTool implements UI
 	final protected boolean pointShouldSnapToCenterOfWorldCircle(Point point, Circle worldCircle) {
 		return worldCircle.contains(point);
 	}
+	
 	final protected void createWorldLine(Point A, Point B) {
 		worldData.createLine(A, B);
 	}
+	
 	final protected void snapPointToCircleCenter(Point point, Circle circle){
 		point.set(circle.x(), circle.y());
 	}
