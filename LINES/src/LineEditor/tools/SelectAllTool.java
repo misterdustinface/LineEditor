@@ -1,4 +1,4 @@
-package LineEditor.UI.uiTools;
+package LineEditor.tools;
 
 import shapes.Shape;
 import LineEditor.data.WorldGeometryData;
@@ -9,19 +9,19 @@ public class SelectAllTool extends WorldEditorTool {
 		super(WORLD_DATA);
 	}
 	
-	private void selectAllWorldShapes(){
-		for(Shape s : collisionBounds()) 
+	private void selectAllWorldShapes() {
+		for (Shape s : collisionBounds()) 
 			select(s);
 	}
 	
-	private void toggleAllWorldShapes(){
-		for(Shape s : collisionBounds()) 
+	private void toggleAllWorldShapes() {
+		for (Shape s : collisionBounds()) 
 			toggleSelected(s);
 	}
 	
-	private boolean allWorldShapesAreAlreadySelected(){
-		for(Shape s : collisionBounds()) 
-			if(! isSelected(s))
+	private boolean allWorldShapesAreAlreadySelected() {
+		for (Shape s : collisionBounds()) 
+			if (!isSelected(s))
 				return false;
 		return true;
 	}
@@ -33,9 +33,9 @@ public class SelectAllTool extends WorldEditorTool {
 	
 	@Override
 	protected void performAction() {
-		if(allWorldShapesAreAlreadySelected()){
+		if (allWorldShapesAreAlreadySelected()) {
 			toggleAllWorldShapes();
-		}else{
+		} else {
 			selectAllWorldShapes();
 		}
 	}

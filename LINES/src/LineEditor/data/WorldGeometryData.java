@@ -1,5 +1,7 @@
 package LineEditor.data;
 
+import generic.ListenerPattern.Descriptive.DataModificationNotifier;
+
 import java.util.ArrayList;
 
 import shapes.Circle;
@@ -10,8 +12,8 @@ import shapes.Shape;
 import shapes.ShapeSelectorMap;
 import LineEditor.AWT.graphicdata.LineEditorAWTGraphicData;
 
-public class WorldGeometryData{
-
+public class WorldGeometryData extends DataModificationNotifier {
+	
 	private ArrayList<Shape> 	worldCollisionBounds;
 	private ArrayList<Circle> 	worldPointCollisionCircles;
 	private ArrayList<Pipe> 	worldLineCollisionBoxes;
@@ -33,40 +35,63 @@ public class WorldGeometryData{
 		this.worldLineCollisionBoxes 	= other.worldLineCollisionBoxes;
 		this.worldCollisionBounds		= other.worldCollisionBounds;
 		this.selectionMap 				= other.selectionMap;
+		notifyDataModified();
 	}
 	
 	public void append(WorldGeometryData other) {
-		for(Shape s : other.worldCollisionBounds ) {
+		for (Shape s : other.worldCollisionBounds ) {
 			add(s);
-			if(other.isSelected(s)) { select(s); }
-		}		
+			if (other.isSelected(s))
+				select(s); 
+		}
+		notifyDataModified();
 	}
 	
-	public boolean 	isSelected(Shape s) 	{ return selectionMap.isSelected(s); }
-	public void 	toggleSelected(Shape s) { selectionMap.toggleSelected(s); }
-	public void 	select(Shape s) 		{ selectionMap.select(s); }
-	public int 		totalNumberOfShapes() 	{ return totalNumberOfPoints() + totalNumberOfLines(); }
-	public int 		totalNumberOfPoints() 	{ return worldPointCollisionCircles.size(); }
-	public int 		totalNumberOfLines() 	{ return worldLineCollisionBoxes.size(); }
+	public boolean isSelected(Shape s) { 
+		return selectionMap.isSelected(s); 
+	}
 	
-	public boolean isShapeAtPositionSelected(float X, float Y){
-		for(Shape s : worldCollisionBounds)
-			if(s.contains(X, Y))
+	public void toggleSelected(Shape s) { 
+		selectionMap.toggleSelected(s);
+		notifyDataModified();
+	}
+	
+	public void select(Shape s) { 
+		selectionMap.select(s);
+		notifyDataModified();
+	}
+	
+	public int totalNumberOfShapes() { 
+		return totalNumberOfPoints() + totalNumberOfLines(); 
+	}
+	
+	public int totalNumberOfPoints() { 
+		return worldPointCollisionCircles.size(); 
+	}
+	
+	public int totalNumberOfLines() { 
+		return worldLineCollisionBoxes.size(); 
+	}
+	
+	public boolean isShapeAtPositionSelected(float X, float Y) {
+		for (Shape s : worldCollisionBounds)
+			if (s.contains(X, Y))
 				return isSelected(s);
 		return false;
 	}
 	
-	public boolean isCircleAtPositionSelected(float X, float Y){
-		for(Circle circle : worldPointCollisionCircles)
-			if(circle.contains(X, Y))
+	public boolean isCircleAtPositionSelected(float X, float Y) {
+		for (Circle circle : worldPointCollisionCircles)
+			if (circle.contains(X, Y))
 				return isSelected(circle);
 		return false;
 	}
 	
-	public void scaleSelectionAreaSizeForWorldGeometry(float percent){
+	public void scaleSelectionAreaSizeForWorldGeometry(float percent) {
 		lineEditorGraphicData.scaleHighlightedWorldGeometry(percent);
-		for(Shape s : worldCollisionBounds)
+		for (Shape s : worldCollisionBounds)
 			s.scale(percent);
+		notifyDataModified();
 	}
 	
 	private boolean pointHasDuplicate(Point p) {
@@ -74,15 +99,18 @@ public class WorldGeometryData{
 	}
 	
 	public void createPoint(float x, float y){
-		Circle temp = new Circle(x, y, lineEditorGraphicData.pointHighlightCircleThickness);
-		if(! pointHasDuplicate(temp.center()))
+		Circle temp = new Circle(x, y, lineEditorGraphicData.getThicknessOf("pointHighlightCircle"));
+		if (!pointHasDuplicate(temp.center()))
 			add(temp);
+		notifyDataModified();
 	}
+	
 	public void createLine(Point A, Point B){
 		A = getPointDirectlyToCenterOfEquivalentCollisionCircle(A);
 		B = getPointDirectlyToCenterOfEquivalentCollisionCircle(B);
-		Pipe temp = new Pipe(new LineSegment(A,B), lineEditorGraphicData.lineHighlightBoxThickness);
+		Pipe temp = new Pipe(new LineSegment(A,B), lineEditorGraphicData.getThicknessOf("lineHighlightBox"));
 		add(temp);
+		notifyDataModified();
 	}
 	
 	private Point getPointDirectlyToCenterOfEquivalentCollisionCircle(Point point){
@@ -91,56 +119,68 @@ public class WorldGeometryData{
 	}
 	
 	private Circle getCollisionCircleWithGivenCenter(Point centerOfCircle){
-		for(Circle collisionCircle : worldPointCollisionCircles)
-			if((collisionCircle.center().equals(centerOfCircle)))
+		for (Circle collisionCircle : worldPointCollisionCircles)
+			if ((collisionCircle.center().equals(centerOfCircle)))
 				return collisionCircle;
 		return null;
 	}
 	
-	private Shape[] 	shapeArray 	= new Shape[] {};
-	private Circle[] 	circleArray = new Circle[] {};
-	private Pipe[] 		pipeArray 	= new Pipe[] {};
-	public Shape[] 	getAllCollisionBounds() 		{ return worldCollisionBounds.toArray(shapeArray); }
-	public Circle[] getWorldPointCollisionCircles() { return worldPointCollisionCircles.toArray(circleArray); }
-	public Pipe[] 	getWorldLineCollisionBoxes() 	{ return worldLineCollisionBoxes.toArray(pipeArray); }
+	private Shape[] shapeArray = new Shape[] {};
+	private Circle[] circleArray = new Circle[] {};
+	private Pipe[] pipeArray = new Pipe[] {};
 	
-	public void add(Shape s){
-		selectionMap.put(s);
-		worldCollisionBounds.add(s);
-		if(s instanceof Pipe)
-			worldLineCollisionBoxes.add((Pipe)s);
-		if(s instanceof Circle)
-	    	worldPointCollisionCircles.add((Circle)s);
+	public Shape[] getAllCollisionBounds() { 
+		return worldCollisionBounds.toArray(shapeArray); 
 	}
 	
-	public void remove(Shape s){
+	public Circle[] getWorldPointCollisionCircles() { 
+		return worldPointCollisionCircles.toArray(circleArray); 
+	}
+	
+	public Pipe[] getWorldLineCollisionBoxes() { 
+		return worldLineCollisionBoxes.toArray(pipeArray); 
+	}
+	
+	public void add(Shape s) {
+		selectionMap.put(s);
+		worldCollisionBounds.add(s);
+		if (s instanceof Pipe)   worldLineCollisionBoxes.add((Pipe)s);
+		if (s instanceof Circle) worldPointCollisionCircles.add((Circle)s);
+		notifyDataModified();
+	}
+	
+	public void remove(Shape s) {
 		selectionMap.remove(s);
 		worldCollisionBounds.remove(s);
-		if(s instanceof Pipe)
+		if (s instanceof Pipe) {
 			worldLineCollisionBoxes.remove(s);
-		if(s instanceof Circle){
+		}
+		if (s instanceof Circle){
 	    	worldPointCollisionCircles.remove(s);
 	    	removeAssociatedLines(((Circle)s).center());
 		}
+		notifyDataModified();
 	}
 
-	private void removeAssociatedLines(Point point){
-		for(Pipe collisionBox : getWorldLineCollisionBoxes())
-			if(collisionBox.centerLine.isEdge(point))
+	private void removeAssociatedLines(Point point) {
+		for (Pipe collisionBox : getWorldLineCollisionBoxes())
+			if (collisionBox.centerLine.isEdge(point))
 				remove(collisionBox);
+		notifyDataModified();
 	}
 
-	public void splitCollisionBox(Pipe collisionBox, int percent){
+	public void splitCollisionBox(Pipe collisionBox, int percent) {
 
 		LineSegment newLine 	= collisionBox.centerLine.split(percent / 100f);
-		Circle 		newCircle 	= new Circle(newLine.a, lineEditorGraphicData.pointHighlightCircleThickness);
+		Circle 		newCircle 	= new Circle(newLine.a, lineEditorGraphicData.getThicknessOf("pointHighlightCircle"));
 		newLine.a = collisionBox.centerLine.b  = newCircle.center(); // Circle makes copy of point. Get the new point and set the ends of the line to the point.
 		Pipe newRect = new Pipe(newLine, collisionBox.thickness());
 		
 		add(newCircle);
 		add(newRect);
 		select(newCircle);
-		select(newRect);
+		//select(newRect);
+		notifyDataModified();
 	}
 	
 //	/**

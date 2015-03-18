@@ -1,8 +1,9 @@
-package LineEditor.UI.uiTools;
+package LineEditor.tools.mouse;
 
 import shapes.Circle;
 import shapes.Point;
 import LineEditor.data.WorldGeometryData;
+import LineEditor.tools.WorldEditorTool;
 import UI.MouseUserDevice;
 import UI.UILayer;
 
@@ -15,8 +16,12 @@ public abstract class WorldEditorMouseTool extends WorldEditorTool implements UI
 		position = new Point(0,0);
 	}
 	
-	public void setInitialPosition(int x, int y) { position.set(x, y); }
-	public void setCurrentPosition(int x, int y) { position.set(x, y); }
+	public void setInitialPosition(int x, int y) { 
+		position.set(x, y); 
+	}
+	public void setCurrentPosition(int x, int y) { 
+		position.set(x, y); 
+	}
 
 	final protected boolean pointShouldSnapToCenterOfWorldCircle(Point point, Circle worldCircle) {
 		return worldCircle.contains(point);
@@ -30,12 +35,12 @@ public abstract class WorldEditorMouseTool extends WorldEditorTool implements UI
 	
 	@Override
 	public void update(MouseUserDevice mouse) {
-		if(mouse.isClicked() || mouse.isPressed())
+		if (mouse.isClicked() || mouse.isPressed())
 			setInitialPosition((int)mouse.getCursorX(), (int)mouse.getCursorY());
 		
 		setCurrentPosition((int)mouse.getCursorX(), (int)mouse.getCursorY());	
 		
-		if(mouse.isClicked() || mouse.isReleased())
+		if (mouse.isClicked() || mouse.isReleased())
 			request();
 	}
 }

@@ -6,8 +6,8 @@ import java.awt.RenderingHints;
 import shapes.Shape;
 import AWT.UI.AWTUILayer;
 import AWT.UI.Mouse.AWTDefaultMouseUserDevice;
-import LineEditor.UI.uiTools.WorldEditorMouseTool;
 import LineEditor.data.WorldGeometryData;
+import LineEditor.tools.mouse.WorldEditorMouseTool;
 import UI.MouseUserDevice;
 
 public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implements AWTUILayer {
@@ -26,16 +26,18 @@ public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implement
 		currentTool = defaultTool;
 	}
 	
-	public boolean isSelected(Shape s) { return data.isSelected(s); }
+	public boolean isSelected(Shape s) { 
+		return data.isSelected(s); 
+	}
 
 	@Override
 	public void update(MouseUserDevice mouse) {
-		if(mouse.isClicked() || mouse.isPressed())
+		if (mouse.isClicked() || mouse.isPressed())
 			currentTool = toolSetter.getTool(mouse);
 		
 		currentTool.update(mouse);
 
-		if(mouse.isClicked() || mouse.isReleased())
+		if (mouse.isClicked() || mouse.isReleased())
 			currentTool = defaultTool;
 	}
 
