@@ -1,6 +1,7 @@
 package LineEditor.main;
 
 import generic.Application;
+import generic.EditorProgramMain;
 import AWT.UI.AWTDropdownMenuBar;
 import AWT.UI.AWTEditorPanel;
 import AWT.UI.AWTGridLayer;
@@ -11,7 +12,6 @@ import AWT.UI.CommonMenus.AWTToggleLayersMenu;
 import AWT.UI.CommonMenus.AWTViewOptionsMenu;
 import AWT.UI.Mouse.AWTScreenShifter;
 import AWT.UI.Mouse.AWTZoomWheelListener;
-import AWT.update.AWTProgramMain;
 import LineEditor.AWT.UI.uiTools.AWTLineEditorUserDevice;
 import LineEditor.AWT.rendering.AWTLinesRenderer;
 import LineEditor.data.WorldGeometryData;
@@ -64,7 +64,7 @@ public class AWTLineEditorProgram {
 		window.revalidate();
 		
 		Application editorProgram = new Application();
-		editorProgram.setMain(AWTProgramMain.create(layerManager, lineEditorUserDevice));
+		editorProgram.setMain(EditorProgramMain.create(layerManager, lineEditorUserDevice));
 		editorProgram.start();
 	}
 }

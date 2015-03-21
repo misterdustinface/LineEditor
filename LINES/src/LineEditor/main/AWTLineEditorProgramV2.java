@@ -1,6 +1,7 @@
 package LineEditor.main;
 
 import generic.Application;
+import generic.EditorProgramMain;
 import AWT.UI.AWTDropdownMenuBar;
 import AWT.UI.AWTGridLayer;
 import AWT.UI.AWTMenuBar;
@@ -15,7 +16,6 @@ import AWT.UI2.AWTUIDrawer;
 import AWT.UI2.AWTViewport;
 import AWT.UI2.AWTZoomableViewport;
 import AWT.UI2.FixedDrawer;
-import AWT.update.AWTProgramMain;
 import LineEditor.AWT.UI.uiTools.AWTLineEditorUserDevice;
 import LineEditor.AWT.rendering.AWTLinesRenderer;
 import LineEditor.data.WorldGeometryData;
@@ -80,8 +80,8 @@ public class AWTLineEditorProgramV2 {
 		window.revalidate();
 		
 		Application editorProgram = new Application();
-		editorProgram.setMain(AWTProgramMain.create(menuLayerManager, lineEditorUserDevice));
-		editorProgram.setAudioSystem(AWTProgramMain.create(worldLayerManager, lineEditorUserDevice)); // Because I had to use a thread...
+		editorProgram.setMain(EditorProgramMain.create(menuLayerManager, lineEditorUserDevice));
+		editorProgram.setAudioSystem(EditorProgramMain.create(worldLayerManager, lineEditorUserDevice)); // Because I had to use a thread...
 		
 		FixedDrawer fixedDrawer = new FixedDrawer(worldDrawer);
 		fixedDrawer.setDrawsPerSecond(20);
