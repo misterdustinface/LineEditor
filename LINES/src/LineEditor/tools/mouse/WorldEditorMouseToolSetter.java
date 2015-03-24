@@ -1,8 +1,8 @@
 package LineEditor.tools.mouse;
 
-import generic.Pair;
+import generic.structures.Pair;
 import LineEditor.data.WorldGeometryData;
-import UI.MouseUserDevice;
+import UI.input.MouseUserDevice;
 
 public class WorldEditorMouseToolSetter {
 

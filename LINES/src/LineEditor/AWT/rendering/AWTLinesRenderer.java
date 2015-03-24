@@ -11,7 +11,7 @@ import AWT.rendering.AWTShapeDrawer;
 import LineEditor.AWT.UI.uiTools.AWTLineEditorUserDevice;
 import LineEditor.AWT.graphicdata.LineEditorAWTGraphicData;
 import LineEditor.data.WorldGeometryData;
-import UI.MouseUserDevice;
+import UI.input.MouseUserDevice;
 
 public class AWTLinesRenderer implements AWTUILayer {
 

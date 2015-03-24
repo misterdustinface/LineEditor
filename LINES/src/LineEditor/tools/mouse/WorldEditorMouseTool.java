@@ -4,8 +4,8 @@ import shapes.Circle;
 import shapes.Point;
 import LineEditor.data.WorldGeometryData;
 import LineEditor.tools.WorldEditorTool;
-import UI.MouseUserDevice;
 import UI.UILayer;
+import UI.input.MouseUserDevice;
 
 public abstract class WorldEditorMouseTool extends WorldEditorTool implements UILayer {
 	

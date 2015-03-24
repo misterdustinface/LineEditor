@@ -1,7 +1,7 @@
 package LineEditor.tools.mouse;
 
 import LineEditor.data.WorldGeometryData;
-import UI.MouseUserDevice;
+import UI.input.MouseUserDevice;
 
 public abstract class WorldEditorMouseToolSelectorConditions {
 	

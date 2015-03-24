@@ -8,7 +8,7 @@ import AWT.UI.AWTUILayer;
 import AWT.UI.Mouse.AWTDefaultMouseUserDevice;
 import LineEditor.data.WorldGeometryData;
 import LineEditor.tools.mouse.WorldEditorMouseTool;
-import UI.MouseUserDevice;
+import UI.input.MouseUserDevice;
 
 public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implements AWTUILayer {
 	
