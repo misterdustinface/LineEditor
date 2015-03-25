@@ -121,6 +121,16 @@ public class AWTLineEditorProgram {
 						if (event.contains("keyText=G") && event.contains("KEY_PRESSED")) {
 							layerManager.toggleLayer(gridDrawer);
 						}
+						if (event.contains("keyText=Z") && event.contains("KEY_PRESSED")) {
+							worldEditorPanel.resetToDefaultZoom();
+						}
+						if (event.contains("keyText=O") && event.contains("KEY_PRESSED")) {
+							worldEditorPanel.resetToOrigin();
+						}
+						if (event.contains("keyText=S") && event.contains("KEY_PRESSED")) {
+							lineEditorUserDevice.forceClick();
+							lineEditorUserDevice.forceButton("right");
+						}
 						if (event.contains("keyText=D") && event.contains("KEY_PRESSED")) {
 							lineEditorUserDevice.forceClick();
 							lineEditorUserDevice.forceButton("middle");
