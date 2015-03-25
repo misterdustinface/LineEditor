@@ -6,18 +6,19 @@ import UI.input.MouseUserDevice;
 
 public class WorldEditorMouseToolSetter {
 
+	protected Pair<WorldEditorMouseToolSelectCondition, WorldEditorMouseTool>[] clickTools;
+	protected Pair<WorldEditorMouseToolSelectCondition, WorldEditorMouseTool>[] pressTools;
 	private WorldEditorMouseTool defaultTool;
 	
 	public WorldEditorMouseToolSetter(WorldGeometryData DATA) {
 		WorldEditorMouseToolSelectorConditions.setWorldData(DATA);
+		clickTools = null;
+		pressTools = null;
 	}
 	
 	final public void setDefaultTool(WorldEditorMouseTool DEFAULT_TOOL) {
 		defaultTool = DEFAULT_TOOL;
 	}
-	
-	protected Pair<WorldEditorMouseToolSelectCondition, WorldEditorMouseTool>[] clickTools;
-	protected Pair<WorldEditorMouseToolSelectCondition, WorldEditorMouseTool>[] pressTools;
 	
 	final public WorldEditorMouseTool getTool(MouseUserDevice mouse) {
 		if (mouse.isClicked()) {

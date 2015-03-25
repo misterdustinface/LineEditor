@@ -7,8 +7,6 @@ public abstract class WorldEditorMouseToolSelectorConditions {
 	
 	private static WorldGeometryData WORLD_DATA;
 	
-	
-	
 	public static void setWorldData(WorldGeometryData worldData) {
 		WORLD_DATA = worldData;
 	}
