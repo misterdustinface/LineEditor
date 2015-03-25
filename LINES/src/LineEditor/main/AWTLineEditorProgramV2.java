@@ -27,10 +27,10 @@ public class AWTLineEditorProgramV2 {
 	public static void main(String[] args) {
 		AWTProgramWindow window = new AWTProgramWindow("Lines");
 		
-		WorldGeometryData 			worldData 				= new WorldGeometryData();
-		WorldGeometryFiler 			worldFiler 				= new WorldGeometryFiler();
+		WorldGeometryData worldData = new WorldGeometryData();
+		WorldGeometryFiler worldFiler = new WorldGeometryFiler();
 		worldFiler.setData(worldData);
-		AWTLineEditorUserDevice 	lineEditorUserDevice 	= new AWTLineEditorUserDevice(worldData);
+		AWTLineEditorUserDevice lineEditorUserDevice = new AWTLineEditorUserDevice(worldData);
 		
 		final AWTZoomableViewport worldView = new AWTZoomableViewport();
 		worldView.setSize(800, 600);
@@ -42,16 +42,16 @@ public class AWTLineEditorProgramV2 {
 		display.addView(worldView);
 		display.addView(menuView);
 		
-		AWTLinesRenderer			worldRenderer  			= new AWTLinesRenderer(worldData);
-		AWTGridLayer 				gridDrawer 				= new AWTGridLayer(worldView, worldView);
-		AWTScreenShifter			screenShifter 			= new AWTScreenShifter(worldView);
+		AWTLinesRenderer worldRenderer = new AWTLinesRenderer(worldData);
+		AWTGridLayer gridDrawer = new AWTGridLayer(worldView, worldView);
+		AWTScreenShifter screenShifter = new AWTScreenShifter(worldView);
 		
 		display.addSurfaceMouseListener(screenShifter);
 		display.addSurfaceMotionListener(screenShifter);
 		display.addMouseWheelListener(new AWTZoomWheelListener(worldView));
 		
-		UILayerManager 				menuLayerManager 		= new UILayerManager();
-		UILayerManager				worldLayerManager		= new UILayerManager();
+		UILayerManager menuLayerManager = new UILayerManager();
+		UILayerManager worldLayerManager = new UILayerManager();
 		
 		final AWTUIDrawer menuDrawer = new AWTUIDrawer();
 		menuDrawer.setDrawing(menuView);

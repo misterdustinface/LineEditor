@@ -23,19 +23,19 @@ public class AWTLineEditorProgram {
 	public static void main(String[] args) {
 		AWTProgramWindow window = new AWTProgramWindow("Lines");
 		
-		WorldGeometryData 			worldData 				= new WorldGeometryData();
-		WorldGeometryFiler 			worldFiler 				= new WorldGeometryFiler();
+		WorldGeometryData worldData = new WorldGeometryData();
+		WorldGeometryFiler worldFiler = new WorldGeometryFiler();
 		worldFiler.setData(worldData);
-		AWTLineEditorUserDevice 	lineEditorUserDevice 	= new AWTLineEditorUserDevice(worldData);
+		AWTLineEditorUserDevice lineEditorUserDevice = new AWTLineEditorUserDevice(worldData);
 		
 		AWTEditorPanel worldEditorPanel = new AWTEditorPanel();	
 		worldEditorPanel.addViewportMotionListener(lineEditorUserDevice);
 		worldEditorPanel.addViewportMouseListener(lineEditorUserDevice);
 		
-		AWTLinesRenderer			worldRenderer  			= new AWTLinesRenderer(worldData);
-		AWTGridLayer 				gridDrawer 				= new AWTGridLayer(worldEditorPanel, worldEditorPanel);
-		AWTScreenShifter			screenShifter 			= new AWTScreenShifter(worldEditorPanel);
-		UILayerManager 				layerManager 			= new UILayerManager();
+		AWTLinesRenderer worldRenderer = new AWTLinesRenderer(worldData);
+		AWTGridLayer gridDrawer = new AWTGridLayer(worldEditorPanel, worldEditorPanel);
+		AWTScreenShifter screenShifter = new AWTScreenShifter(worldEditorPanel);
+		UILayerManager layerManager = new UILayerManager();
 		
 		worldEditorPanel.setLayerManager(layerManager);
 		worldEditorPanel.addMouseMotionListener(screenShifter);
