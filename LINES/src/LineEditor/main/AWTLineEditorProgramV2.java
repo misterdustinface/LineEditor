@@ -80,16 +80,16 @@ public class AWTLineEditorProgramV2 {
 		window.revalidate();
 		
 		Application editorProgram = new Application();
-		editorProgram.setMain(EditorProgramMain.create(menuLayerManager, lineEditorUserDevice));
-		editorProgram.setAudioSystem(EditorProgramMain.create(worldLayerManager, lineEditorUserDevice)); // Because I had to use a thread...
+		editorProgram.addComponent("MenuLayer", EditorProgramMain.create(menuLayerManager, lineEditorUserDevice));
+		editorProgram.addComponent("WorldLayer", EditorProgramMain.create(worldLayerManager, lineEditorUserDevice));
 		
 		FixedDrawer fixedDrawer = new FixedDrawer(worldDrawer);
 		fixedDrawer.setDrawsPerSecond(20);
-		editorProgram.setDrawer(fixedDrawer);
+		editorProgram.addComponent("WorldDrawer", fixedDrawer);
 		
 		FixedDrawer fixedDrawer2 = new FixedDrawer(menuDrawer);
 		fixedDrawer2.setDrawsPerSecond(20);
-		editorProgram.setRenderer(fixedDrawer2);
+		editorProgram.addComponent("MenuDrawer", fixedDrawer2);
 		
 		editorProgram.start();
 	}
