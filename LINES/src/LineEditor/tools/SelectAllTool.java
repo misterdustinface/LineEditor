@@ -26,12 +26,10 @@ public class SelectAllTool extends WorldEditorTool {
 		return true;
 	}
 	
-	@Override
 	protected boolean shouldAcceptRequest() {
 		return true;
 	}
 	
-	@Override
 	protected void performAction() {
 		if (allWorldShapesAreAlreadySelected()) {
 			toggleAllWorldShapes();
@@ -39,4 +37,5 @@ public class SelectAllTool extends WorldEditorTool {
 			selectAllWorldShapes();
 		}
 	}
+	
 }

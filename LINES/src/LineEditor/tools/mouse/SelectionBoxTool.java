@@ -18,7 +18,6 @@ public class SelectionBoxTool extends WorldEditorMouseTool {
 		selectionBox = new Pipe(spanLine, 1);
 	}
 	
-	@Override
 	public void setInitialPosition(int x, int y) {
 		super.setInitialPosition(x, y);
 		startPoint.set(x, y);
@@ -46,17 +45,17 @@ public class SelectionBoxTool extends WorldEditorMouseTool {
 	protected boolean selectionRectangleContainsCircleCenter(Pipe selectionRectangle, Circle circle){
 		return selectionRectangle.getBoundingRectangle().contains(circle.center());
 	}
+	
 	protected boolean selectionRectangleContainsRectangle(Pipe selectionRectangle, Pipe rectangularPipe){
 		return selectionRectangle.intersects(rectangularPipe.getBoundingRectangle());
 	}
 
-	@Override
 	protected boolean shouldAcceptRequest() {
 		return true;
 	}
 
-	@Override
 	protected void performAction() {
 		selectWorldShapes();
 	}
+	
 }

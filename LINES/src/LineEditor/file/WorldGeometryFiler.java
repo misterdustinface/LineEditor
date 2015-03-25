@@ -25,12 +25,10 @@ public class WorldGeometryFiler extends LuaScriptFiler {
 		return scriptHeading("Lines Data") + script + scriptCloser("End of Data");
 	}
 
-	@Override
 	protected void preparseOperation() {
 		loadedData = new WorldGeometryData();
 	}
 	
-	@Override
 	protected void parseLine(String line) {
 		Point[] points = parsePointDataFromLine(line);
 		addPointDataToWorldGeometryData(points[0], points[1]);
@@ -48,7 +46,6 @@ public class WorldGeometryFiler extends LuaScriptFiler {
 		loadedData.createLine(A, B);
 	}
 
-	@Override
 	protected void postparseOperation() {
 		programData.load(loadedData);
 	}

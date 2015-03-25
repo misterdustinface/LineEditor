@@ -16,14 +16,12 @@ public class TracerLineTool extends WorldEditorMouseTool {
 		tracerLine 	= new LineSegment(start,position);
 	}
 
-	@Override
 	public void setInitialPosition(int x, int y) {
 		super.setInitialPosition(x, y);
 		start.set(x, y);
 		snapTracerLinePointToSomeWorldCircleIfWithinCircleBounds(start);
 	}
 
-	@Override
 	public void setCurrentPosition(int x, int y) {
 		super.setCurrentPosition(x, y);
 		snapTracerLinePointToSomeWorldCircleIfWithinCircleBounds(position);
@@ -32,6 +30,7 @@ public class TracerLineTool extends WorldEditorMouseTool {
 	private boolean pointsNotEquivalent(Point A, Point B){
 		return !A.equals(B);
 	}
+	
 	private void snapTracerLinePointToSomeWorldCircleIfWithinCircleBounds(Point point){
 		for(Circle worldCircle : worldCircles()){
 			if(pointShouldSnapToCenterOfWorldCircle(point, worldCircle)){
@@ -50,12 +49,10 @@ public class TracerLineTool extends WorldEditorMouseTool {
 		return false;
 	}
 	
-	@Override
 	protected boolean shouldAcceptRequest() { 
 		return pointIntersectsSomeWorldCircle(start.x, start.y); 
 	}
 
-	@Override
 	protected void performAction() {
 		if(pointsNotEquivalent(start, position)){
 			for(Circle worldCircle : worldCircles()){

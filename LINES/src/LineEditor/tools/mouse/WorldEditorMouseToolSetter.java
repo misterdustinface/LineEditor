@@ -38,4 +38,5 @@ public class WorldEditorMouseToolSetter {
 		}
 		return defaultTool;
 	}
+	
 }

@@ -12,12 +12,10 @@ public class ScaleWorldGeometrySelectionShapesTool extends WorldEditorTool{
 		scaleController = CONTROLLER;
 	}
 
-	@Override
 	protected boolean shouldAcceptRequest() {
 		return scaleController.getScale() != 1.0f;
 	}
 
-	@Override
 	protected void performAction() {
 		worldData.scaleSelectionAreaSizeForWorldGeometry(scaleController.getScale());
 	}

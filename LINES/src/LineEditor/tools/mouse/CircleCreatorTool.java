@@ -43,12 +43,10 @@ public class CircleCreatorTool extends WorldEditorMouseTool {
 		return null; // TODO throw exception
 	}
 
-	@Override
 	protected boolean shouldAcceptRequest() {
 		return hasBeenMovedSinceLastUse();
 	}
 
-	@Override
 	protected void performAction() {
 		positionOfLastUse.set(position.x, position.y);
 		if (pointIntersectsSomeWorldRectangle(position.x, position.y)) {
@@ -57,4 +55,5 @@ public class CircleCreatorTool extends WorldEditorMouseTool {
 			createWorldCircleAtPoint((int)position.x, (int)position.y);
 		}
 	}
+
 }

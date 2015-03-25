@@ -30,7 +30,6 @@ public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implement
 		return data.isSelected(s); 
 	}
 
-	@Override
 	public void update(MouseUserDevice mouse) {
 		if (mouse.isClicked() || mouse.isPressed())
 			currentTool = toolSetter.getTool(mouse);
@@ -41,7 +40,6 @@ public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implement
 			currentTool = defaultTool;
 	}
 
-	@Override
 	public void render(Graphics2D g) {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);	
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, 	RenderingHints.VALUE_RENDER_SPEED);
@@ -52,4 +50,5 @@ public class AWTLineEditorUserDevice extends AWTDefaultMouseUserDevice implement
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_DEFAULT);
 		g.setRenderingHint(RenderingHints.KEY_RENDERING, 	RenderingHints.VALUE_RENDER_DEFAULT);
 	}
+
 }

@@ -7,7 +7,7 @@ import LineEditor.data.WorldGeometryData;
 
 public class ShapeDeleteTool extends WorldEditorMouseTool {
 	
-	private DebounceTimer 	debounceTimer;
+	private DebounceTimer debounceTimer;
 	
 	public ShapeDeleteTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
@@ -24,12 +24,10 @@ public class ShapeDeleteTool extends WorldEditorMouseTool {
 		}
 	}
 
-	@Override
 	protected boolean shouldAcceptRequest() {
 		return debounceTimer.isDebounceComplete();
 	}
 
-	@Override
 	protected void performAction() {
 		debounceTimer.reset();
 		findAndRemoveFirstFoundWorldShapeAtPoint(position);

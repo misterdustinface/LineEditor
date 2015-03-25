@@ -38,7 +38,6 @@ public abstract class WorldEditorTool implements Requestible {
 		return worldData.getAllCollisionBounds(); 
 	}
 	
-	@Override
 	final public void request() {
 		if (shouldAcceptRequest())
 			performAction();

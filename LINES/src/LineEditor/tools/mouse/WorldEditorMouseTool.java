@@ -36,7 +36,6 @@ public abstract class WorldEditorMouseTool extends WorldEditorTool implements UI
 		point.set(circle.x(), circle.y());
 	}
 	
-	@Override
 	public void update(MouseUserDevice mouse) {
 		if (mouse.isClicked() || mouse.isPressed())
 			setInitialPosition((int)mouse.getCursorX(), (int)mouse.getCursorY());
@@ -46,4 +45,5 @@ public abstract class WorldEditorMouseTool extends WorldEditorTool implements UI
 		if (mouse.isClicked() || mouse.isReleased())
 			request();
 	}
+	
 }

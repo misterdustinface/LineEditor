@@ -6,7 +6,7 @@ import LineEditor.data.WorldGeometryData;
 
 public class SelectionPointTool extends WorldEditorMouseTool {
 	
-	private Point	positionOfLastUse;
+	private Point positionOfLastUse;
 	
 	public SelectionPointTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
@@ -23,12 +23,10 @@ public class SelectionPointTool extends WorldEditorMouseTool {
 				toggleSelected(s);
 	}
 
-	@Override
 	protected boolean shouldAcceptRequest() {
 		return hasBeenMovedSinceLastUse();
 	}
 
-	@Override
 	protected void performAction() {
 		positionOfLastUse.setPosition(position);
 		selectWorldShapes(position);

@@ -23,7 +23,6 @@ public class AWTTracerLineTool extends TracerLineTool implements AWTUILayer {
 		graphicData = LineEditorAWTGraphicData.getGraphicData();
 	}
 
-	@Override
 	public void render(Graphics2D g) {
 		if (shouldAcceptRequest()) {
 			shapeDrawer.setGraphics(g);

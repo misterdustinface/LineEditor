@@ -29,19 +29,19 @@ public class AWTLinesRenderer implements AWTUILayer {
 	private Circle[] getWorldCircles() { 
 		return worldGeometry.getWorldPointCollisionCircles(); 
 	}
+	
 	private Pipe[] getWorldRectangles() { 
 		return worldGeometry.getWorldLineCollisionBoxes(); 
 	}
+	
 	private boolean isEditorCursorHoveredOver(Shape s) { 
 		return s.contains(device.getCursorPosition()); 
 	}
 	
-	@Override
 	public void update(MouseUserDevice mouse) {
 		device = (AWTLineEditorUserDevice)mouse;
 	}
 
-	@Override
 	public void render(Graphics2D g) {
 		g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		//g.setRenderingHint(RenderingHints.KEY_RENDERING, 	RenderingHints.VALUE_RENDER_DEFAULT);

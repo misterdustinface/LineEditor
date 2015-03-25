@@ -12,7 +12,6 @@ public class AWTCircleCreatorTool extends CircleCreatorTool implements AWTUILaye
 		super(WORLD_DATA);
 	}
 
-	@Override
 	public void render(Graphics2D g) {
 //		cursorDrawer.setGraphics(g);
 //		cursorDrawer.setColor(AWTGraphicData.cursorColor);

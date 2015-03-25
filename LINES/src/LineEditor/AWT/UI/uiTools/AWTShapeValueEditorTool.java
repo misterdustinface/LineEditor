@@ -12,10 +12,10 @@ public class AWTShapeValueEditorTool extends ShapeValueEditorTool implements AWT
 		super(WORLD_DATA);
 	}
 
-	@Override
 	public void render(Graphics2D g) {
 //		cursorDrawer.setGraphics(g);
 //		cursorDrawer.setColor(AWTGraphicData.cursorColor);
 //		cursorDrawer.drawTriangularCrosshairCursor((int)position.x, (int)position.y);
 	}
+	
 }

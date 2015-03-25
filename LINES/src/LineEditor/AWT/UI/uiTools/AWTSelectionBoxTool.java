@@ -22,7 +22,6 @@ public class AWTSelectionBoxTool extends SelectionBoxTool implements AWTUILayer 
 		graphicData = LineEditorAWTGraphicData.getGraphicData();
 	}
 	
-	@Override
 	public void render(Graphics2D g) {
 		shapeDrawer.setGraphics(g);
 		shapeDrawer.setColor(graphicData.getColorOf("dragSelectionBoxTransparentArea"));

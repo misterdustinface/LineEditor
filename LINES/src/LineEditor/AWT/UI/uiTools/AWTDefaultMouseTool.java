@@ -19,7 +19,6 @@ public class AWTDefaultMouseTool extends DefaultMouseTool implements AWTUILayer 
 		graphicData = LineEditorAWTGraphicData.getGraphicData();
 	}
 
-	@Override
 	public void render(Graphics2D g) {
 		cursorDrawer.setGraphics(g);
 		cursorDrawer.setColor(graphicData.getColorOf("cursor"));

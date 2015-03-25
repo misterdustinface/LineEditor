@@ -8,12 +8,10 @@ public class DefaultMouseTool extends WorldEditorMouseTool {
 		super(WORLD_DATA);
 	}
 
-	@Override
 	protected boolean shouldAcceptRequest() {
 		return false;
 	}
 
-	@Override
 	protected void performAction() {
 
 	}

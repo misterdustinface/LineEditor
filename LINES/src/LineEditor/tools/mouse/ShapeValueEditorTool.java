@@ -27,13 +27,12 @@ public class ShapeValueEditorTool extends WorldEditorMouseTool {
 		System.out.println("NO EDITOR WINDOWS EXIST");
 	}
 
-	@Override
 	protected boolean shouldAcceptRequest() {
 		return true;
 	}
 
-	@Override
 	protected void performAction() {
 		selectAndOpenValueEditorWindowForFirstMatchingIntersection(position);
 	}
+
 }
