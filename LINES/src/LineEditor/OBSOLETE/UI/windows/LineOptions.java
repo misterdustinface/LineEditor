@@ -342,7 +342,7 @@ public class LineOptions extends javax.swing.JInternalFrame {
 	private void shiftButtonActionPerformed(ActionEvent evt) {
 		// TODO Auto-generated method stub
     	try{
-    		rect.setPosition(Float.parseFloat(xShiftTextField.getText().trim()), Float.parseFloat(yShiftTextField.getText().trim()));
+    		rect.setCenterPosition(Float.parseFloat(xShiftTextField.getText().trim()), Float.parseFloat(yShiftTextField.getText().trim()));
     	}catch(Exception e){}
     	xShiftTextField.setText("0");
     	yShiftTextField.setText("0");

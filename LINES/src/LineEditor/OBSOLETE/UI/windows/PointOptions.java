@@ -151,9 +151,9 @@ public class PointOptions extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     	float previous = circle.x();
     	try{
-    		circle.setPosition(Float.valueOf(xTextField.getText().trim()), circle.y());
+    		circle.setCenterPosition(Float.valueOf(xTextField.getText().trim()), circle.y());
     	}catch(Exception e){
-    		circle.setPosition(previous, circle.y());
+    		circle.setCenterPosition(previous, circle.y());
     	}
     }//GEN-LAST:event_xVariableActionPerformed
 
@@ -161,9 +161,9 @@ public class PointOptions extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     	float previous = circle.y();
     	try{
-    		circle.setPosition(circle.x(), Float.valueOf(yTextField.getText().trim()));
+    		circle.setCenterPosition(circle.x(), Float.valueOf(yTextField.getText().trim()));
     	}catch(Exception e){
-    		circle.setPosition(circle.x(), previous);
+    		circle.setCenterPosition(circle.x(), previous);
     	}
     }//GEN-LAST:event_yVariableActionPerformed
     
@@ -178,9 +178,9 @@ public class PointOptions extends javax.swing.JInternalFrame {
     	float previousX = circle.x();
     	float previousY = circle.y();
     	try{
-    		circle.setPosition(Float.valueOf(xTextField.getText().trim()), Float.valueOf(yTextField.getText().trim()));
+    		circle.setCenterPosition(Float.valueOf(xTextField.getText().trim()), Float.valueOf(yTextField.getText().trim()));
     	}catch(Exception e){
-    		circle.setPosition(previousX, previousY);
+    		circle.setCenterPosition(previousX, previousY);
     	}
 	}//GEN-LAST:event_deleteActionPerformed
 

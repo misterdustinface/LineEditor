@@ -38,7 +38,7 @@ public class CircleMoverTool extends WorldEditorMouseTool {
 	}
 
 	protected void performAction() {
-		circleToMove.setPosition(position.x, position.y);
+		circleToMove.setCenterPosition(position.x, position.y);
 	}
 
 }
