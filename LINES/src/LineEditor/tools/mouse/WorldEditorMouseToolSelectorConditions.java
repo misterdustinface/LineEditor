@@ -13,7 +13,7 @@ public abstract class WorldEditorMouseToolSelectorConditions {
 	
 	public static WorldEditorMouseToolSelectCondition deleteToolSelectCondition = new WorldEditorMouseToolSelectCondition(){
 		public boolean shouldBeSelected(MouseUserDevice mouse) {
-			return mouse.isButton("middle");
+			return mouse.isButton("MIDDLE");
 			//		arg0.isShiftDown()
 			//	&& arg0.getButton() == MouseEvent.BUTTON1;
 		}
@@ -21,7 +21,7 @@ public abstract class WorldEditorMouseToolSelectorConditions {
 	
 	public static WorldEditorMouseToolSelectCondition pointCreateToolSelectCondition = new WorldEditorMouseToolSelectCondition(){
 		public boolean shouldBeSelected(MouseUserDevice mouse) {
-			return mouse.isButton("left");
+			return mouse.isButton("LEFT");
 			//		!arg0.isControlDown()
 			//	&& arg0.getButton() == MouseEvent.BUTTON1;
 		}
@@ -37,14 +37,14 @@ public abstract class WorldEditorMouseToolSelectorConditions {
 	
 	public static WorldEditorMouseToolSelectCondition selectPointToolSelectCondition = new WorldEditorMouseToolSelectCondition(){
 		public boolean shouldBeSelected(MouseUserDevice mouse) {
-			return mouse.isButton("right");
+			return mouse.isButton("RIGHT");
 			//		arg0.getButton() == MouseEvent.BUTTON3;
 		}
 	};
 	
 	public static WorldEditorMouseToolSelectCondition moveCircleToolSelectCondition = new WorldEditorMouseToolSelectCondition(){
 		public boolean shouldBeSelected(MouseUserDevice mouse) {
-			return mouse.isButton("left")
+			return mouse.isButton("LEFT")
 				&& WORLD_DATA.isCircleAtPositionSelected(mouse.getCursorX(), mouse.getCursorY());
 			//		!arg0.isControlDown() 
 			//	&& arg0.getButton() == MouseEvent.BUTTON1 
@@ -54,7 +54,7 @@ public abstract class WorldEditorMouseToolSelectorConditions {
 	
 	public static WorldEditorMouseToolSelectCondition tracerLineToolSelectCondition = new WorldEditorMouseToolSelectCondition(){
 		public boolean shouldBeSelected(MouseUserDevice mouse) {
-			return mouse.isButton("left"); // checks if a circle is at mouse position... why doesn't moveCircleTool?
+			return mouse.isButton("LEFT"); // checks if a circle is at mouse position... why doesn't moveCircleTool?
 			//		!arg0.isControlDown()
 			//	&& !arg0.isShiftDown()
 			//	&& arg0.getButton() == MouseEvent.BUTTON1;
@@ -63,7 +63,7 @@ public abstract class WorldEditorMouseToolSelectorConditions {
 	
 	public static WorldEditorMouseToolSelectCondition selectionBoxToolSelectCondition = new WorldEditorMouseToolSelectCondition(){
 		public boolean shouldBeSelected(MouseUserDevice mouse) {
-			return mouse.isButton("right");
+			return mouse.isButton("RIGHT");
 			//		!arg0.isControlDown() 
 			//	&& arg0.getButton() == MouseEvent.BUTTON3;
 		}

@@ -18,6 +18,7 @@ import LineEditor.AWT.rendering.AWTLinesRenderer;
 import LineEditor.data.WorldGeometryData;
 import LineEditor.file.WorldGeometryFiler;
 import UI.UILayerManager;
+import UI.input.InputEvent;
 
 public class AWTLineEditorProgram {
 	
@@ -72,7 +73,7 @@ public class AWTLineEditorProgram {
 		
 		// NEW
 		Runnable keyboardInterpreter = new Runnable() {
-			String event;
+			InputEvent event;
 			boolean moveWorld = true;
 			
 			private void toggleMoveWorld() {
@@ -95,66 +96,65 @@ public class AWTLineEditorProgram {
 				for (;;) {
 					event = keyboardDevice.consumeEvent();
 					
-					if (event != null) {
-						
-						if (event.contains("keyText=Up") && event.contains("KEY_PRESSED")) {
-							move(0, 5);
-						}
-						if (event.contains("keyText=Down") && event.contains("KEY_PRESSED")) {
-							move(0, -5);
-						}
-						if (event.contains("keyText=Right") && event.contains("KEY_PRESSED")) {
-							move(-5, 0);
-						}
-						if (event.contains("keyText=Left") && event.contains("KEY_PRESSED")) {
-							move(5, 0);
-						}
-						if (event.contains("keyChar=\'+\'") && event.contains("KEY_PRESSED")) {
-							zoom(0.1f);
-						}
-						if (event.contains("keyChar=\'-\'") && event.contains("KEY_PRESSED")) {
-							zoom(-0.1f);
-						}
-						if (event.contains("keyText=M") && event.contains("KEY_PRESSED")) {
-							toggleMoveWorld();
-						}
-						if (event.contains("keyText=G") && event.contains("KEY_PRESSED")) {
-							layerManager.toggleLayer(gridDrawer);
-						}
-						if (event.contains("keyText=Z") && event.contains("KEY_PRESSED")) {
-							worldEditorPanel.resetToDefaultZoom();
-						}
-						if (event.contains("keyText=O") && event.contains("KEY_PRESSED")) {
-							worldEditorPanel.resetToOrigin();
-						}
-						if (event.contains("keyText=S") && event.contains("KEY_PRESSED")) {
-							lineEditorUserDevice.forceClick();
-							lineEditorUserDevice.forceButton("right");
-						}
-						if (event.contains("keyText=D") && event.contains("KEY_PRESSED")) {
-							lineEditorUserDevice.forceClick();
-							lineEditorUserDevice.forceButton("middle");
-						}
-//						if (event.contains("keyText=B") && event.contains("KEY_PRESSED")) {
-//							lineEditorUserDevice.forcePress();
-//							lineEditorUserDevice.forceButton("right");
-//						}
-//						if (event.contains("keyText=B") && event.contains("KEY_RELEASED")) {
-//							lineEditorUserDevice.forceRelease();
-//						}
-						if (event.contains("keyText=Space") && event.contains("KEY_PRESSED")) {
-							//lineEditorUserDevice.forcePress();
-							lineEditorUserDevice.forceClick();
-							lineEditorUserDevice.forceButton("left");
-						}
-//						if (event.contains("keyText=Space") && event.contains("KEY_RELEASED")) {
-//							lineEditorUserDevice.forceRelease();
-//						}
-						if (event.contains("keyText=Escape") && event.contains("KEY_PRESSED")) {
-							editorProgram.quit();
-						}
-						
-						//System.out.println(event);
+					if (event.is("Up") && event.is("PRESSED")) {
+						move(0, 5);
+					}
+					if (event.is("Down") && event.is("PRESSED")) {
+						move(0, -5);
+					}
+					if (event.is("Right") && event.is("PRESSED")) {
+						move(-5, 0);
+					}
+					if (event.is("Left") && event.is("PRESSED")) {
+						move(5, 0);
+					}
+					if (event.is("+") && event.is("PRESSED")) {
+						zoom(0.1f);
+					}
+					if (event.is("-") && event.is("PRESSED")) {
+						zoom(-0.1f);
+					}
+					if (event.is("M") && event.is("PRESSED")) {
+						toggleMoveWorld();
+					}
+					if (event.is("G") && event.is("PRESSED")) {
+						layerManager.toggleLayer(gridDrawer);
+					}
+					if (event.is("Z") && event.is("PRESSED")) {
+						worldEditorPanel.resetToDefaultZoom();
+					}
+					if (event.is("O") && event.is("PRESSED")) {
+						worldEditorPanel.resetToOrigin();
+					}
+					if (event.is("S") && event.is("PRESSED")) {
+						lineEditorUserDevice.forceClick();
+						lineEditorUserDevice.forceButton("RIGHT");
+					}
+					if (event.is("D") && event.is("PRESSED")) {
+						lineEditorUserDevice.forceClick();
+						lineEditorUserDevice.forceButton("MIDDLE");
+					}
+//					if (event.is("B") && event.is("PRESSED")) {
+//						lineEditorUserDevice.forcePress();
+//						lineEditorUserDevice.forceButton("RIGHT");
+//					}
+//					if (event.is("B") && event.is("RELEASED")) {
+//						lineEditorUserDevice.forceRelease();
+//					}
+					if (event.is("Space") && event.is("PRESSED")) {
+						//lineEditorUserDevice.forcePress();
+						lineEditorUserDevice.forceClick();
+						lineEditorUserDevice.forceButton("LEFT");
+					}
+//					if (event.is("Space") && event.is("RELEASED")) {
+//						lineEditorUserDevice.forceRelease();
+//					}
+					if (event.is("Escape") && event.is("PRESSED")) {
+						editorProgram.quit();
+					}
+					
+					if (event.is("PRESSED") || event.is("RELEASED")) {
+						System.out.println(event.toString());
 					}
 					
 				}
