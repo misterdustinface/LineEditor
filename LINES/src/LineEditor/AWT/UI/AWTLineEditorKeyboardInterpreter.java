@@ -9,6 +9,7 @@ import LineEditor.UI.KeyboardUserDeviceInterpreter;
 import UI.input.InputEvent;
 import UI.input.KeyboardUserDevice;
 import UI.input.MouseUserDevice;
+import UI.input.MouseUserDeviceWrapper;
 
 public class AWTLineEditorKeyboardInterpreter extends KeyboardUserDeviceInterpreter {
 
@@ -36,6 +37,9 @@ public class AWTLineEditorKeyboardInterpreter extends KeyboardUserDeviceInterpre
 		
 		super(keyboardDevice);
 		
+		final MouseUserDeviceWrapper mouseUserDeviceWrapper = new MouseUserDeviceWrapper();
+		mouseUserDeviceWrapper.set(mouseUserDevice);
+		
 		TickingLoop keyboardMoverZoomer = new TickingLoop();
 		VoidFunctionPointer moverZoomerFunction = new VoidFunctionPointer() {
 			
@@ -48,7 +52,7 @@ public class AWTLineEditorKeyboardInterpreter extends KeyboardUserDeviceInterpre
 				if (moveWorld) {
 					zoomableViewport.setPosition(zoomableViewport.getXPosition() + DX, zoomableViewport.getYPosition() + DY);
 				} else {
-					mouseUserDevice.forcePosition(mouseUserDevice.getCursorX() - DX, mouseUserDevice.getCursorY() - DY);
+					mouseUserDeviceWrapper.forcePosition(mouseUserDevice.getCursorX() - DX, mouseUserDevice.getCursorY() - DY);
 				}
 			}
 			

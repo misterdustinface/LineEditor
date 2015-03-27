@@ -22,6 +22,7 @@ import LineEditor.data.WorldGeometryData;
 import LineEditor.file.WorldGeometryFiler;
 import UI.UILayerManager;
 import UI.input.InputEvent;
+import UI.input.MouseUserDeviceWrapper;
 
 public class AWTLineEditorProgram {
 	
@@ -89,26 +90,29 @@ public class AWTLineEditorProgram {
 			}
 		});
 		
+		final MouseUserDeviceWrapper mouseUserDeviceWrapper = new MouseUserDeviceWrapper();
+		mouseUserDeviceWrapper.set(mouseUserDevice);
+		
 		keyboardInterpreter.addFunction(new InputEventFunction() {
 			public void call(InputEvent event) {
 				if (event.is("S") && event.is("PRESSED")) {
-					mouseUserDevice.forceClick();
-					mouseUserDevice.forceButton("RIGHT");
+					mouseUserDeviceWrapper.forceClick();
+					mouseUserDeviceWrapper.forceButton("RIGHT");
 				}
 				if (event.is("D") && event.is("PRESSED")) {
-					mouseUserDevice.forceClick();
-					mouseUserDevice.forceButton("MIDDLE");
+					mouseUserDeviceWrapper.forceClick();
+					mouseUserDeviceWrapper.forceButton("MIDDLE");
 				}
 				if (event.is("B") && event.is("PRESSED")) {
-					mouseUserDevice.forcePress();
-					mouseUserDevice.forceButton("RIGHT");
+					mouseUserDeviceWrapper.forcePress();
+					mouseUserDeviceWrapper.forceButton("RIGHT");
 				}
 				if (event.is("B") && event.is("RELEASED")) {
-					mouseUserDevice.forceRelease();
+					mouseUserDeviceWrapper.forceRelease();
 				}
 				if (event.is("Space") && event.is("PRESSED")) {
-					mouseUserDevice.forceClick();
-					mouseUserDevice.forceButton("LEFT");
+					mouseUserDeviceWrapper.forceClick();
+					mouseUserDeviceWrapper.forceButton("LEFT");
 				}
 			}
 		});
