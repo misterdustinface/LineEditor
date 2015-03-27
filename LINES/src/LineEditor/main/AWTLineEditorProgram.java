@@ -17,9 +17,11 @@ import AWT.input.AWTKeyboardUserDevice;
 import LineEditor.AWT.UI.AWTLineEditorKeyboardInterpreter;
 import LineEditor.AWT.UI.uiTools.AWTLineEditorToolLayer;
 import LineEditor.AWT.rendering.AWTLineEditorWorldLayerRenderer;
+import LineEditor.UI.InputEventFunction;
 import LineEditor.data.WorldGeometryData;
 import LineEditor.file.WorldGeometryFiler;
 import UI.UILayerManager;
+import UI.input.InputEvent;
 
 public class AWTLineEditorProgram {
 	
@@ -73,13 +75,52 @@ public class AWTLineEditorProgram {
 		editorProgram.setMain(EditorProgramMain.create(layerManager, mouseUserDevice));
 		
 		AWTLineEditorKeyboardInterpreter keyboardInterpreter = new AWTLineEditorKeyboardInterpreter(
-				worldEditorPanel,    
-				mouseUserDevice,
 				keyboardDevice,      
-				editorProgram,       
-				layerManager,        
-				gridDrawer
+				mouseUserDevice,
+				worldEditorPanel,    
+				editorProgram
 		);
+		
+		keyboardInterpreter.addFunction(new InputEventFunction() {
+			public void call(InputEvent event) {
+				if (event.is("Escape") && event.is("PRESSED")) {
+					editorProgram.quit();
+				}
+			}
+		});
+		
+		keyboardInterpreter.addFunction(new InputEventFunction() {
+			public void call(InputEvent event) {
+				if (event.is("S") && event.is("PRESSED")) {
+					mouseUserDevice.forceClick();
+					mouseUserDevice.forceButton("RIGHT");
+				}
+				if (event.is("D") && event.is("PRESSED")) {
+					mouseUserDevice.forceClick();
+					mouseUserDevice.forceButton("MIDDLE");
+				}
+				if (event.is("B") && event.is("PRESSED")) {
+					mouseUserDevice.forcePress();
+					mouseUserDevice.forceButton("RIGHT");
+				}
+				if (event.is("B") && event.is("RELEASED")) {
+					mouseUserDevice.forceRelease();
+				}
+				if (event.is("Space") && event.is("PRESSED")) {
+					mouseUserDevice.forceClick();
+					mouseUserDevice.forceButton("LEFT");
+				}
+			}
+		});
+		
+		keyboardInterpreter.addFunction(new InputEventFunction() {
+			public void call(InputEvent event) {
+				if (event.is("G") && event.is("PRESSED")) {
+					layerManager.toggleLayer(gridDrawer);
+				}
+			}
+		});
+		
 		editorProgram.addComponent("keyboardInterpreter", keyboardInterpreter);
 		
 		editorProgram.start();
