@@ -10,32 +10,35 @@ import AWT.UI.AWTProgramWindow;
 import AWT.UI.CommonMenus.AWTFileMenu;
 import AWT.UI.CommonMenus.AWTToggleLayersMenu;
 import AWT.UI.CommonMenus.AWTViewOptionsMenu;
+import AWT.UI.Mouse.AWTDefaultMouseUserDevice;
 import AWT.UI.Mouse.AWTScreenShifter;
 import AWT.UI.Mouse.AWTZoomWheelListener;
 import AWT.input.AWTKeyboardUserDevice;
-import LineEditor.AWT.UI.uiTools.AWTLineEditorUserDevice;
-import LineEditor.AWT.rendering.AWTLinesRenderer;
+import LineEditor.AWT.UI.AWTLineEditorKeyboardInterpreter;
+import LineEditor.AWT.UI.uiTools.AWTLineEditorToolLayer;
+import LineEditor.AWT.rendering.AWTLineEditorWorldLayerRenderer;
 import LineEditor.data.WorldGeometryData;
 import LineEditor.file.WorldGeometryFiler;
 import UI.UILayerManager;
-import UI.input.InputEvent;
 
 public class AWTLineEditorProgram {
 	
 	public static void main(String[] args) {
 		final AWTProgramWindow window = new AWTProgramWindow("Lines");
+		final AWTKeyboardUserDevice keyboardDevice = new AWTKeyboardUserDevice();
+		window.addKeyListener(keyboardDevice);
 		
 		final WorldGeometryData worldData = new WorldGeometryData();
 		final WorldGeometryFiler worldFiler = new WorldGeometryFiler();
 		worldFiler.setData(worldData);
-		final AWTLineEditorUserDevice lineEditorUserDevice = new AWTLineEditorUserDevice(worldData);
-		final AWTKeyboardUserDevice keyboardDevice = new AWTKeyboardUserDevice(); // NEW
+		final AWTLineEditorToolLayer lineEditorLayer = new AWTLineEditorToolLayer(worldData);
 		
 		final AWTEditorPanel worldEditorPanel = new AWTEditorPanel();	
-		worldEditorPanel.addViewportMotionListener(lineEditorUserDevice);
-		worldEditorPanel.addViewportMouseListener(lineEditorUserDevice);
+		final AWTDefaultMouseUserDevice mouseUserDevice = new AWTDefaultMouseUserDevice();
+		worldEditorPanel.addViewportMotionListener(mouseUserDevice);
+		worldEditorPanel.addViewportMouseListener(mouseUserDevice);
 		
-		final AWTLinesRenderer worldRenderer = new AWTLinesRenderer(worldData);
+		final AWTLineEditorWorldLayerRenderer worldRenderer = new AWTLineEditorWorldLayerRenderer(lineEditorLayer, worldData);
 		final AWTGridLayer gridDrawer = new AWTGridLayer(worldEditorPanel, worldEditorPanel);
 		final AWTScreenShifter screenShifter = new AWTScreenShifter(worldEditorPanel);
 		final UILayerManager layerManager = new UILayerManager();
@@ -45,8 +48,6 @@ public class AWTLineEditorProgram {
 		worldEditorPanel.addMouseListener(screenShifter);
 		worldEditorPanel.addMouseWheelListener(new AWTZoomWheelListener(worldEditorPanel));
 		window.add(worldEditorPanel);
-		
-		window.addKeyListener(keyboardDevice); // NEW
 
 		final AWTToggleLayersMenu toggleLayersMenu = new AWTToggleLayersMenu(layerManager);
 		toggleLayersMenu.addMenuItemToggleUI("GRID",   gridDrawer);
@@ -64,103 +65,22 @@ public class AWTLineEditorProgram {
 		layerManager.addLayers(gridDrawer,
 							   worldRenderer,
 							   new AWTDropdownMenuBar(menuBar),
-							   lineEditorUserDevice);
+							   lineEditorLayer);
 		
 		window.revalidate();
 		
 		final Application editorProgram = new Application();
-		editorProgram.setMain(EditorProgramMain.create(layerManager, lineEditorUserDevice));
+		editorProgram.setMain(EditorProgramMain.create(layerManager, mouseUserDevice));
 		
-		// NEW
-		Runnable keyboardInterpreter = new Runnable() {
-			InputEvent event;
-			boolean moveWorld = true;
-			
-			private void toggleMoveWorld() {
-				moveWorld = !moveWorld;
-			}
-			
-			private void move(int dx, int dy) {
-				if (moveWorld) {
-					worldEditorPanel.setPosition(worldEditorPanel.getXPosition() + dx, worldEditorPanel.getYPosition() + dy);
-				} else {
-					lineEditorUserDevice.forcePosition(lineEditorUserDevice.getCursorX() - dx, lineEditorUserDevice.getCursorY() - dy);
-				}
-			}
-			
-			private void zoom(float dz) {
-				worldEditorPanel.setZoom(worldEditorPanel.getZoom() + dz);
-			}
-			
-			public void run() {
-				for (;;) {
-					event = keyboardDevice.consumeEvent();
-					
-					if (event.is("Up") && event.is("PRESSED")) {
-						move(0, 5);
-					}
-					if (event.is("Down") && event.is("PRESSED")) {
-						move(0, -5);
-					}
-					if (event.is("Right") && event.is("PRESSED")) {
-						move(-5, 0);
-					}
-					if (event.is("Left") && event.is("PRESSED")) {
-						move(5, 0);
-					}
-					if (event.is("+") && event.is("PRESSED")) {
-						zoom(0.1f);
-					}
-					if (event.is("-") && event.is("PRESSED")) {
-						zoom(-0.1f);
-					}
-					if (event.is("M") && event.is("PRESSED")) {
-						toggleMoveWorld();
-					}
-					if (event.is("G") && event.is("PRESSED")) {
-						layerManager.toggleLayer(gridDrawer);
-					}
-					if (event.is("Z") && event.is("PRESSED")) {
-						worldEditorPanel.resetToDefaultZoom();
-					}
-					if (event.is("O") && event.is("PRESSED")) {
-						worldEditorPanel.resetToOrigin();
-					}
-					if (event.is("S") && event.is("PRESSED")) {
-						lineEditorUserDevice.forceClick();
-						lineEditorUserDevice.forceButton("RIGHT");
-					}
-					if (event.is("D") && event.is("PRESSED")) {
-						lineEditorUserDevice.forceClick();
-						lineEditorUserDevice.forceButton("MIDDLE");
-					}
-//					if (event.is("B") && event.is("PRESSED")) {
-//						lineEditorUserDevice.forcePress();
-//						lineEditorUserDevice.forceButton("RIGHT");
-//					}
-//					if (event.is("B") && event.is("RELEASED")) {
-//						lineEditorUserDevice.forceRelease();
-//					}
-					if (event.is("Space") && event.is("PRESSED")) {
-						//lineEditorUserDevice.forcePress();
-						lineEditorUserDevice.forceClick();
-						lineEditorUserDevice.forceButton("LEFT");
-					}
-//					if (event.is("Space") && event.is("RELEASED")) {
-//						lineEditorUserDevice.forceRelease();
-//					}
-					if (event.is("Escape") && event.is("PRESSED")) {
-						editorProgram.quit();
-					}
-					
-					if (event.is("PRESSED") || event.is("RELEASED")) {
-						System.out.println(event.toString());
-					}
-					
-				}
-			}
-		};
-		editorProgram.addComponent("keyboardInterpreter", keyboardInterpreter); // NEW
+		AWTLineEditorKeyboardInterpreter keyboardInterpreter = new AWTLineEditorKeyboardInterpreter(
+				worldEditorPanel,    
+				mouseUserDevice,
+				keyboardDevice,      
+				editorProgram,       
+				layerManager,        
+				gridDrawer
+		);
+		editorProgram.addComponent("keyboardInterpreter", keyboardInterpreter);
 		
 		editorProgram.start();
 	}

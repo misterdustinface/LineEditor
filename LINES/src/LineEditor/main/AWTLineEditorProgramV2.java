@@ -9,6 +9,7 @@ import AWT.UI.AWTProgramWindow;
 import AWT.UI.CommonMenus.AWTFileMenu;
 import AWT.UI.CommonMenus.AWTToggleLayersMenu;
 import AWT.UI.CommonMenus.AWTViewOptionsMenu;
+import AWT.UI.Mouse.AWTDefaultMouseUserDevice;
 import AWT.UI.Mouse.AWTScreenShifter;
 import AWT.UI.Mouse.AWTZoomWheelListener;
 import AWT.UI2.AWTDisplay;
@@ -16,8 +17,8 @@ import AWT.UI2.AWTUIDrawer;
 import AWT.UI2.AWTViewport;
 import AWT.UI2.AWTZoomableViewport;
 import AWT.UI2.FixedDrawer;
-import LineEditor.AWT.UI.uiTools.AWTLineEditorUserDevice;
-import LineEditor.AWT.rendering.AWTLinesRenderer;
+import LineEditor.AWT.UI.uiTools.AWTLineEditorToolLayer;
+import LineEditor.AWT.rendering.AWTLineEditorWorldLayerRenderer;
 import LineEditor.data.WorldGeometryData;
 import LineEditor.file.WorldGeometryFiler;
 import UI.UILayerManager;
@@ -30,7 +31,7 @@ public class AWTLineEditorProgramV2 {
 		WorldGeometryData worldData = new WorldGeometryData();
 		WorldGeometryFiler worldFiler = new WorldGeometryFiler();
 		worldFiler.setData(worldData);
-		AWTLineEditorUserDevice lineEditorUserDevice = new AWTLineEditorUserDevice(worldData);
+		AWTLineEditorToolLayer lineEditorLayer = new AWTLineEditorToolLayer(worldData);
 		
 		final AWTZoomableViewport worldView = new AWTZoomableViewport();
 		worldView.setSize(800, 600);
@@ -38,11 +39,12 @@ public class AWTLineEditorProgramV2 {
 		final AWTViewport menuView = new AWTViewport();
 		menuView.setSize(400, 175);	
 		
-		AWTDisplay display = new AWTDisplay(lineEditorUserDevice);
+		final AWTDefaultMouseUserDevice mouseUserDevice = new AWTDefaultMouseUserDevice();
+		AWTDisplay display = new AWTDisplay(mouseUserDevice);
 		display.addView(worldView);
 		display.addView(menuView);
 		
-		AWTLinesRenderer worldRenderer = new AWTLinesRenderer(worldData);
+		AWTLineEditorWorldLayerRenderer worldRenderer = new AWTLineEditorWorldLayerRenderer(lineEditorLayer, worldData);
 		AWTGridLayer gridDrawer = new AWTGridLayer(worldView, worldView);
 		AWTScreenShifter screenShifter = new AWTScreenShifter(worldView);
 		
@@ -73,15 +75,15 @@ public class AWTLineEditorProgramV2 {
 							toggleLayersMenu,
 							new AWTFileMenu(worldFiler));
 		
-		menuLayerManager.addLayers(new AWTDropdownMenuBar(menuBar), lineEditorUserDevice);
-		worldLayerManager.addLayers(gridDrawer, worldRenderer, lineEditorUserDevice);
+		menuLayerManager.addLayers(new AWTDropdownMenuBar(menuBar), lineEditorLayer);
+		worldLayerManager.addLayers(gridDrawer, worldRenderer, lineEditorLayer);
 		
 		window.add(display);
 		window.revalidate();
 		
 		Application editorProgram = new Application();
-		editorProgram.addComponent("MenuLayer", EditorProgramMain.create(menuLayerManager, lineEditorUserDevice));
-		editorProgram.addComponent("WorldLayer", EditorProgramMain.create(worldLayerManager, lineEditorUserDevice));
+		editorProgram.addComponent("MenuLayer", EditorProgramMain.create(menuLayerManager, mouseUserDevice));
+		editorProgram.addComponent("WorldLayer", EditorProgramMain.create(worldLayerManager, mouseUserDevice));
 		
 		FixedDrawer fixedDrawer = new FixedDrawer(worldDrawer);
 		fixedDrawer.setDrawsPerSecond(20);
