@@ -172,7 +172,7 @@ public class WorldGeometryData extends DataModificationNotifier {
 	public void splitCollisionBox(Pipe collisionBox, int percent) {
 
 		LineSegment newLine 	= collisionBox.centerLine.split(percent / 100f);
-		Circle 		newCircle 	= new Circle(newLine.a, lineEditorGraphicData.getThicknessOf("pointHighlightCircle"));
+		Circle 		newCircle 	= new Circle(newLine.a.x, newLine.a.y, lineEditorGraphicData.getThicknessOf("pointHighlightCircle"));
 		newLine.a = collisionBox.centerLine.b  = newCircle.center(); // Circle makes copy of point. Get the new point and set the ends of the line to the point.
 		Pipe newRect = new Pipe(newLine, collisionBox.thickness());
 		
