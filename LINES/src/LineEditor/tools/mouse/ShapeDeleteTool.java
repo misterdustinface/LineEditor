@@ -12,7 +12,7 @@ public class ShapeDeleteTool extends WorldEditorMouseTool {
 	public ShapeDeleteTool(WorldGeometryData WORLD_DATA) {
 		super(WORLD_DATA);
 		debounceTimer = new DebounceTimer();
-		debounceTimer.setDebounceTime_sec(0.5);
+		debounceTimer.setDebounceTime__sec(0.5);
 	}
 	
 	private void findAndRemoveFirstFoundWorldShapeAtPoint(Point pointToRemoveAt){
