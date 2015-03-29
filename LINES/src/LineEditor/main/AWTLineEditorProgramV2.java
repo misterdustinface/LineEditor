@@ -9,7 +9,7 @@ import AWT.UI.AWTProgramWindow;
 import AWT.UI.CommonMenus.AWTFileMenu;
 import AWT.UI.CommonMenus.AWTToggleLayersMenu;
 import AWT.UI.CommonMenus.AWTViewOptionsMenu;
-import AWT.UI.Mouse.AWTDefaultMouseUserDevice;
+import AWT.UI.Mouse.AWTMouseUserDevice;
 import AWT.UI.Mouse.AWTScreenShifter;
 import AWT.UI.Mouse.AWTZoomWheelListener;
 import AWT.UI2.AWTDisplay;
@@ -39,7 +39,7 @@ public class AWTLineEditorProgramV2 {
 		final AWTViewport menuView = new AWTViewport();
 		menuView.setSize(400, 175);	
 		
-		final AWTDefaultMouseUserDevice mouseUserDevice = new AWTDefaultMouseUserDevice();
+		final AWTMouseUserDevice mouseUserDevice = new AWTMouseUserDevice();
 		AWTDisplay display = new AWTDisplay(mouseUserDevice);
 		display.addView(worldView);
 		display.addView(menuView);

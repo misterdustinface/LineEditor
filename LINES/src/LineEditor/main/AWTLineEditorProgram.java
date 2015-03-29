@@ -10,7 +10,7 @@ import AWT.UI.AWTProgramWindow;
 import AWT.UI.CommonMenus.AWTFileMenu;
 import AWT.UI.CommonMenus.AWTToggleLayersMenu;
 import AWT.UI.CommonMenus.AWTViewOptionsMenu;
-import AWT.UI.Mouse.AWTDefaultMouseUserDevice;
+import AWT.UI.Mouse.AWTMouseUserDevice;
 import AWT.UI.Mouse.AWTScreenShifter;
 import AWT.UI.Mouse.AWTZoomWheelListener;
 import AWT.input.AWTKeyboardUserDevice;
@@ -37,7 +37,7 @@ public class AWTLineEditorProgram {
 		final AWTLineEditorToolLayer lineEditorLayer = new AWTLineEditorToolLayer(worldData);
 		
 		final AWTEditorPanel worldEditorPanel = new AWTEditorPanel();	
-		final AWTDefaultMouseUserDevice mouseUserDevice = new AWTDefaultMouseUserDevice();
+		final AWTMouseUserDevice mouseUserDevice = new AWTMouseUserDevice();
 		worldEditorPanel.addViewportMotionListener(mouseUserDevice);
 		worldEditorPanel.addViewportMouseListener(mouseUserDevice);
 		
