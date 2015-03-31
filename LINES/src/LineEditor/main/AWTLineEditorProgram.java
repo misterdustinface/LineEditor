@@ -61,9 +61,9 @@ public class AWTLineEditorProgram {
 		menuBar.setOffset(32, 8);
 		menuBar.setSpacing(2);
 		
-		menuBar.addUIMenus( new AWTViewOptionsMenu(worldEditorPanel, worldEditorPanel),
+		menuBar.addUIMenus( new AWTFileMenu(worldFiler),
 							toggleLayersMenu,
-							new AWTFileMenu(worldFiler));
+							new AWTViewOptionsMenu(worldEditorPanel, worldEditorPanel));
 		
 		layerManager.addLayers(gridDrawer,
 							   worldRenderer,
