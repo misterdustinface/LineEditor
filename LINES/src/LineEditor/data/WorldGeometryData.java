@@ -3,6 +3,7 @@ package LineEditor.data;
 import generic.ListenerPattern.Descriptive.DataModificationNotifier;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import shapes.Circle;
 import shapes.LineSegment;
@@ -21,6 +22,8 @@ public class WorldGeometryData extends DataModificationNotifier {
 	
 	private LineEditorAWTGraphicData lineEditorGraphicData;
 	
+	private Stack<Pipe> associatedLineRemovalList;
+	
 	public WorldGeometryData() {
 		worldPointCollisionCircles 	= new ArrayList<Circle>();
 		worldLineCollisionBoxes 	= new ArrayList<Pipe>();		
@@ -28,6 +31,8 @@ public class WorldGeometryData extends DataModificationNotifier {
 		selectionMap 				= new ShapeSelectorMap();
 		
 		lineEditorGraphicData = LineEditorAWTGraphicData.getGraphicData();
+		
+		associatedLineRemovalList = new Stack<Pipe>();
 	}
 	
 	public void load(WorldGeometryData other) {
@@ -38,13 +43,51 @@ public class WorldGeometryData extends DataModificationNotifier {
 		notifyDataModified();
 	}
 	
-	public void append(WorldGeometryData other) {
+	private void append(WorldGeometryData other) {
 		for (Shape s : other.worldCollisionBounds ) {
 			add(s);
 			if (other.isSelected(s))
 				select(s); 
 		}
 		notifyDataModified();
+	}
+	
+	/**
+	 * FOR GRAPHICS ONLY
+	 */
+	public ArrayList<Circle> getCircles() {
+		return worldPointCollisionCircles;
+	}
+	
+	/**
+	 * FOR GRAPHICS ONLY
+	 */
+	public ArrayList<Pipe> getPipes() {
+		return worldLineCollisionBoxes;
+	}
+	
+	public boolean isShapeQuerySatisfied(ShapeQuery sq) {
+		for (Shape s : worldCollisionBounds) {
+			if (sq.isSatisfiableGivenShape(s)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Shape getShapeThatSatisfiesQuery(ShapeQuery sq) {
+		for (Shape s : worldCollisionBounds) {
+			if (sq.isSatisfiableGivenShape(s)) {
+				return s;
+			}
+		}
+		return null;
+	}
+	
+	public void performShapeFunctionOnAllShapes(ShapeFunction sf) {
+		for (Shape s : worldCollisionBounds) {
+			sf.manipulateShape(s);
+		}
 	}
 	
 	public boolean isSelected(Shape s) { 
@@ -62,7 +105,7 @@ public class WorldGeometryData extends DataModificationNotifier {
 	}
 	
 	public int totalNumberOfShapes() { 
-		return totalNumberOfPoints() + totalNumberOfLines(); 
+		return worldCollisionBounds.size();
 	}
 	
 	public int totalNumberOfPoints() { 
@@ -73,29 +116,11 @@ public class WorldGeometryData extends DataModificationNotifier {
 		return worldLineCollisionBoxes.size(); 
 	}
 	
-	public boolean isShapeAtPositionSelected(float X, float Y) {
-		for (Shape s : worldCollisionBounds)
-			if (s.contains(X, Y))
-				return isSelected(s);
-		return false;
-	}
-	
-	public boolean isCircleAtPositionSelected(float X, float Y) {
-		for (Circle circle : worldPointCollisionCircles)
-			if (circle.contains(X, Y))
-				return isSelected(circle);
-		return false;
-	}
-	
 	public void scaleSelectionAreaSizeForWorldGeometry(float percent) {
 		lineEditorGraphicData.scaleHighlightedWorldGeometry(percent);
 		for (Shape s : worldCollisionBounds)
 			s.scale(percent);
 		notifyDataModified();
-	}
-	
-	private boolean pointHasDuplicate(Point p) {
-		return getPointDirectlyToCenterOfEquivalentCollisionCircle(p) != null;
 	}
 	
 	public void createPoint(float x, float y){
@@ -113,32 +138,12 @@ public class WorldGeometryData extends DataModificationNotifier {
 		notifyDataModified();
 	}
 	
-	private Point getPointDirectlyToCenterOfEquivalentCollisionCircle(Point point){
-		Circle c = getCollisionCircleWithGivenCenter(point);
-		return c == null ? null : c.center();
-	}
-	
-	private Circle getCollisionCircleWithGivenCenter(Point centerOfCircle){
-		for (Circle collisionCircle : worldPointCollisionCircles)
-			if ((collisionCircle.center().equals(centerOfCircle)))
-				return collisionCircle;
-		return null;
-	}
-	
-	private Shape[] shapeArray = new Shape[] {};
-	private Circle[] circleArray = new Circle[] {};
-	private Pipe[] pipeArray = new Pipe[] {};
-	
-	public Shape[] getAllCollisionBounds() { 
-		return worldCollisionBounds.toArray(shapeArray); 
-	}
-	
-	public Circle[] getWorldPointCollisionCircles() { 
-		return worldPointCollisionCircles.toArray(circleArray); 
-	}
-	
-	public Pipe[] getWorldLineCollisionBoxes() { 
-		return worldLineCollisionBoxes.toArray(pipeArray); 
+	public LineSegment[] getLines() {
+		LineSegment[] lines = new LineSegment[worldLineCollisionBoxes.size()];
+		for (int i = 0; i < lines.length; ++i) {
+			lines[i] = worldLineCollisionBoxes.get(i).centerLine;
+		}
+		return lines;
 	}
 	
 	public void add(Shape s) {
@@ -162,24 +167,44 @@ public class WorldGeometryData extends DataModificationNotifier {
 		notifyDataModified();
 	}
 
-	private void removeAssociatedLines(Point point) {
-		for (Pipe collisionBox : getWorldLineCollisionBoxes())
-			if (collisionBox.centerLine.isEdge(point))
-				remove(collisionBox);
-		notifyDataModified();
-	}
-
 	public void splitCollisionBox(Pipe collisionBox, int percent) {
 
-		LineSegment newLine 	= collisionBox.centerLine.split(percent / 100f);
-		Circle 		newCircle 	= new Circle(newLine.a.x, newLine.a.y, lineEditorGraphicData.getThicknessOf("pointHighlightCircle"));
-		newLine.a = collisionBox.centerLine.b  = newCircle.center(); // Circle makes copy of point. Get the new point and set the ends of the line to the point.
+		LineSegment newLine = collisionBox.centerLine.split(percent / 100f);
+		Circle newCircle = new Circle(newLine.a.x, newLine.a.y, lineEditorGraphicData.getThicknessOf("pointHighlightCircle"));
+		newLine.a = collisionBox.centerLine.b = newCircle.center(); // Circle makes copy of point. Get the new point and set the ends of the line to the point.
 		Pipe newRect = new Pipe(newLine, collisionBox.thickness());
 		
 		add(newCircle);
 		add(newRect);
 		select(newCircle);
 		//select(newRect);
+		notifyDataModified();
+	}
+	
+	private boolean pointHasDuplicate(Point p) {
+		return getPointDirectlyToCenterOfEquivalentCollisionCircle(p) != null;
+	}
+	
+	private Point getPointDirectlyToCenterOfEquivalentCollisionCircle(Point point){
+		Circle c = getCollisionCircleWithGivenCenter(point);
+		return c == null ? null : c.center();
+	}
+	
+	private Circle getCollisionCircleWithGivenCenter(Point centerOfCircle){
+		for (Circle collisionCircle : worldPointCollisionCircles)
+			if ((collisionCircle.center().equals(centerOfCircle)))
+				return collisionCircle;
+		return null;
+	}
+	
+	private void removeAssociatedLines(Point point) {
+		for (Pipe collisionBox : worldLineCollisionBoxes) {
+			if (collisionBox.centerLine.isEdge(point))
+				associatedLineRemovalList.push(collisionBox);
+		}
+		while (!associatedLineRemovalList.isEmpty()) {
+			remove(associatedLineRemovalList.pop());
+		}
 		notifyDataModified();
 	}
 	

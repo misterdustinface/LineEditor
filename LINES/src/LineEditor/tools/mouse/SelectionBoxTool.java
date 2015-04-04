@@ -4,12 +4,14 @@ import shapes.Circle;
 import shapes.LineSegment;
 import shapes.Pipe;
 import shapes.Point;
+import shapes.Shape;
+import LineEditor.data.ShapeFunction;
 import LineEditor.data.WorldGeometryData;
 
 public class SelectionBoxTool extends WorldEditorMouseTool {
 
-	protected Point 		startPoint;
-	protected Pipe 			selectionBox;
+	protected Point startPoint;
+	protected Pipe selectionBox;
 	
 	public SelectionBoxTool(WorldGeometryData WORLD_DATA){
 		super(WORLD_DATA);
@@ -23,31 +25,27 @@ public class SelectionBoxTool extends WorldEditorMouseTool {
 		startPoint.set(x, y);
 	}
 	
-	/////////////////////////////////////////////////////////////////////////////////
+	private ShapeFunction toggleShapeSelection = new ShapeFunction() {
+		public void manipulateShape(Shape s) {
+			if ((s instanceof Circle) && (selectionRectangleContainsCircleCenter((Circle)s))) {
+				worldData.toggleSelected(s);
+			}
+			if ((s instanceof Pipe) && (selectionRectangleContainsPipe((Pipe) s))) {
+				worldData.toggleSelected(s);
+			}
+		}
+	};
 	
 	private void selectWorldShapes(){
-		selectWorldCircles(selectionBox);
-		selectWorldRectangles(selectionBox);
-	}
-
-	private void selectWorldCircles(Pipe selectionRectangle){
-		for(Circle worldCircle : worldCircles())
-			if(selectionRectangleContainsCircleCenter(selectionRectangle, worldCircle))
-				toggleSelected(worldCircle);
+		worldData.performShapeFunctionOnAllShapes(toggleShapeSelection);
 	}
 	
-	private void selectWorldRectangles(Pipe selectionRectangle){
-		for(Pipe worldRectangle : worldRectangles())
-			if(selectionRectangleContainsRectangle(selectionRectangle, worldRectangle))
-				toggleSelected(worldRectangle);
+	protected boolean selectionRectangleContainsCircleCenter(Circle circle){
+		return selectionBox.getBoundingRectangle().contains(circle.center());
 	}
 	
-	protected boolean selectionRectangleContainsCircleCenter(Pipe selectionRectangle, Circle circle){
-		return selectionRectangle.getBoundingRectangle().contains(circle.center());
-	}
-	
-	protected boolean selectionRectangleContainsRectangle(Pipe selectionRectangle, Pipe rectangularPipe){
-		return selectionRectangle.intersects(rectangularPipe.getBoundingRectangle());
+	protected boolean selectionRectangleContainsPipe(Pipe rectangularPipe){
+		return selectionBox.intersects(rectangularPipe.getBoundingRectangle());
 	}
 
 	protected boolean shouldAcceptRequest() {

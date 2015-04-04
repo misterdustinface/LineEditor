@@ -2,6 +2,7 @@ package LineEditor.tools.mouse;
 
 import shapes.Point;
 import shapes.Shape;
+import LineEditor.data.ShapeFunction;
 import LineEditor.data.WorldGeometryData;
 
 public class SelectionPointTool extends WorldEditorMouseTool {
@@ -17,10 +18,16 @@ public class SelectionPointTool extends WorldEditorMouseTool {
 		return !positionOfLastUse.equals(position); 
 	}
 	
+	private ShapeFunction toggleShapeSelection = new ShapeFunction() {
+		public void manipulateShape(Shape s) {
+			if (s.contains(positionOfLastUse)) {
+				worldData.toggleSelected(s);
+			}
+		}
+	};
+	
 	private void selectWorldShapes(Point selectionPoint){
-		for(Shape s : collisionBounds())
-			if(s.contains(selectionPoint))
-				toggleSelected(s);
+		worldData.performShapeFunctionOnAllShapes(toggleShapeSelection);
 	}
 
 	protected boolean shouldAcceptRequest() {

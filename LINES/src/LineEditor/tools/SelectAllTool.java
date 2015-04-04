@@ -1,6 +1,8 @@
 package LineEditor.tools;
 
 import shapes.Shape;
+import LineEditor.data.ShapeFunction;
+import LineEditor.data.ShapeQuery;
 import LineEditor.data.WorldGeometryData;
 
 public class SelectAllTool extends WorldEditorTool {
@@ -9,21 +11,35 @@ public class SelectAllTool extends WorldEditorTool {
 		super(WORLD_DATA);
 	}
 	
+	private ShapeFunction selectShape = new ShapeFunction() {
+		public void manipulateShape(Shape s) {
+			worldData.select(s);
+		}
+	};
+	
 	private void selectAllWorldShapes() {
-		for (Shape s : collisionBounds()) 
-			select(s);
+		worldData.performShapeFunctionOnAllShapes(selectShape);
 	}
+	
+	private ShapeFunction toggleShape = new ShapeFunction() {
+		public void manipulateShape(Shape s) {
+			worldData.toggleSelected(s);
+		}
+	};
 	
 	private void toggleAllWorldShapes() {
-		for (Shape s : collisionBounds()) 
-			toggleSelected(s);
+		worldData.performShapeFunctionOnAllShapes(toggleShape);
 	}
 	
+	private ShapeQuery isNotSelected = new ShapeQuery() {
+		public boolean isSatisfiableGivenShape(Shape s) {
+			return !worldData.isSelected(s);
+		}
+	};
+	
 	private boolean allWorldShapesAreAlreadySelected() {
-		for (Shape s : collisionBounds()) 
-			if (!isSelected(s))
-				return false;
-		return true;
+		boolean allSelected = !worldData.isShapeQuerySatisfied(isNotSelected);
+		return allSelected;
 	}
 	
 	protected boolean shouldAcceptRequest() {

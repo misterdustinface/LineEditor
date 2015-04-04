@@ -1,6 +1,8 @@
 package LineEditor.tools.mouse;
 
 import shapes.Circle;
+import shapes.Shape;
+import LineEditor.data.ShapeQuery;
 import LineEditor.data.WorldGeometryData;
 
 public class CircleMoverTool extends WorldEditorMouseTool {
@@ -22,19 +24,20 @@ public class CircleMoverTool extends WorldEditorMouseTool {
 		performAction();
 	}
 	
-	private Circle retrieveSelectedCircleToMove(){
-		for(Circle worldCircle : worldData.getWorldPointCollisionCircles()){
-			if(worldCircle.contains(position)){
-				if(isSelected(worldCircle)){
-					return worldCircle;
-				}
-			}
+	private ShapeQuery isCircleAtPositionSelected = new ShapeQuery() {
+		public boolean isSatisfiableGivenShape(Shape s) {
+			return (s instanceof Circle) && (s.contains(position) && worldData.isSelected(s));
 		}
-		return circleToMove;
+	};
+	
+	private Circle retrieveSelectedCircleToMove() {
+		Circle c = (Circle) worldData.getShapeThatSatisfiesQuery(isCircleAtPositionSelected);
+		if (c == null) c = circleToMove;
+		return c;
 	}
 	
 	protected boolean shouldAcceptRequest() {
-		return worldData.isCircleAtPositionSelected(position.x, position.y);
+		return worldData.isShapeQuerySatisfied(isCircleAtPositionSelected);
 	}
 
 	protected void performAction() {

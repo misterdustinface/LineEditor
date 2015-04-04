@@ -1,8 +1,8 @@
 package LineEditor.tools.mouse;
 
 import generic.timers.DebounceTimer;
-import shapes.Point;
 import shapes.Shape;
+import LineEditor.data.ShapeQuery;
 import LineEditor.data.WorldGeometryData;
 
 public class ShapeDeleteTool extends WorldEditorMouseTool {
@@ -15,12 +15,16 @@ public class ShapeDeleteTool extends WorldEditorMouseTool {
 		debounceTimer.setDebounceTime__sec(0.5);
 	}
 	
-	private void findAndRemoveFirstFoundWorldShapeAtPoint(Point pointToRemoveAt){
-		for(Shape s : collisionBounds()){
-			if(s.contains(pointToRemoveAt)){
-				worldData.remove(s);
-				//return;
-			}
+	private ShapeQuery containsPosition = new ShapeQuery() {
+		public boolean isSatisfiableGivenShape(Shape s) {
+			return s.contains(position);
+		}
+	};
+	
+	private void findAndRemoveFirstFoundWorldShapeAtPosition(){
+		Shape s = worldData.getShapeThatSatisfiesQuery(containsPosition);
+		if (s != null) {
+			worldData.remove(s);
 		}
 	}
 
@@ -30,7 +34,7 @@ public class ShapeDeleteTool extends WorldEditorMouseTool {
 
 	protected void performAction() {
 		debounceTimer.reset();
-		findAndRemoveFirstFoundWorldShapeAtPoint(position);
+		findAndRemoveFirstFoundWorldShapeAtPosition();
 	}
 	
 }

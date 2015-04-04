@@ -1,10 +1,7 @@
 package LineEditor.tools;
 
-import shapes.Circle;
-import shapes.Pipe;
-import shapes.Shape;
-import LineEditor.data.WorldGeometryData;
 import generic.Requestible;
+import LineEditor.data.WorldGeometryData;
 
 public abstract class WorldEditorTool implements Requestible {
 
@@ -12,30 +9,6 @@ public abstract class WorldEditorTool implements Requestible {
 	
 	public WorldEditorTool(WorldGeometryData WORLD_DATA) {
 		worldData = WORLD_DATA;
-	}
-	
-	final protected void select(Shape s) { 
-		worldData.select(s); 
-	}
-	
-	final protected boolean isSelected(Shape s) { 
-		return worldData.isSelected(s); 
-	}
-	
-	final protected void toggleSelected(Shape s) { 
-		worldData.toggleSelected(s); 
-	}
-
-	final protected Circle[] worldCircles() { 
-		return worldData.getWorldPointCollisionCircles(); 
-	}
-	
-	final protected Pipe[] worldRectangles() { 
-		return worldData.getWorldLineCollisionBoxes(); 
-	}
-	
-	final protected Shape[] collisionBounds() { 
-		return worldData.getAllCollisionBounds(); 
 	}
 	
 	final public void request() {

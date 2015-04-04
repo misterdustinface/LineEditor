@@ -3,6 +3,8 @@ package LineEditor.tools.mouse;
 import shapes.Circle;
 import shapes.LineSegment;
 import shapes.Point;
+import shapes.Shape;
+import LineEditor.data.ShapeQuery;
 import LineEditor.data.WorldGeometryData;
 
 public class TracerLineTool extends WorldEditorMouseTool {
@@ -31,35 +33,35 @@ public class TracerLineTool extends WorldEditorMouseTool {
 		return !A.equals(B);
 	}
 	
-	private void snapTracerLinePointToSomeWorldCircleIfWithinCircleBounds(Point point){
-		for(Circle worldCircle : worldCircles()){
-			if(pointShouldSnapToCenterOfWorldCircle(point, worldCircle)){
-				snapPointToCircleCenter(point, worldCircle);
-				return;
-			}
+	private ShapeQuery shouldPointSnapToCenterOfCircle = new ShapeQuery() {
+		public boolean isSatisfiableGivenShape(Shape s) {
+			return (s instanceof Circle) && pointShouldSnapToCenterOfWorldCircle(position, (Circle)s);
 		}
+	};
+	
+	private void snapTracerLinePointToSomeWorldCircleIfWithinCircleBounds(Point point) {
+		Shape s = worldData.getShapeThatSatisfiesQuery(shouldPointSnapToCenterOfCircle);
+		if (s != null) snapPointToCircleCenter(point, (Circle) s);
 	}
 
-	private boolean pointIntersectsSomeWorldCircle(float x, float y){
-		for(Circle worldCircle : worldCircles()){
-			if(worldCircle.contains(x, y)){
-				return true;
-			}
+	private ShapeQuery startPositionIntersectsCircle = new ShapeQuery() {
+		public boolean isSatisfiableGivenShape(Shape s) {
+			return (s instanceof Circle) && s.contains(start);
 		}
-		return false;
+	};
+	
+	private boolean startPositionIntersectsSomeWorldCircle(){
+		return worldData.isShapeQuerySatisfied(startPositionIntersectsCircle);
 	}
 	
 	protected boolean shouldAcceptRequest() { 
-		return pointIntersectsSomeWorldCircle(start.x, start.y); 
+		return startPositionIntersectsSomeWorldCircle(); 
 	}
-
+	
 	protected void performAction() {
-		if(pointsNotEquivalent(start, position)){
-			for(Circle worldCircle : worldCircles()){
-				if(pointShouldSnapToCenterOfWorldCircle(position, worldCircle)){
-					createWorldLine(start, position);
-					return;
-				}
+		if (pointsNotEquivalent(start, position)) {
+			if (worldData.isShapeQuerySatisfied(shouldPointSnapToCenterOfCircle)) {
+				createWorldLine(start, position);
 			}
 		}
 	}

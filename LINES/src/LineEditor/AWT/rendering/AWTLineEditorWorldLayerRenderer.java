@@ -30,14 +30,6 @@ public class AWTLineEditorWorldLayerRenderer implements AWTUILayer {
 		lastMousePosition = new Point(0,0);
 	}
 	
-	private Circle[] getWorldCircles() { 
-		return worldGeometry.getWorldPointCollisionCircles(); 
-	}
-	
-	private Pipe[] getWorldRectangles() { 
-		return worldGeometry.getWorldLineCollisionBoxes(); 
-	}
-	
 	private boolean isEditorCursorHoveredOver(Shape s) { 
 		return s.contains(lastMousePosition); 
 	}
@@ -61,7 +53,7 @@ public class AWTLineEditorWorldLayerRenderer implements AWTUILayer {
 	}
 	
 	private void drawPoints() {
-		for (Circle worldCircle : getWorldCircles())
+		for (Circle worldCircle : worldGeometry.getCircles())
 			drawPoint(worldCircle);
 	}
 	
@@ -76,7 +68,7 @@ public class AWTLineEditorWorldLayerRenderer implements AWTUILayer {
 	}
 	
 	private void drawLines() {
-		for (Pipe worldRectangle : getWorldRectangles())
+		for (Pipe worldRectangle : worldGeometry.getPipes())
 			drawLine(worldRectangle);
 	}
 	

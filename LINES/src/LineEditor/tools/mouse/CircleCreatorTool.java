@@ -2,6 +2,8 @@ package LineEditor.tools.mouse;
 
 import shapes.Pipe;
 import shapes.Point;
+import shapes.Shape;
+import LineEditor.data.ShapeQuery;
 import LineEditor.data.WorldGeometryData;
 
 public class CircleCreatorTool extends WorldEditorMouseTool {
@@ -22,25 +24,21 @@ public class CircleCreatorTool extends WorldEditorMouseTool {
 	}
 	
 	private void splitIntersectedRectangleAtMidpoint() {
-		worldData.splitCollisionBox(getIntersectedRectangle(position.x, position.y), 50);
+		worldData.splitCollisionBox(getIntersectedRectangle(), 50);
 	}
 	
-	private boolean pointIntersectsSomeWorldRectangle(float x, float y) {
-		for (Pipe worldRectangle : worldRectangles()) {
-			if (worldRectangle.getArea().contains(x, y)) {
-				return true;
-			}
+	private ShapeQuery pointIntersectsPipe = new ShapeQuery() {
+		public boolean isSatisfiableGivenShape(Shape s) {
+			return (s instanceof Pipe) && ((Pipe) s).getArea().contains(position.x, position.y);
 		}
-		return false;
+	};
+	
+	private boolean pointIntersectsSomeWorldRectangle() {
+		return worldData.isShapeQuerySatisfied(pointIntersectsPipe);
 	}
 	
-	private Pipe getIntersectedRectangle(float x, float y) {
-		for (Pipe worldRectangle : worldRectangles()) {
-			if (worldRectangle.getArea().contains(x, y)) {
-				return worldRectangle;
-			}
-		}
-		return null; // TODO throw exception
+	private Pipe getIntersectedRectangle() {
+		return (Pipe) worldData.getShapeThatSatisfiesQuery(pointIntersectsPipe);
 	}
 
 	protected boolean shouldAcceptRequest() {
@@ -49,7 +47,7 @@ public class CircleCreatorTool extends WorldEditorMouseTool {
 
 	protected void performAction() {
 		positionOfLastUse.set(position.x, position.y);
-		if (pointIntersectsSomeWorldRectangle(position.x, position.y)) {
+		if (pointIntersectsSomeWorldRectangle()) {
 			splitIntersectedRectangleAtMidpoint();
 		} else {
 			createWorldCircleAtPoint((int)position.x, (int)position.y);

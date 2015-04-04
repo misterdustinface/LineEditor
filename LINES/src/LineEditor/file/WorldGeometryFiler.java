@@ -1,6 +1,6 @@
 package LineEditor.file;
 
-import shapes.Pipe;
+import shapes.LineSegment;
 import shapes.Point;
 import LineEditor.data.WorldGeometryData;
 import file.LuaScriptFiler;
@@ -16,11 +16,11 @@ public class WorldGeometryFiler extends LuaScriptFiler {
 	
 	protected String dataToLuaScript() {
 		String script = new String();
-		for (Pipe collisionBox : programData.getWorldLineCollisionBoxes()) {
-			script += createEntry(	String.valueOf(collisionBox.centerLine.a.x),
-									String.valueOf(collisionBox.centerLine.a.y),
-									String.valueOf(collisionBox.centerLine.b.x),
-									String.valueOf(collisionBox.centerLine.b.y));
+		for (LineSegment line : programData.getLines()) {
+			script += createEntry(	String.valueOf(line.a.x),
+									String.valueOf(line.a.y),
+									String.valueOf(line.b.x),
+									String.valueOf(line.b.y));
 		}
 		return scriptHeading("Lines Data") + script + scriptCloser("End of Data");
 	}
