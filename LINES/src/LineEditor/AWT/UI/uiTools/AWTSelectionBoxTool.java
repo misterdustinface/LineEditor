@@ -32,7 +32,8 @@ public class AWTSelectionBoxTool extends SelectionBoxTool implements AWTUILayer 
 
 		cursorDrawer.setGraphics(g);
 		shapeDrawer.setColor(graphicData.getColorOf("cursor"));
-		cursorDrawer.drawCrosshairCursor((int)position.x, (int)position.y);
+		cursorDrawer.setCursor("Crosshair");
+		cursorDrawer.drawCursor((int)position.x, (int)position.y);
 	}
 
 }

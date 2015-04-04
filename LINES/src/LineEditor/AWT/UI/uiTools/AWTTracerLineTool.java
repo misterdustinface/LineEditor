@@ -31,11 +31,13 @@ public class AWTTracerLineTool extends TracerLineTool implements AWTUILayer {
 			
 			cursorDrawer.setGraphics(g);
 			cursorDrawer.setColor(graphicData.getColorOf("cursor"));
-			cursorDrawer.drawTriangularCrosshairCursor((int)position.x, (int)position.y);
+			cursorDrawer.setCursor("Triangle");
+			cursorDrawer.drawCursor((int)position.x, (int)position.y);
 		} else {
 			cursorDrawer.setGraphics(g);
 			cursorDrawer.setColor(graphicData.getColorOf("cursor"));
-			cursorDrawer.drawSmallXCursor((int)position.x, (int)position.y);
+			cursorDrawer.setCursor("SmallX");
+			cursorDrawer.drawCursor((int)position.x, (int)position.y);
 		}
 	}
 

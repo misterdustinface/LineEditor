@@ -29,7 +29,8 @@ public class AWTCircleMoverTool extends CircleMoverTool implements AWTUILayer {
 
 		cursorDrawer.setGraphics(g);
 		cursorDrawer.setColor(graphicData.getColorOf("cursor"));
-		cursorDrawer.drawCrosshairCursor((int)position.x, (int)position.y);
+		cursorDrawer.setCursor("Crosshair");
+		cursorDrawer.drawCursor((int)position.x, (int)position.y);
 	}
 
 }

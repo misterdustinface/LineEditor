@@ -22,7 +22,8 @@ public class AWTDefaultMouseTool extends DefaultMouseTool implements AWTUILayer 
 	public void render(Graphics2D g) {
 		cursorDrawer.setGraphics(g);
 		cursorDrawer.setColor(graphicData.getColorOf("cursor"));
-		cursorDrawer.drawCrosshairCursor((int)position.x, (int)position.y);
+		cursorDrawer.setCursor("Pointer");
+		cursorDrawer.drawCursor((int)position.x, (int)position.y);
 	}
 
 }
