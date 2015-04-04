@@ -1,13 +1,12 @@
 package LineEditor.AWT.graphicdata;
 
-import generic.datastructures.Property;
-import generic.tags.NamedData;
-import generic.tags.Singleton;
-
 import java.awt.Color;
 
-import AWT.graphicdata.EditorAWTGraphicData;
+import tags.NamedData;
+import tags.Singleton;
 import AWT.graphicdata.AWTGraphicData;
+import AWT.graphicdata.EditorAWTGraphicData;
+import datastructures.Property;
 
 public class LineEditorAWTGraphicData extends AWTGraphicData implements Singleton, NamedData {
 	

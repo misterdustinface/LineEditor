@@ -1,6 +1,6 @@
 package LineEditor.AWT.UI.uiTools;
 
-import generic.structures.Pair;
+import structures.Pair;
 import LineEditor.data.WorldGeometryData;
 import LineEditor.tools.mouse.WorldEditorMouseToolSelectorConditions;
 import LineEditor.tools.mouse.WorldEditorMouseToolSetter;

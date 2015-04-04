@@ -1,10 +1,9 @@
 package LineEditor.data;
 
-import generic.ListenerPattern.Descriptive.DataModificationNotifier;
-
 import java.util.ArrayList;
 import java.util.Stack;
 
+import notifiers.DataModificationNotifier;
 import shapes.Circle;
 import shapes.LineSegment;
 import shapes.Pipe;

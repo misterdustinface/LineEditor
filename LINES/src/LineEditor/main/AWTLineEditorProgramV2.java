@@ -1,7 +1,6 @@
 package LineEditor.main;
 
-import generic.Application;
-import generic.EditorProgramMain;
+import main.EditorProgramMain;
 import AWT.UI.AWTDropdownMenuBar;
 import AWT.UI.AWTGridLayer;
 import AWT.UI.AWTMenuBar;
@@ -22,6 +21,7 @@ import LineEditor.AWT.rendering.AWTLineEditorWorldLayerRenderer;
 import LineEditor.data.WorldGeometryData;
 import LineEditor.file.WorldGeometryFiler;
 import UI.UILayerManager;
+import base.Application;
 
 public class AWTLineEditorProgramV2 {
 	

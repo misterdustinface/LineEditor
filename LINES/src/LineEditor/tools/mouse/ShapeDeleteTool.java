@@ -1,7 +1,7 @@
 package LineEditor.tools.mouse;
 
-import generic.timers.DebounceTimer;
 import shapes.Shape;
+import timers.DebounceTimer;
 import LineEditor.data.ShapeQuery;
 import LineEditor.data.WorldGeometryData;
 

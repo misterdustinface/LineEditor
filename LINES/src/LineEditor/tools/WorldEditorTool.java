@@ -1,22 +1,14 @@
 package LineEditor.tools;
 
-import generic.Requestible;
+import base.Requestible;
 import LineEditor.data.WorldGeometryData;
 
-public abstract class WorldEditorTool implements Requestible {
+public abstract class WorldEditorTool extends Requestible {
 
 	protected WorldGeometryData worldData;
 	
 	public WorldEditorTool(WorldGeometryData WORLD_DATA) {
 		worldData = WORLD_DATA;
 	}
-	
-	final public void request() {
-		if (shouldAcceptRequest())
-			performAction();
-	}
-	
-	abstract protected boolean 	shouldAcceptRequest();
-	abstract protected void		performAction();
 	
 }

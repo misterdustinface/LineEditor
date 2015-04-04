@@ -1,6 +1,6 @@
 package LineEditor.tools.mouse;
 
-import generic.structures.Pair;
+import structures.Pair;
 import LineEditor.data.WorldGeometryData;
 import UI.input.MouseUserDevice;
 

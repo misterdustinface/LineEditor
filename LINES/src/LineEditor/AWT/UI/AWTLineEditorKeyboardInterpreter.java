@@ -1,8 +1,5 @@
 package LineEditor.AWT.UI;
 
-import generic.Application;
-import generic.TickingLoop;
-import generic.fp.VoidFunctionPointer;
 import AWT.UI.AWTZoomableViewport;
 import LineEditor.UI.InputEventFunction;
 import LineEditor.UI.KeyboardUserDeviceInterpreter;
@@ -10,6 +7,9 @@ import UI.input.InputEvent;
 import UI.input.KeyboardUserDevice;
 import UI.input.MouseUserDevice;
 import UI.input.MouseUserDeviceWrapper;
+import base.Application;
+import base.TickingLoop;
+import functionpointers.VoidFunctionPointer;
 
 public class AWTLineEditorKeyboardInterpreter extends KeyboardUserDeviceInterpreter {
 
